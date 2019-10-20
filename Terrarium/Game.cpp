@@ -11,15 +11,10 @@ namespace terr {
 			sf::Style::Titlebar | sf::Style::Close)
 	{
 		m_window.setVerticalSyncEnabled(true);
-		if (!m_default_font.loadFromFile("arial.ttf"))
-		{
-			throw "Nie mo¿na wczytaæ czcionki arial.ttf";
-		}
-
-		m_start_screen = std::make_unique<Screen>(Screen(m_default_font));
-		m_current_screen = m_start_screen.get();
+			
+		m_current_screen = &m_main_screen;
 	}
-	Game::~Game() {}
+	Game::~Game() {	}
 
 	void Game::start()
 	{
@@ -42,13 +37,15 @@ namespace terr {
 
 	void Game::draw()
 	{
-		m_window.clear(sf::Color::Green);
+		m_window.clear(sf::Color::Black);
 
-		if (m_current_screen != nullptr)
+		m_main_screen.draw(m_window);
+		
+		/*if (m_current_screen != nullptr)
 		{
 			m_current_screen->draw(m_window);
-		}
-		
+		}*/
+
 		m_window.display();
 	}
 
@@ -57,6 +54,5 @@ namespace terr {
 		m_window.close();
 	}
 
-	sf::Font Game::getDefaultFont() const { return m_default_font; }
 	sf::RenderWindow& Game::getWindow() { return m_window; }
 }

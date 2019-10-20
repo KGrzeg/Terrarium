@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
-#include <vector>
+#include <stack>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Screen.hpp"
+#include "ScreenMainMenu.hpp"
 
 namespace terr {
 
@@ -24,10 +25,10 @@ namespace terr {
 
 	private:
 		sf::RenderWindow m_window;
-		sf::Font m_default_font;
-		std::unique_ptr<Screen> m_start_screen;
-		Screen *m_current_screen;
 
+		ScreenMainMenu m_main_screen;
+		Screen *m_current_screen;
+		
 		void update();
 		void draw();
 		void quit();

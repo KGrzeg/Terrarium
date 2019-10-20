@@ -5,15 +5,15 @@
 
 namespace terr {
 
-	Screen::Screen() { }
-	Screen::Screen(sf::Font& font)
+	Screen::Screen()
 	{
-		m_font = font;
-		m_background_color = sf::Color::Black;
+		if (!m_font.loadFromFile("arial.ttf"))
+		{
+			throw "Nie mo¿na wczytaæ czcionki arial.ttf!";
+		};
 	}
 
 	Screen::~Screen() {}
-
 
 	void Screen::draw(sf::RenderWindow& window)
 	{
@@ -23,7 +23,7 @@ namespace terr {
 		text.setFont(m_font);
 
 		// set the string to display
-		text.setString("Hello world");
+		text.setString("Hello world oooo!");
 
 		// set the character size
 		text.setCharacterSize(24); // in pixels, not points!
@@ -33,8 +33,6 @@ namespace terr {
 
 		// set the text style
 		text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
-		window.clear(m_background_color);
 
 		window.draw(text);
 	}
