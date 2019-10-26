@@ -3,8 +3,7 @@
 #include "Screen.hpp"
 
 namespace terr {
-	class ScreenMenu :
-		public terr::Screen
+	class ScreenMenu : public Screen
 	{
 	public:
 		ScreenMenu(sf::String name) :Screen(name) {	}
@@ -14,7 +13,7 @@ namespace terr {
 		{
 			Screen::setup(fnt);
 		}
-		void draw(sf::RenderWindow& window)
+		void draw(sf::RenderWindow& window) override
 		{
 			const unsigned int middle_x = window.getSize().x / 2;
 
@@ -27,6 +26,7 @@ namespace terr {
 				window.draw(m_texts[i]);
 			}
 		}
+		void update() override {}
 
 	protected:
 		std::vector<sf::Text> m_texts;

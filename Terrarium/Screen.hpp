@@ -16,8 +16,8 @@ namespace terr {
 		{
 			m_font = fnt;
 		}
-		void draw(sf::RenderWindow&);
-		void update();
+		virtual void draw(sf::RenderWindow&) = 0;
+		virtual void update() = 0;
 
 	protected:
 		std::string m_name;

@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Screen.hpp" />
+    <ClInclude Include="ScreenAuthor.h" />
     <ClInclude Include="ScreenMainMenu.hpp" />
     <ClInclude Include="ScreenMenu.hpp" />
   </ItemGroup>
