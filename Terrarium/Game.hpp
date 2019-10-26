@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <stack>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Screen.hpp"
 #include "ScreenMainMenu.hpp"
@@ -15,22 +14,68 @@ namespace terr {
 		const int window_width = 800;
 		const int window_height = 600;
 
-		Game();
-		~Game();
+		Game()
+			:m_window(sf::VideoMode(this->window_width, this->window_height),
+				this->name + " v" + this->version,
+				sf::Style::Titlebar | sf::Style::Close),
+			m_main_screen(L"Menu G³ówne")
+		{
+			m_window.setVerticalSyncEnabled(true);
+			m_current_screen = &m_main_screen;
 
-		void start();
+			setup();
+		}
+		~Game() = default;
 
-		sf::Font getDefaultFont() const;
-		sf::RenderWindow& getWindow();
+		void setup()
+		{
+			sf::Font default_font;
+			if (!default_font.loadFromFile("arial.ttf"))
+			{
+				throw "Nie mo¿na wczytaæ czcionki arial.ttf!";
+			};
 
+			m_main_screen.setup(default_font);
+
+			m_current_screen = &m_main_screen;
+		}
+
+
+		void start()
+		{
+			while (m_window.isOpen())
+			{
+				sf::Event event;
+				while (m_window.pollEvent(event))
+				{
+					if (event.type == sf::Event::Closed)
+						this->quit();
+				}
+
+				this->draw();
+			}
+		}
+
+		void update() {}
+
+		void draw()
+		{
+			m_window.clear(sf::Color::Black);
+
+			m_main_screen.draw(m_window);
+
+			m_window.display();
+		}
+
+		void quit()
+		{
+			m_window.close();
+		}
 	private:
 		sf::RenderWindow m_window;
 
 		ScreenMainMenu m_main_screen;
 		Screen *m_current_screen;
-		
-		void update();
-		void draw();
-		void quit();
+
 	};
 }

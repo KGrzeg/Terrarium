@@ -1,24 +1,26 @@
 #pragma once
-#include <string>
 #include <SFML/Graphics.hpp>
-#include "Screen.hpp"
+#include "ScreenMenu.hpp"
 
 namespace terr {
-
-	class ScreenMainMenu:
-		public terr::Screen
+	class ScreenMainMenu :
+		public ScreenMenu
 	{
 	public:
-		ScreenMainMenu();
-		~ScreenMainMenu();
+		ScreenMainMenu(sf::String name) : ScreenMenu(name) {}
+		~ScreenMainMenu() = default;
 
-		void draw(sf::RenderWindow&);
+		void setup(sf::Font &fnt)
+		{
+			ScreenMenu::setup(fnt);
 
-	private:
-		std::vector<sf::Text> m_texts;
-		const int m_buttons_margin = 10;
-		const int m_buttons_size = 30;
-		const int m_first_button_offset = 100;
+			m_texts.emplace_back(L"Zacznij grê", m_font, m_buttons_size);
+			m_texts.emplace_back(L"Wczytaj grê", m_font, m_buttons_size);
+			m_texts.emplace_back(L"Pomoc", m_font, m_buttons_size);
+			m_texts.emplace_back(L"Ustawienia", m_font, m_buttons_size);
+			m_texts.emplace_back(L"O Autorze", m_font, m_buttons_size);
+			m_texts.emplace_back(L"Wyjœcie", m_font, m_buttons_size);
+		}
 	};
 
 }

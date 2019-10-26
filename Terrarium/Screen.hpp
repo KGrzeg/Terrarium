@@ -7,9 +7,15 @@ namespace terr {
 	class Screen
 	{
 	public:
-		Screen();
-		~Screen();
+		~Screen() = default;
+		Screen(sf::String name)
+			:m_name(name)
+		{}
 
+		void setup(sf::Font& fnt)
+		{
+			m_font = fnt;
+		}
 		void draw(sf::RenderWindow&);
 		void update();
 
