@@ -145,6 +145,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Screen.hpp" />
     <ClInclude Include="ScreenAuthor.h" />
