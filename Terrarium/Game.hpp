@@ -1,9 +1,8 @@
 #pragma once
 #include <string>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Screen.hpp"
 #include "ScreenMainMenu.hpp"
-#include "ScreenAuthor.h"
+#include "ScreenAuthor.hpp"
 
 namespace terr {
 	enum Game_Sreen
@@ -20,85 +19,23 @@ namespace terr {
 		const int window_width = 800;
 		const int window_height = 600;
 
-		Game()
-			:m_window(sf::VideoMode(this->window_width, this->window_height),
-				this->name + " v" + this->version,
-				sf::Style::Titlebar | sf::Style::Close),
-			m_main_screen(L"Menu G³ówne"),
-			m_author_screen(L"Autor")
-		{
-			m_window.setVerticalSyncEnabled(true);
-
-			setup();
-		}
+		Game();
 		~Game() = default;
 
-		void setup()
-		{
-			sf::Font default_font;
-			if (!default_font.loadFromFile("arial.ttf"))
-			{
-				throw "Nie mo¿na wczytaæ czcionki arial.ttf!";
-			};
+		void setup();
+		void start();
+		void quit();
+		
+		void update();
+		void draw();
 
-			m_main_screen.setup(default_font, m_window);
-			m_author_screen.setup(default_font, m_window);
-						
-			m_current_screen = &m_main_screen;
-		}
-
-
-		void start()
-		{
-			while (m_window.isOpen())
-			{
-				sf::Event event;
-				while (m_window.pollEvent(event))
-				{
-					if (event.type == sf::Event::Closed)
-						this->quit();
-				}
-
-				this->draw();
-			}
-		}
-
-		void update() {}
-
-		void draw()
-		{
-			m_window.clear(sf::Color::Black);
-
-			m_current_screen->draw(m_window);
-
-			m_window.display();
-		}
-
-		void setScreen(Game_Sreen screen)
-		{
-			switch (m_gameScreen)
-			{
-			case MainMenu:
-			{
-				m_current_screen = &m_main_screen;
-				break;
-			}
-			case Author:
-			{
-				m_current_screen = &m_author_screen;
-				break;
-			}
-			}
-
-			m_gameScreen = screen;
-		}
-
-		void quit()
-		{
-			m_window.close();
-		}
+		void setScreen(Game_Sreen screen);
+		sf::Font getDefaultFont() const;
+		sf::RenderWindow* getWindowPtr();
+		
 	private:
 		sf::RenderWindow m_window;
+		sf::Font m_default_font;
 
 		ScreenMainMenu m_main_screen;
 		ScreenAuthor m_author_screen;

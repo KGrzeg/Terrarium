@@ -16,7 +16,7 @@ namespace terr {
 			}
 		};
 
-		void setup(sf::Font& fnt, sf::RenderWindow& window)
+		void setup()
 		{
 			Screen::setup(fnt);
 			m_middle = window.getSize().x / 2;
