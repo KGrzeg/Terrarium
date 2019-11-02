@@ -8,15 +8,14 @@ namespace  terr
 	public:
 		ScreenAuthor(sf::String name) : ScreenMenu(name) {}
 		
-		void setup(sf::Font &fnt)
+		void setup(sf::Font &fnt, sf::RenderWindow& window)
 		{
-			ScreenMenu::setup(fnt);
+			ScreenMenu::setup(fnt, window);
 
-			m_texts.emplace_back(L"Autor Gry", m_font, m_buttons_size);
-			m_texts.emplace_back(L"Grzegorz Kupczyk", m_font, m_buttons_size);
-			m_texts.emplace_back(L" ", m_font, m_buttons_size);
-			m_texts.emplace_back(L"Wróæ", m_font, m_buttons_size);
-			m_texts.emplace_back(L"Wyjœcie", m_font, m_buttons_size);
+			AddElement(new UIElement(m_font, L"Autor Gry"));
+			AddElement(new UIElement(m_font, L"Grzegorz Kupczyk"));
+			AddElement(new Button(m_font, L"Wróæ"));
+			AddElement(new Button(m_font, L"Wyjscie"));
 		}
 	};
 }

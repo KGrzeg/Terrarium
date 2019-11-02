@@ -145,12 +145,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Screen.hpp" />
     <ClInclude Include="ScreenAuthor.h" />
     <ClInclude Include="ScreenMainMenu.hpp" />
     <ClInclude Include="ScreenMenu.hpp" />
+    <ClInclude Include="UIElement.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

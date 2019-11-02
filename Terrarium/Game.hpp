@@ -6,6 +6,12 @@
 #include "ScreenAuthor.h"
 
 namespace terr {
+	enum Game_Sreen
+	{
+		MainMenu,
+		Author
+	};
+	
 	class Game
 	{
 	public:
@@ -35,11 +41,10 @@ namespace terr {
 				throw "Nie mo¿na wczytaæ czcionki arial.ttf!";
 			};
 
-			m_main_screen.setup(default_font);
-			m_author_screen.setup(default_font);
-
+			m_main_screen.setup(default_font, m_window);
+			m_author_screen.setup(default_font, m_window);
+						
 			m_current_screen = &m_main_screen;
-			//m_current_screen = &m_author_screen;
 		}
 
 
@@ -69,6 +74,25 @@ namespace terr {
 			m_window.display();
 		}
 
+		void setScreen(Game_Sreen screen)
+		{
+			switch (m_gameScreen)
+			{
+			case MainMenu:
+			{
+				m_current_screen = &m_main_screen;
+				break;
+			}
+			case Author:
+			{
+				m_current_screen = &m_author_screen;
+				break;
+			}
+			}
+
+			m_gameScreen = screen;
+		}
+
 		void quit()
 		{
 			m_window.close();
@@ -79,6 +103,7 @@ namespace terr {
 		ScreenMainMenu m_main_screen;
 		ScreenAuthor m_author_screen;
 		Screen *m_current_screen;
+		Game_Sreen m_gameScreen = MainMenu;
 
 	};
 }
