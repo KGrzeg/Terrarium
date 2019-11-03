@@ -10,7 +10,7 @@ namespace terr {
 		MainMenu,
 		Author
 	};
-	
+
 	class Game
 	{
 	public:
@@ -25,21 +25,21 @@ namespace terr {
 		void setup();
 		void start();
 		void quit();
-		
+
 		void update();
 		void draw();
 
 		void setScreen(Game_Sreen screen);
 		sf::Font getDefaultFont() const;
 		sf::RenderWindow* getWindowPtr();
-		
+
 	private:
 		sf::RenderWindow m_window;
 		sf::Font m_default_font;
 
-		ScreenMainMenu m_main_screen;
-		ScreenAuthor m_author_screen;
-		Screen *m_current_screen;
+		/*ScreenMainMenu m_main_screen;
+		ScreenAuthor m_author_screen;*/
+		//Screen* m_current_screen;
 		Game_Sreen m_gameScreen = MainMenu;
 
 	};
