@@ -1,9 +1,30 @@
 #include "ScreenMenu.hpp"
+#include "Game.hpp"
+
 void terr::ScreenMenu::draw(sf::RenderWindow& window)
 {
 	for (auto const &position : m_positions)
 	{
 		window.draw(position);
+	}
+}
+
+void terr::ScreenMenu::update(Game *game)
+{
+	const auto mouse_pos = sf::Mouse::getPosition(*game->getWindowPtr());
+
+	for (auto &position : m_positions)
+	{
+		auto bounds = position.getGlobalBounds();
+		
+		if (bounds.contains(mouse_pos.x, mouse_pos.y))
+		{
+			position.setFillColor(m_hover_color);
+		}
+		else
+		{
+			position.setFillColor(m_default_color);
+		}
 	}
 }
 
@@ -19,7 +40,7 @@ void terr::ScreenMenu::addPosition(sf::String msg)
 	//recalculate Y of entries
 	for (std::vector<sf::Font>::size_type i = 0; i < m_positions.size(); ++i)
 	{
-		const auto y = m_window_size.y / (m_positions.size()+1) * (i + 1);
+		const auto y = m_window_size.y / (m_positions.size() + 1) * (i + 1) - m_positions[i].getLocalBounds().height / 2;
 		m_positions[i].setPosition(m_positions[i].getPosition().x, y);
 	}
 }

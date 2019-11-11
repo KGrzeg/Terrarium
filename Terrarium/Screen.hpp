@@ -10,9 +10,9 @@ namespace terr {
 	public:
 		Screen() {};
 
-		void setup(Game *game);
-		void draw(sf::RenderWindow&) {};
-		void update() {};
+		virtual void setup(Game *game);
+		virtual void draw(sf::RenderWindow&) {};
+		virtual void update(Game *game) {};
 
 	protected:
 		sf::Font m_font;

@@ -16,15 +16,21 @@ namespace terr {
 		{
 			throw L"Nie mo¿na wczytaæ czcionki arial.ttf!";
 		}
-		m_main_menu.setup(this);
-		m_main_menu.addPosition(L"Nowa Gra");
-		m_main_menu.addPosition(L"Wczytaj Grê");
-		m_main_menu.addPosition(L"Opcje");
-		m_main_menu.addPosition(L"Autor");
-		m_main_menu.addPosition(L"Pomoc");
-		m_main_menu.addPosition(L"Wyjœcie");
+		
+		m_menu_main.setup(this);
+		m_menu_main.addPosition(L"Nowa Gra");
+		m_menu_main.addPosition(L"Wczytaj Grê");
+		m_menu_main.addPosition(L"Autor");
+		m_menu_main.addPosition(L"Pomoc");
+		m_menu_main.addPosition(L"Wyjœcie");
 
-		m_current_screen = &m_main_menu;
+		m_menu_load.setup(this);
+		m_menu_load.addPosition(L"Slot 1");
+		m_menu_load.addPosition(L"Slot 2");
+		m_menu_load.addPosition(L"Slot 3");
+		m_menu_load.addPosition(L"Wróæ");
+
+		m_current_screen = &m_menu_main;
 	}
 
 	void Game::start()
@@ -34,16 +40,23 @@ namespace terr {
 			sf::Event event;
 			while (m_window.pollEvent(event))
 			{
-				if (event.type == sf::Event::Closed)
-					this->quit();
+				handleEvent(event);
 			}
 
+			this->update();
 			this->draw();
 		}
 	}
 
 	void Game::update()
 	{
+		m_current_screen->update(this);
+	}
+
+	void Game::handleEvent(sf::Event &event)
+	{
+		if (event.type == sf::Event::Closed)
+			this->quit();
 	}
 
 	void Game::draw()
@@ -55,23 +68,22 @@ namespace terr {
 		m_window.display();
 	}
 
-	void Game::setScreen(Game_Sreen screen)
+	void Game::setScreen(game_menu screen)
 	{
-		switch (m_game_screen)
+		switch (screen)
 		{
-		case MainMenu:
+		case main:
 		{
-			//m_current_screen = &m_main_screen;
+			m_current_screen = &m_menu_main;
 			break;
 		}
-		case Author:
+		case loadgame:
 		{
-			//m_current_screen = &m_author_screen;
+			m_current_screen = &m_menu_load;
 			break;
 		}
 		}
 
-		m_game_screen = screen;
 	}
 
 	sf::Font Game::getDefaultFont() const { return m_default_font; }
