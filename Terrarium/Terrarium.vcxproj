@@ -145,18 +145,12 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="ScreenAuthor.cpp" />
-    <ClCompile Include="ScreenMainMenu.cpp" />
     <ClCompile Include="ScreenMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Screen.hpp" />
-    <ClInclude Include="ScreenAuthor.hpp" />
-    <ClInclude Include="ScreenMainMenu.hpp" />
     <ClInclude Include="ScreenMenu.hpp" />
-    <ClInclude Include="UIElement.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -1,21 +1,22 @@
 #pragma once
-#include <string>
 #include <SFML/Graphics.hpp>
-#include "Game.hpp"
 
 namespace terr {
+
 	class Game;
+
 	class Screen
 	{
 	public:
-		Screen(sf::String name);
+		Screen() {};
 
-		void setup(Game*) {};
+		void setup(Game *game);
 		void draw(sf::RenderWindow&) {};
 		void update() {};
 
 	protected:
-		std::string m_name;
+		sf::Font m_font;
+		sf::Vector2u m_window_size;
 	};
 
 }

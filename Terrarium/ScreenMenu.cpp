@@ -1,41 +1,25 @@
 #include "ScreenMenu.hpp"
-
-terr::ScreenMenu::ScreenMenu(sf::String name): Screen(name)
-{
-}
-
-terr::ScreenMenu::~ScreenMenu()
-{
-	for (std::vector<UIElement*>::size_type i = 0; i < m_elements.size(); ++i)
-	{
-		delete m_elements[i];
-	}
-}
-
-void terr::ScreenMenu::setup(Game* game)
-{
-	m_middle = game->getWindowPtr()->getSize().x / 2;
-}
-
 void terr::ScreenMenu::draw(sf::RenderWindow& window)
 {
-	const unsigned int middle_x = window.getSize().x / 2;
-
-	for (std::vector<UIElement*>::size_type i = 0; i < m_elements.size(); ++i)
+	for (auto const &position : m_positions)
 	{
-		window.draw(*m_elements[i]);
+		window.draw(position);
 	}
 }
 
-terr::UIElement* terr::ScreenMenu::AddElement(UIElement* elem)
+void terr::ScreenMenu::addPosition(sf::String msg)
 {
-	//TODO: Œrednio podoba mi siê taki zapis liczenia y, warto kiedyœ poprawiæ
-	//pozycjonuj po œrodku
-	const int H = 40; //wysokoœæ + margines pozycji w menu
-	auto s = elem->getSize();
-	int y = m_first_button_offset + m_elements.size() * H;
-	elem->setPosition(m_middle - s.x / 2, y);
-	m_elements.push_back(elem);
+	auto newpos = sf::Text(msg, m_font, m_menu_font_size);
+	newpos.setFillColor(m_default_color);
+	const auto x = m_window_size.x / 2 - newpos.getLocalBounds().width / 2;
 
-	return elem;
+	newpos.setPosition(x, 0);
+	m_positions.push_back(newpos);
+
+	//recalculate Y of entries
+	for (std::vector<sf::Font>::size_type i = 0; i < m_positions.size(); ++i)
+	{
+		const auto y = m_window_size.y / (m_positions.size()+1) * (i + 1);
+		m_positions[i].setPosition(m_positions[i].getPosition().x, y);
+	}
 }

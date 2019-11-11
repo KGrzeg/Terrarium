@@ -3,9 +3,7 @@
 namespace terr {
 	Game::Game() : m_window(sf::VideoMode(this->window_width, this->window_height),
 		this->name + " v" + this->version,
-		sf::Style::Titlebar | sf::Style::Close)/*,
-		m_main_screen(L"Menu G³ówne"),
-		m_author_screen(L"Autor")*/
+		sf::Style::Titlebar | sf::Style::Close)
 	{
 		m_window.setVerticalSyncEnabled(true);
 
@@ -17,12 +15,16 @@ namespace terr {
 		if (!m_default_font.loadFromFile("arial.ttf"))
 		{
 			throw L"Nie mo¿na wczytaæ czcionki arial.ttf!";
-		};
+		}
+		m_main_menu.setup(this);
+		m_main_menu.addPosition(L"Nowa Gra");
+		m_main_menu.addPosition(L"Wczytaj Grê");
+		m_main_menu.addPosition(L"Opcje");
+		m_main_menu.addPosition(L"Autor");
+		m_main_menu.addPosition(L"Pomoc");
+		m_main_menu.addPosition(L"Wyjœcie");
 
-		//m_main_screen.setup(this);
-		//m_author_screen.setup(this);
-
-		//m_current_screen = &m_main_screen;
+		m_current_screen = &m_main_menu;
 	}
 
 	void Game::start()
@@ -48,14 +50,14 @@ namespace terr {
 	{
 		m_window.clear(sf::Color::Black);
 
-		//m_current_screen->draw(m_window);
+		m_current_screen->draw(m_window);
 
 		m_window.display();
 	}
 
 	void Game::setScreen(Game_Sreen screen)
 	{
-		switch (m_gameScreen)
+		switch (m_game_screen)
 		{
 		case MainMenu:
 		{
@@ -69,7 +71,7 @@ namespace terr {
 		}
 		}
 
-		m_gameScreen = screen;
+		m_game_screen = screen;
 	}
 
 	sf::Font Game::getDefaultFont() const { return m_default_font; }

@@ -1,8 +1,11 @@
-#include "Screen.hpp"
+#include "Game.hpp"
+//#include "Screen.hpp"
 
 namespace terr
 {
-	Screen::Screen(sf::String name) : m_name(name)
-	{}
-
+	void Screen::setup(Game *game)
+	{
+		m_font = game->getDefaultFont();
+		m_window_size = game->getWindowPtr()->getSize();
+	}
 }

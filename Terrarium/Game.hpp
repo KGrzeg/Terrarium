@@ -1,8 +1,7 @@
 #pragma once
 #include <string>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include "ScreenMainMenu.hpp"
-#include "ScreenAuthor.hpp"
+#include <SFML/Graphics.hpp>
+#include "ScreenMenu.hpp"
 
 namespace terr {
 	enum Game_Sreen
@@ -16,8 +15,8 @@ namespace terr {
 	public:
 		const std::string name = "Terrarium";
 		const std::string version = "0.1";
-		const int window_width = 800;
-		const int window_height = 600;
+		const int window_width = 1280;
+		const int window_height = 720;
 
 		Game();
 		~Game() = default;
@@ -37,10 +36,9 @@ namespace terr {
 		sf::RenderWindow m_window;
 		sf::Font m_default_font;
 
-		/*ScreenMainMenu m_main_screen;
-		ScreenAuthor m_author_screen;*/
-		//Screen* m_current_screen;
-		Game_Sreen m_gameScreen = MainMenu;
+		Game_Sreen m_game_screen = MainMenu;
+		ScreenMenu m_main_menu;
+		ScreenMenu* m_current_screen;
 
 	};
 }
