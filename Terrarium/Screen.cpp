@@ -8,4 +8,5 @@ namespace terr
 		m_font = game->getDefaultFont();
 		m_window_size = game->getWindowPtr()->getSize();
 	}
+	
 }

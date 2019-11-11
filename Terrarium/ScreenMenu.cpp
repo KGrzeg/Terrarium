@@ -3,6 +3,7 @@
 
 void terr::ScreenMenu::draw(sf::RenderWindow& window)
 {
+	window.draw(m_background_shape);
 	for (auto const &position : m_positions)
 	{
 		window.draw(position);
@@ -31,6 +32,14 @@ void terr::ScreenMenu::update(Game *game)
 		}
 		++i;
 	}
+}
+
+void terr::ScreenMenu::setup(Game* game, sf::Texture &tex)
+{
+	Screen::setup(game);
+	m_background_texture = tex;
+	m_background_shape.setTexture(&m_background_texture);
+	m_background_shape.setSize(sf::Vector2f(m_window_size));
 }
 
 void terr::ScreenMenu::addPosition(sf::String msg)

@@ -18,14 +18,20 @@ namespace terr {
 			throw L"Nie mo¿na wczytaæ czcionki arial.ttf!";
 		}
 
-		m_menu_main.setup(this);
+		sf::Texture menu_background_text;
+		if (!menu_background_text.loadFromFile("images/menu_background.jpg"))
+		{
+			throw L"Nie mo¿na wczytaæ obrazu images/menu_background.jpg!";
+		}
+		
+		m_menu_main.setup(this, menu_background_text);
 		m_menu_main.addPosition(L"Nowa Gra");
 		m_menu_main.addPosition(L"Wczytaj Grê");
 		m_menu_main.addPosition(L"Autor");
 		m_menu_main.addPosition(L"Pomoc");
 		m_menu_main.addPosition(L"Wyjœcie");
 
-		m_menu_load.setup(this);
+		m_menu_load.setup(this, menu_background_text);
 		m_menu_load.addPosition(L"Slot 1");
 		m_menu_load.addPosition(L"Slot 2");
 		m_menu_load.addPosition(L"Slot 3");
