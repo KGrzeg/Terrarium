@@ -13,18 +13,23 @@ void terr::ScreenMenu::update(Game *game)
 {
 	const auto mouse_pos = sf::Mouse::getPosition(*game->getWindowPtr());
 
+	int i = 0;
+	m_hover_on_something = false;
 	for (auto &position : m_positions)
 	{
 		auto bounds = position.getGlobalBounds();
-		
+
 		if (bounds.contains(mouse_pos.x, mouse_pos.y))
 		{
 			position.setFillColor(m_hover_color);
+			m_selected = i;
+			m_hover_on_something = true;
 		}
 		else
 		{
 			position.setFillColor(m_default_color);
 		}
+		++i;
 	}
 }
 
@@ -43,4 +48,9 @@ void terr::ScreenMenu::addPosition(sf::String msg)
 		const auto y = m_window_size.y / (m_positions.size() + 1) * (i + 1) - m_positions[i].getLocalBounds().height / 2;
 		m_positions[i].setPosition(m_positions[i].getPosition().x, y);
 	}
+}
+
+int terr::ScreenMenu::getSelectedPosition()
+{
+	return m_hover_on_something ? m_selected : -1;
 }

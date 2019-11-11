@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "ScreenMenu.hpp"
 
 namespace terr {
 	Game::Game() : m_window(sf::VideoMode(this->window_width, this->window_height),
@@ -16,7 +17,7 @@ namespace terr {
 		{
 			throw L"Nie mo¿na wczytaæ czcionki arial.ttf!";
 		}
-		
+
 		m_menu_main.setup(this);
 		m_menu_main.addPosition(L"Nowa Gra");
 		m_menu_main.addPosition(L"Wczytaj Grê");
@@ -51,12 +52,65 @@ namespace terr {
 	void Game::update()
 	{
 		m_current_screen->update(this);
+
 	}
 
 	void Game::handleEvent(sf::Event &event)
 	{
 		if (event.type == sf::Event::Closed)
 			this->quit();
+
+		handleMenus(event);
+	}
+
+	void Game::handleMenus(sf::Event& event)
+	{
+		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
+		{
+			ScreenMenu *menu = dynamic_cast<ScreenMenu *>(m_current_screen);
+			if (menu && menu->getSelectedPosition() != -1)
+			{
+
+				switch (m_current_screen_type)
+				{
+				case main:
+				{
+					handleMainMenu(menu);
+					break;
+				}
+				case loadgame:
+				{
+					handleLoadgameMenu(menu);
+				}
+				}
+			}
+		}
+	}
+
+	void Game::handleMainMenu(ScreenMenu* menu)
+	{
+		switch (menu->getSelectedPosition())
+		{
+		case 1: {
+			setScreen(loadgame);
+			break;
+		}
+		case 4: {
+			quit();
+			break;
+		}
+		}
+	}
+
+	void Game::handleLoadgameMenu(ScreenMenu* menu)
+	{
+		switch (menu->getSelectedPosition())
+		{
+		case 3: {
+			setScreen(main);
+			break;
+		}
+		}
 	}
 
 	void Game::draw()
@@ -68,8 +122,9 @@ namespace terr {
 		m_window.display();
 	}
 
-	void Game::setScreen(game_menu screen)
+	void Game::setScreen(game_screen_type screen)
 	{
+		m_current_screen_type = screen;
 		switch (screen)
 		{
 		case main:

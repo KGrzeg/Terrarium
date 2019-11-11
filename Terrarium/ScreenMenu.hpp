@@ -9,9 +9,12 @@ namespace terr {
 		void update(Game *) override;
 
 		void addPosition(sf::String msg);
+		int getSelectedPosition();
 		
 	private:
 		std::vector<sf::Text> m_positions;
+		int m_selected = 0;
+		bool m_hover_on_something = false;
 		const int m_menu_font_size = 50;
 		const sf::Color m_default_color = sf::Color::White;
 		const sf::Color m_hover_color = sf::Color::Yellow;

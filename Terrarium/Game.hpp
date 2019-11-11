@@ -4,13 +4,14 @@
 #include "ScreenMenu.hpp"
 
 namespace terr {
-	enum game_menu
+	enum game_screen_type
 	{
 		main,
 		author,
 		loadgame,
 		newgame,
-		help
+		help,
+		game
 	};
 
 	class Game
@@ -32,16 +33,21 @@ namespace terr {
 		void handleEvent(sf::Event &event);
 		void draw();
 
-		void setScreen(game_menu screen);
+		void setScreen(game_screen_type screen);
 		sf::Font getDefaultFont() const;
 		sf::RenderWindow* getWindowPtr();
 
 	private:
+		void handleMenus(sf::Event& event);
+		void handleMainMenu(ScreenMenu* menu);
+		void handleLoadgameMenu(ScreenMenu* menu);
+
 		sf::RenderWindow m_window;
 		sf::Font m_default_font;
 
 		ScreenMenu m_menu_main;
 		ScreenMenu m_menu_load;
 		Screen* m_current_screen;
+		game_screen_type m_current_screen_type;
 	};
 }
