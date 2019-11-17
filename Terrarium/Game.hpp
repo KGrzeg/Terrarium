@@ -2,6 +2,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "ScreenMenu.hpp"
+#include "ScreenNewGame.hpp"
 
 namespace terr {
 	enum game_screen_type
@@ -39,14 +40,16 @@ namespace terr {
 
 	private:
 		void handleMenus(sf::Event& event);
-		void handleMainMenu(ScreenMenu* menu);
-		void handleLoadgameMenu(ScreenMenu* menu);
+		void handleMainMenu();
+		void handleNewgameMenu(sf::Event &event);
+		void handleLoadgameMenu();
 
 		sf::RenderWindow m_window;
 		sf::Font m_default_font;
 
 		ScreenMenu m_menu_main;
 		ScreenMenu m_menu_load;
+		ScreenNewGame m_menu_new_game;
 		Screen* m_current_screen;
 		game_screen_type m_current_screen_type;
 	};

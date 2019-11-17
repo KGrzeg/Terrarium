@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "ScreenMenu.hpp"
 
 namespace terr {
 	Game::Game() : m_window(sf::VideoMode(this->window_width, this->window_height),
@@ -23,7 +22,7 @@ namespace terr {
 		{
 			throw L"Nie mo¿na wczytaæ obrazu images/menu_background.jpg!";
 		}
-		
+
 		m_menu_main.setup(this, menu_background_text);
 		m_menu_main.addPosition(L"Nowa Gra");
 		m_menu_main.addPosition(L"Wczytaj Grê");
@@ -37,6 +36,8 @@ namespace terr {
 		m_menu_load.addPosition(L"Slot 3");
 		m_menu_load.addPosition(L"Wróæ");
 
+		m_menu_new_game.setup(this);
+		
 		m_current_screen = &m_menu_main;
 	}
 
@@ -58,7 +59,6 @@ namespace terr {
 	void Game::update()
 	{
 		m_current_screen->update(this);
-
 	}
 
 	void Game::handleEvent(sf::Event &event)
@@ -71,6 +71,12 @@ namespace terr {
 
 	void Game::handleMenus(sf::Event& event)
 	{
+		if (m_current_screen_type == newgame)
+		{
+			handleNewgameMenu(event);
+			return;
+		}
+		
 		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 		{
 			ScreenMenu *menu = dynamic_cast<ScreenMenu *>(m_current_screen);
@@ -81,22 +87,29 @@ namespace terr {
 				{
 				case main:
 				{
-					handleMainMenu(menu);
+					handleMainMenu();
 					break;
 				}
 				case loadgame:
 				{
-					handleLoadgameMenu(menu);
+					handleLoadgameMenu();
+					break;
 				}
 				}
 			}
 		}
 	}
 
-	void Game::handleMainMenu(ScreenMenu* menu)
+	
+	
+	void Game::handleMainMenu()
 	{
-		switch (menu->getSelectedPosition())
+		switch (m_menu_main.getSelectedPosition())
 		{
+		case 0: {
+			setScreen(newgame);
+			break;
+		}
 		case 1: {
 			setScreen(loadgame);
 			break;
@@ -108,9 +121,15 @@ namespace terr {
 		}
 	}
 
-	void Game::handleLoadgameMenu(ScreenMenu* menu)
+	void Game::handleNewgameMenu(sf::Event &event)
 	{
-		switch (menu->getSelectedPosition())
+			m_menu_new_game.handleEvent(event);
+	}
+
+	
+	void Game::handleLoadgameMenu()
+	{
+		switch (m_menu_load.getSelectedPosition())
 		{
 		case 3: {
 			setScreen(main);
@@ -136,6 +155,11 @@ namespace terr {
 		case main:
 		{
 			m_current_screen = &m_menu_main;
+			break;
+		}
+		case newgame:
+		{
+			m_current_screen = &m_menu_new_game;
 			break;
 		}
 		case loadgame:
