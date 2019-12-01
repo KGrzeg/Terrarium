@@ -4,7 +4,7 @@ namespace terr {
 	Game::Game() : m_window(sf::VideoMode(this->window_width, this->window_height),
 		this->name + " v" + this->version,
 		sf::Style::Titlebar | sf::Style::Close),
-		screen_play(50, 50)
+		screen_play(180, 90)
 	{
 		m_window.setVerticalSyncEnabled(true);
 

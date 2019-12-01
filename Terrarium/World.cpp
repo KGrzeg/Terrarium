@@ -6,7 +6,7 @@ World::World(int width, int height)
 	this->height = height;
 
 	tiles = new tile*[width];
-	for (int x = 0; x < height; ++x)
+	for (int x = 0; x < width; ++x)
 	{
 		tiles[x] = new tile[height];
 	}
