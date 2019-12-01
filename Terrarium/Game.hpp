@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "ScreenMenu.hpp"
 #include "ScreenNewGame.hpp"
+#include "ScreenPlay.hpp"
 
 namespace terr {
 	enum game_screen_type
@@ -47,6 +48,7 @@ namespace terr {
 		sf::RenderWindow m_window;
 		sf::Font m_default_font;
 
+		ScreenPlay screen_play;
 		ScreenMenu m_menu_main;
 		ScreenMenu m_menu_load;
 		ScreenNewGame m_menu_new_game;

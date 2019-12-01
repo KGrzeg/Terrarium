@@ -3,7 +3,8 @@
 namespace terr {
 	Game::Game() : m_window(sf::VideoMode(this->window_width, this->window_height),
 		this->name + " v" + this->version,
-		sf::Style::Titlebar | sf::Style::Close)
+		sf::Style::Titlebar | sf::Style::Close),
+		screen_play(50, 50)
 	{
 		m_window.setVerticalSyncEnabled(true);
 
@@ -37,7 +38,7 @@ namespace terr {
 		m_menu_load.addPosition(L"Wróæ");
 
 		m_menu_new_game.setup(this);
-		
+
 		m_current_screen = &m_menu_main;
 	}
 
@@ -76,7 +77,7 @@ namespace terr {
 			handleNewgameMenu(event);
 			return;
 		}
-		
+
 		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
 		{
 			ScreenMenu *menu = dynamic_cast<ScreenMenu *>(m_current_screen);
@@ -100,14 +101,15 @@ namespace terr {
 		}
 	}
 
-	
-	
+
+
 	void Game::handleMainMenu()
 	{
 		switch (m_menu_main.getSelectedPosition())
 		{
 		case 0: {
-			setScreen(newgame);
+			//setScreen(newgame);
+			setScreen(game);
 			break;
 		}
 		case 1: {
@@ -123,10 +125,10 @@ namespace terr {
 
 	void Game::handleNewgameMenu(sf::Event &event)
 	{
-			m_menu_new_game.handleEvent(event);
+		m_menu_new_game.handleEvent(event);
 	}
 
-	
+
 	void Game::handleLoadgameMenu()
 	{
 		switch (m_menu_load.getSelectedPosition())
@@ -152,6 +154,11 @@ namespace terr {
 		m_current_screen_type = screen;
 		switch (screen)
 		{
+		case game:
+		{
+			m_current_screen = &screen_play;
+			break;
+		}
 		case main:
 		{
 			m_current_screen = &m_menu_main;
