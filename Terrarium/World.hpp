@@ -4,6 +4,12 @@
 #define TILE_WIDTH 10
 #define TILE_HEIGHT 10
 
+typedef struct
+{
+	int width;
+	int height;
+} WorldSettings;
+
 enum tile_type
 {
 	dirt,
@@ -19,7 +25,7 @@ typedef struct
 class World : public sf::Drawable
 {
 public:
-	World(int width, int height);
+	World(WorldSettings settings);
 	~World();
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

@@ -1,9 +1,9 @@
 #include "World.hpp"
 
-World::World(int width, int height)
+World::World(WorldSettings settings)
 {
-	this->width = width;
-	this->height = height;
+	this->width = settings.width;
+	this->height = settings.height;
 
 	tiles = new tile*[width];
 	for (int x = 0; x < width; ++x)

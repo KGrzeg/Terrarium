@@ -8,15 +8,14 @@ namespace terr {
 	class Navigator
 	{
 	public:
-		Navigator();
-		~Navigator() {};
+		Navigator() {};
 
 		void goBack();
-		void setScreen(Screen &screen, bool replace);		
-		Screen &getScreen();
+		void setScreen(ScreenReference screen, bool replace);		
+		ScreenReference &getScreen();
 		
 	private:
-		std::stack<Screen> screens;
+		std::stack<ScreenReference> screens;
 	};
 
 }

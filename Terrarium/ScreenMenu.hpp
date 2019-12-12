@@ -1,18 +1,24 @@
 #pragma once
 #include "Screen.hpp"
+#include "Game.hpp"
 
 namespace terr {
 	class ScreenMenu : public Screen
 	{
 	public:
-		void draw(sf::RenderWindow& window) override;
-		void update(Game *) override;
-		void setup(Game *, sf::Texture&);
+		ScreenMenu(GlobalReference global);
+
+		void setup() {};
+		void handle_input() {};
+		void draw(sf::Time time);
+		void update(sf::Time time);
 
 		void addPosition(sf::String msg);
 		int getSelectedPosition();
 		
 	private:
+		GlobalReference global;
+		
 		std::vector<sf::Text> m_positions;
 		const int m_menu_font_size = 50;
 
@@ -22,7 +28,6 @@ namespace terr {
 		const sf::Color m_default_color = sf::Color::White;
 		const sf::Color m_hover_color = sf::Color::Cyan;
 
-		sf::Texture m_background_texture;
 		sf::RectangleShape m_background_shape;
 	};
 }

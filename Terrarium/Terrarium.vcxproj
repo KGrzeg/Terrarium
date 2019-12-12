@@ -157,7 +157,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Navigator.cpp" />
-    <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="ScreenMainMenu.cpp" />
     <ClCompile Include="ScreenMenu.cpp" />
     <ClCompile Include="ScreenNewGame.cpp" />
     <ClCompile Include="ScreenPlay.cpp" />
@@ -168,9 +168,11 @@
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Navigator.hpp" />
     <ClInclude Include="Screen.hpp" />
+    <ClInclude Include="ScreenMainMenu.hpp" />
     <ClInclude Include="ScreenMenu.hpp" />
     <ClInclude Include="ScreenNewGame.hpp" />
     <ClInclude Include="ScreenPlay.hpp" />
+    <ClInclude Include="Utils.hpp" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

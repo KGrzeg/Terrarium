@@ -1,17 +1,14 @@
 #include "ScreenPlay.hpp"
 
+namespace terr {
+	ScreenPlay::ScreenPlay(GlobalReference global, WorldSettings settings) :
+		global(global), world(settings)
+	{
+	}
 
-ScreenPlay::ScreenPlay(int width, int height) :
-	world(width, height)
-{
-}
 
-
-ScreenPlay::~ScreenPlay()
-{
-}
-
-void ScreenPlay::draw(sf::RenderWindow& window)
-{
-	window.draw(world);
+	void ScreenPlay::draw(sf::Time time)
+	{
+		global->window.draw(world);
+	}
 }

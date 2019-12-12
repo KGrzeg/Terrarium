@@ -3,20 +3,20 @@
 
 namespace terr {
 
-	class Game;
 
 	class Screen
 	{
 	public:
-		Screen() {};
 
-		virtual void setup(Game *game);
-		virtual void draw(sf::RenderWindow&) {};
-		virtual void update(Game *game) {};
+		virtual void setup() = 0;
 
-	protected:
-		sf::Font m_font;
-		sf::Vector2u m_window_size;
+		virtual void handle_input() = 0;
+		virtual void update(sf::Time time) = 0;
+		virtual void draw(sf::Time time) = 0;
+
+		virtual void pause() {};
+		virtual void reset() {};
 	};
 
+	typedef std::unique_ptr<Screen> ScreenReference;
 }

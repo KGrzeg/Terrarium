@@ -10,15 +10,15 @@ public:
 	AssetAdmin();
 	~AssetAdmin() {};
 
-	void addTexture(sf::String key, sf::String path);
-	void addFont(sf::String key, sf::String path);
+	void addTexture(std::string key, std::string path);
+	void addFont(std::string key, std::string path);
 	
-	sf::Texture &getTexture(sf::String key);
-	sf::Font &getFont(sf::String key);
+	sf::Texture &getTexture(std::string key);
+	sf::Font &getFont(std::string key);
 	
 private:
-	std::map<sf::String, sf::Texture> textures;
-	std::map<sf::String, sf::Font> fonts;
+	std::map<std::string, sf::Texture> textures;
+	std::map<std::string, sf::Font> fonts;
 };
 
 }
