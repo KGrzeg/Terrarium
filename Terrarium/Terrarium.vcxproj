@@ -157,6 +157,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Navigator.cpp" />
+    <ClCompile Include="ScreenLoadGame.cpp" />
     <ClCompile Include="ScreenMainMenu.cpp" />
     <ClCompile Include="ScreenMenu.cpp" />
     <ClCompile Include="ScreenNewGame.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Navigator.hpp" />
     <ClInclude Include="Screen.hpp" />
+    <ClInclude Include="ScreenLoadGame.hpp" />
     <ClInclude Include="ScreenMainMenu.hpp" />
     <ClInclude Include="ScreenMenu.hpp" />
     <ClInclude Include="ScreenNewGame.hpp" />

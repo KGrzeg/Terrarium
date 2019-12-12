@@ -56,6 +56,7 @@ namespace terr
 
 	void ScreenNewGame::draw(sf::Time time)
 	{
+		global->window.clear();
 		global->window.draw(m_background_rectangle);
 
 		global->window.draw(m_lbl_title);
@@ -67,6 +68,7 @@ namespace terr
 
 		global->window.draw(m_btn_start);
 		global->window.draw(m_btn_back);
+		global->window.display();
 	}
 }
 

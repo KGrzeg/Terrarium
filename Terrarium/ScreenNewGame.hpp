@@ -10,6 +10,11 @@ namespace terr {
 	public:
 		ScreenNewGame(GlobalReference global);
 		void draw(sf::Time time);
+
+		void setup() {};
+		void handle_input() {};
+		void update(sf::Time time) {};
+		
 		
 	private:
 		GlobalReference global;

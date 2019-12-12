@@ -28,7 +28,7 @@ namespace terr
 		const auto mouse_pos = sf::Mouse::getPosition(global->window);
 
 		int i = 0;
-		m_hover_on_something = false;
+		m_hover_above = -1;
 		for (auto &position : m_positions)
 		{
 			auto bounds = position.getGlobalBounds();
@@ -36,8 +36,7 @@ namespace terr
 			if (bounds.contains(mouse_pos.x, mouse_pos.y))
 			{
 				position.setFillColor(m_hover_color);
-				m_selected = i;
-				m_hover_on_something = true;
+				m_hover_above = i;
 			}
 			else
 			{
@@ -64,10 +63,19 @@ namespace terr
 			m_positions[i].setPosition(m_positions[i].getPosition().x, y);
 		}
 	}
-	int ScreenMenu::getSelectedPosition()
+
+	void ScreenMenu::handle_input()
 	{
-		return m_hover_on_something ? m_selected : -1;
+		sf::Event event;
+		while (global->window.pollEvent(event))
+		{
+			if (event.type == sf::Event::MouseButtonPressed && m_hover_above != -1)
+			{
+				clicked_option(m_hover_above);
+			}
+		}
 	}
+
 }
 
 

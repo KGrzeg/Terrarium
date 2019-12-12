@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki źródłowe\Navigation">
+      <UniqueIdentifier>{764d5984-4c99-47c5-b7e1-0be2322112c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\Navigation">
+      <UniqueIdentifier>{d56d076e-22ca-41c7-bd7e-9f39d7e3c50b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -21,39 +27,33 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="ScreenMenu.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenNewGame.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="ScreenPlay.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="Navigator.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="AssetAdmin.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="ScreenMainMenu.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenMenu.cpp">
+      <Filter>Pliki źródłowe\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenNewGame.cpp">
+      <Filter>Pliki źródłowe\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenPlay.cpp">
+      <Filter>Pliki źródłowe\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenLoadGame.cpp">
+      <Filter>Pliki źródłowe\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigator.cpp">
+      <Filter>Pliki źródłowe\Navigation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="Screen.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenMenu.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenNewGame.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="World.hpp">
@@ -62,17 +62,29 @@
     <ClInclude Include="ScreenPlay.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="Navigator.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="AssetAdmin.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Utils.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="Screen.hpp">
+      <Filter>Pliki nagłówkowe\Navigation</Filter>
+    </ClInclude>
     <ClInclude Include="ScreenMainMenu.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenMenu.hpp">
+      <Filter>Pliki nagłówkowe\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenNewGame.hpp">
+      <Filter>Pliki nagłówkowe\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenLoadGame.hpp">
+      <Filter>Pliki nagłówkowe\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigator.hpp">
+      <Filter>Pliki nagłówkowe\Navigation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

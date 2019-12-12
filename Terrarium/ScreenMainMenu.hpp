@@ -8,6 +8,7 @@ class ScreenMainMenu :
 {
 public:
 	ScreenMainMenu(GlobalReference global);
+	void clicked_option(int id) override;
 };
 
 }
