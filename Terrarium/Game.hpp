@@ -4,6 +4,7 @@
 #include "ScreenMenu.hpp"
 #include "ScreenNewGame.hpp"
 #include "ScreenPlay.hpp"
+#include "Navigator.hpp"
 
 namespace terr {
 	enum game_screen_type
@@ -54,5 +55,7 @@ namespace terr {
 		ScreenNewGame m_menu_new_game;
 		Screen* m_current_screen;
 		game_screen_type m_current_screen_type;
+
+		Navigator navigator;
 	};
 }
