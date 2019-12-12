@@ -7,36 +7,25 @@ namespace terr {
 		public UIElement
 	{
 	public:
-		Button(sf::Font& font, sf::String text) :
-			UIElement(font, text)
-		{		}
+		Button(GlobalReference global, sf::String text);
+		Button(GlobalReference global, sf::String text, float x, float y);
 
-		void update() override
-		{
-			auto mpos = sf::Mouse::getPosition();
-			bool pressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+		void update(sf::Time time) override;
+		void handle_event(sf::Event& event) override;
+		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-			if (pressed && mouseOver(mpos))
-			{
-				if (m_onClick != nullptr)
-					m_onClick();
-			}
-		}
+		virtual bool is_clicked() { return clicked; };
 
-		void setOnClick(void(*on_click)()) { m_onClick = on_click; }
+		void setPosition(float x, float y);
+		sf::Text &get_text() { return label; }
 
 	private:
-		bool mouseOver(sf::Vector2i pos)
-		{
-			if (pos.x > m_position.x &&
-				pos.x < m_position.x + m_size.x &&
-				pos.y > m_position.y &&
-				pos.y < m_position.y + m_size.y)
-				return true;
-			return false;
-		}
-
-		void(*m_onClick)();
+		sf::Text label;
+		const sf::Color default_color = sf::Color::White;
+		const sf::Color hover_color = sf::Color::Cyan;
+		bool hovered;
+		bool clicked;
 	};
 
 }
+

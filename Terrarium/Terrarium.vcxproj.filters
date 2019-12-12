@@ -19,6 +19,12 @@
     <Filter Include="Pliki nagłówkowe\Navigation">
       <UniqueIdentifier>{d56d076e-22ca-41c7-bd7e-9f39d7e3c50b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\UI">
+      <UniqueIdentifier>{668e159f-cb06-4230-b5a0-a8aaeb601786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\UI">
+      <UniqueIdentifier>{853332b3-c926-498f-80e7-bb58fdb0f6f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -51,15 +57,21 @@
     <ClCompile Include="Navigator.cpp">
       <Filter>Pliki źródłowe\Navigation</Filter>
     </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Pliki źródłowe\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Pliki źródłowe\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIGrid.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="World.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenPlay.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="AssetAdmin.hpp">
@@ -85,6 +97,21 @@
     </ClInclude>
     <ClInclude Include="Navigator.hpp">
       <Filter>Pliki nagłówkowe\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenPlay.hpp">
+      <Filter>Pliki nagłówkowe\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.hpp">
+      <Filter>Pliki nagłówkowe\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.hpp">
+      <Filter>Pliki nagłówkowe\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.hpp">
+      <Filter>Pliki nagłówkowe\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIGrid.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

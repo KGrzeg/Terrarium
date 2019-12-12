@@ -9,6 +9,8 @@ namespace terr {
 
 	void ScreenPlay::draw(sf::Time time)
 	{
+		global->window.clear();
 		global->window.draw(world);
+		global->window.display();
 	}
 }

@@ -9,7 +9,10 @@ namespace terr {
 	{
 	public:
 		ScreenPlay(GlobalReference global, WorldSettings settings);
-		void draw(sf::Time time);
+		void draw(sf::Time time) override;
+		void update(sf::Time time) override {};
+		void handle_input() override {};
+
 	private:
 		GlobalReference global;
 		World world;

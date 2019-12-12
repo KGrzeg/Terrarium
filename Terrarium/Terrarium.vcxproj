@@ -154,7 +154,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssetAdmin.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Navigator.cpp" />
     <ClCompile Include="ScreenLoadGame.cpp" />
@@ -162,11 +164,14 @@
     <ClCompile Include="ScreenMenu.cpp" />
     <ClCompile Include="ScreenNewGame.cpp" />
     <ClCompile Include="ScreenPlay.cpp" />
+    <ClCompile Include="UIGrid.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetAdmin.hpp" />
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Label.hpp" />
     <ClInclude Include="Navigator.hpp" />
     <ClInclude Include="Screen.hpp" />
     <ClInclude Include="ScreenLoadGame.hpp" />
@@ -174,6 +179,8 @@
     <ClInclude Include="ScreenMenu.hpp" />
     <ClInclude Include="ScreenNewGame.hpp" />
     <ClInclude Include="ScreenPlay.hpp" />
+    <ClInclude Include="UIElement.hpp" />
+    <ClInclude Include="UIGrid.hpp" />
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>
