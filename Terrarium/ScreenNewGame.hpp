@@ -4,6 +4,7 @@
 #include "Button.hpp"
 #include "UIElement.hpp"
 #include "Label.hpp"
+#include "UIGrid.hpp"
 
 namespace terr {
 	typedef std::unique_ptr<UIElement> UIElementReference;
@@ -21,12 +22,14 @@ namespace terr {
 	private:
 		GlobalReference global;
 		
-		Label title;
+		/*Label title;
 		Label world_name_lbl;
 		Label resources_lbl;
 
 		Button btn_start;
-		Button btn_back;
+		Button btn_back;*/
+
+		UIGrid grid;
 
 		sf::RectangleShape m_background_rectangle;
 	};

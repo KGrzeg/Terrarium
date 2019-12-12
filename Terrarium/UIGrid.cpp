@@ -6,16 +6,15 @@ namespace terr {
 
 	void UIGrid::update(sf::Time time)
 	{
+		clicked_btn = UNSET_KEY;
 		for (auto &element : elements)
 		{
-			element.second->update(time);
-
-			clicked_btn = "none";
 			if (auto btn = dynamic_cast<Button*>(element.second.get()))
 			{
 				if (btn->is_clicked())
 					clicked_btn = element.first;
 			}
+			element.second->update(time);
 		}
 	}
 
@@ -38,5 +37,13 @@ namespace terr {
 			target.draw(*element.second);
 		}
 	}
+	void UIGrid::handle_event(sf::Event& event)
+	{
+		for (auto &element : elements)
+		{
+			element.second->handle_event(event);
+		}
+	}
+
 
 }
