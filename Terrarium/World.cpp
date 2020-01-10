@@ -15,11 +15,10 @@ namespace terr {
 		srand(time(0));
 		perlin_noise.setSeed(rand());
 
-		tex = &global->assets.addTexture("map_spritesheet", settings.texture_name);
+		tex = &global->assets.getTexture(settings.texture_name);
 		setup_tiles_definitions();
 
 		tiles = new int[width * height];
-		//generate_simple_world(settings);
 		generate_complex_world(settings);
 		setup_vertices();
 	}
@@ -40,29 +39,7 @@ namespace terr {
 		// draw the vertex array
 		target.draw(vertices, states);
 	}
-
-	void World::generate_simple_world(WorldSettings& settings) {
-
-		int x, y;
-		for (int i = 0; i < width * height; i++)
-		{
-			x = i % width;
-			y = i / width;
-
-			if (y < settings.layers[1].level) {
-				tiles[i] = TILE_AIR;
-				continue;
-			}
-
-			if (y < settings.dirt_level) {
-				tiles[i] = TILE_DIRT;
-				continue;
-			}
-
-			tiles[i] = TILE_STONE;
-		}
-	}
-
+	
 	void World::generate_filled_layer(WorldLayer& layer) {
 		if (!layer.enabled) return;
 
@@ -165,23 +142,36 @@ namespace terr {
 
 	void World::setup_tiles_definitions() {
 		tile_definitions[TILE_AIR].collide = false;
+		tile_definitions[TILE_AIR].destroyable = false;
 		tile_definitions[TILE_AIR].hardness = 0;
 		tile_definitions[TILE_AIR].texture_coords = sf::Vector2f(1, 23);
 
+		tile_definitions[TILE_GRASS_DECAL].collide = false;
+		tile_definitions[TILE_GRASS_DECAL].destroyable = false;
+		tile_definitions[TILE_GRASS_DECAL].texture_coords = sf::Vector2f(12, 1);
 
-		tile_definitions[TILE_DIRT].collide = true;
-		tile_definitions[TILE_DIRT].hardness = 1;
+		tile_definitions[TILE_GRASS].texture_coords = sf::Vector2f(12, 12);
 		tile_definitions[TILE_DIRT].texture_coords = sf::Vector2f(12, 23);
 
-		tile_definitions[TILE_STONE].collide = true;
 		tile_definitions[TILE_STONE].hardness = 2;
 		tile_definitions[TILE_STONE].score = 1;
 		tile_definitions[TILE_STONE].texture_coords = sf::Vector2f(12, 34);
 
-		tile_definitions[TILE_COAL].collide = true;
 		tile_definitions[TILE_COAL].hardness = 2;
 		tile_definitions[TILE_COAL].score = 4;
 		tile_definitions[TILE_COAL].texture_coords = sf::Vector2f(12, 45);
+
+		tile_definitions[TILE_IRON].hardness = 3;
+		tile_definitions[TILE_IRON].score = 8;
+		tile_definitions[TILE_IRON].texture_coords = sf::Vector2f(23, 1);
+
+		tile_definitions[TILE_GOLD].hardness = 4;
+		tile_definitions[TILE_GOLD].score = 16;
+		tile_definitions[TILE_GOLD].texture_coords = sf::Vector2f(34, 1);
+
+		tile_definitions[TILE_EMERALD].hardness = 5;
+		tile_definitions[TILE_EMERALD].score = 48;
+		tile_definitions[TILE_EMERALD].texture_coords = sf::Vector2f(45, 1);
 	}
 
 	void World::change_tile(int x, int y, int tile_def_id) {

@@ -8,13 +8,18 @@
 #define TILE_HEIGHT 10
 
 #define TILE_AIR 0
-#define TILE_DIRT 1
-#define TILE_STONE 2
-#define TILE_COAL 3
+#define TILE_GRASS 1
+#define TILE_GRASS_DECAL 2
+#define TILE_DIRT 3
+#define TILE_STONE 4
+#define TILE_COAL 5
+#define TILE_IRON 6
+#define TILE_GOLD 7
+#define TILE_EMERALD 8
+#define TILE_WOOD 9
 
-#define TILE_TYPES 4
-
-#define MAX_LAYERS 10
+#define TILE_TYPES 10
+#define MAX_LAYERS 30
 
 namespace terr {
 	typedef struct {
@@ -28,28 +33,36 @@ namespace terr {
 
 	typedef struct
 	{
-		int width = 120;
-		int height = 100;
-
-		WorldLayer layers[MAX_LAYERS] = {
-			{40, 9, TILE_DIRT, 14.2f, -2.f, true},
-			{70, 16, TILE_STONE, 11.2f, -2.f, true},
-			{60, 8, TILE_STONE, 4.f, 0.45f, true},
-			{60, 8, TILE_COAL, 4.f, 0.75f, true}
-		};
-
-		int dirt_level = 55;
+		int width = 420;
+		int height = 300;
 		float gravity = 185;
+		std::string texture_name = "game/map1";
 		float player_x = 100;
 		float player_y = 20;
-		std::string texture_name = "images/map_tileset.png";
+
+		WorldLayer layers[MAX_LAYERS] = {
+			{45, 9, TILE_GRASS, 14.2f, -2.f, true},
+			{65, 8, TILE_DIRT, 14.1f, -2.f, true},
+			{90, 16, TILE_STONE, 11.2f, -2.f, true},
+			//{150, 50, TILE_DIRT, 15.0f, -1.2f, true},
+			{80, 8, TILE_STONE, 4.f, 0.45f, true},
+			{80, 8, TILE_COAL, 4.f, 0.75f, true},
+			{125, 20, TILE_STONE, 12.f, 0.65f, true},
+			{125, 20, TILE_IRON, 12.f, 0.75f, true},
+			{190, 8, TILE_STONE, 4.f, 0.55f, true},
+			{190, 8, TILE_GOLD, 4.f, 0.80f, true},
+			{260, 40, TILE_EMERALD, 4.f, 0.9f, true},
+			{230, 40, TILE_EMERALD, 1.f, 0.9f, true}
+		};
+
 	} WorldSettings;
 
 	typedef struct {
-		bool collide = false;
+		bool collide = true;
+		bool destroyable = true;
 		int hardness = 1;
 		int score = 0;
-		sf::Vector2f texture_coords;
+		sf::Vector2f texture_coords = { 1,1 };
 	} tile;
 
 	class World : public sf::Drawable, public sf::Transformable

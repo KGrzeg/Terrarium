@@ -6,6 +6,9 @@
 #include "Navigator.hpp"
 #include "AssetAdmin.hpp"
 
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 720
+
 namespace terr {
 	enum game_screen_type
 	{
@@ -29,9 +32,7 @@ namespace terr {
 	{
 	public:
 		const std::string name = "Terrarium";
-		const std::string version = "0.1";
-		const int window_width = 1280;
-		const int window_height = 720;
+		const std::string version = "0.2";
 
 		Game();
 

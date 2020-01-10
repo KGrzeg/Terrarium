@@ -68,6 +68,7 @@ namespace terr {
 		sf::Event event;
 		while (global->window.pollEvent(event)) {
 
+			player->handle_event(event);
 			addScore(pickaxe.feedEvent(event));
 
 			if (event.type == sf::Event::Closed)

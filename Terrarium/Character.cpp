@@ -8,7 +8,6 @@ namespace terr {
 		sprite = new AnimatedSprite(80, 80, global->assets.getTexture("game/character2"));
 		sprite->setAnimation(3);
 		sprite->setFPS(1.f / 12.f);
-
 	}
 
 	void Character::update(sf::Time& time) {
@@ -20,10 +19,31 @@ namespace terr {
 		handle_velocity(time);
 
 		if (camera_follow) {
-			auto v = global->window.getView();
-			v.setCenter(getPosition());
-			global->window.setView(v);
+			view.setCenter(
+				getPosition().x + getSprite()->getGlobalBounds().width / 2,
+				getPosition().y + getSprite()->getGlobalBounds().height / 2
+			);
+			global->window.setView(view);
 		}
+	}
+
+	void Character::handle_event(sf::Event& event) {
+		if (allow_zoom)
+			if (event.type == sf::Event::MouseWheelScrolled) {
+				if (event.mouseWheelScroll.delta > 0) {
+					zoom -= zoom_step;
+				}
+				else {
+					zoom += zoom_step;
+				}
+				zoom = std::max(zoom_min, zoom);
+				zoom = std::min(zoom_max, zoom);
+
+				view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+				view.zoom(zoom);
+				global->window.setView(view);
+			}
 	}
 
 	void Character::handle_moving(sf::Time& time) {

@@ -21,19 +21,24 @@ namespace terr {
 
 		void update(sf::Time& time);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+		void handle_event(sf::Event& event);
 
 		void move(float x, float y) { sprite->move(x, y); }
 		void setPosition(float x, float y) { sprite->setPosition(x, y); }
+
 
 		sf::Vector2f getPosition() const { return sprite->getPosition(); }
 		sf::Sprite* getSprite() { return sprite->getSprite(); };
 
 	private:
 		const float jump_power = 220;
-		const float speed = 285;
+		const float speed = 585;
 		const float collision_ray_distance = 1.f;
 		const float collision_ray_thickness = 0.5f;
 		const float collision_ray_shrink = 0.8f;
+		const float zoom_step = 0.1f;
+		const float zoom_min = 0.2f;
+		const float zoom_max = 1.f;
 
 		void handle_moving(sf::Time& time);
 		void handle_gravity(sf::Time& time);
@@ -51,6 +56,10 @@ namespace terr {
 		bool jumping = false;
 		bool move_horizontally = false;
 		bool god_mode = true;
+		bool allow_zoom = true;
+
+		float zoom;
+		sf::View view;
 
 		sf::Keyboard::Key key_move_up = sf::Keyboard::W;
 		sf::Keyboard::Key key_move_down = sf::Keyboard::S;
