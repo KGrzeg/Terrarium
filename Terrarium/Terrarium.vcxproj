@@ -161,6 +161,7 @@
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Navigator.cpp" />
+    <ClCompile Include="Pickaxe.cpp" />
     <ClCompile Include="ScreenLoadGame.cpp" />
     <ClCompile Include="ScreenMainMenu.cpp" />
     <ClCompile Include="ScreenMenu.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Label.hpp" />
     <ClInclude Include="Navigator.hpp" />
+    <ClInclude Include="Pickaxe.hpp" />
     <ClInclude Include="Screen.hpp" />
     <ClInclude Include="ScreenLoadGame.hpp" />
     <ClInclude Include="ScreenMainMenu.hpp" />

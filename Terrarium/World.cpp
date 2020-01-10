@@ -16,7 +16,6 @@ namespace terr {
 		setup_vertices();
 	}
 
-
 	World::~World()
 	{
 		delete[] tiles;
@@ -134,5 +133,38 @@ namespace terr {
 		tile_definitions[TILE_STONE].collide = true;
 		tile_definitions[TILE_STONE].hardness = 2;
 		tile_definitions[TILE_STONE].texture_coords = sf::Vector2f(12, 34);
+	}
+
+	void World::change_tile(int x, int y, int tile_def_id) {
+		const int id = x + y * width;
+		auto tex_coords = tile_definitions[tile_def_id].texture_coords;
+
+		tiles[id] = tile_def_id;
+
+		//update texture coords
+		vertices[id * 4 + 0].texCoords = sf::Vector2f(tex_coords.x, tex_coords.y);
+		vertices[id * 4 + 1].texCoords = sf::Vector2f(tex_coords.x + TILE_WIDTH, tex_coords.y);
+		vertices[id * 4 + 2].texCoords = sf::Vector2f(tex_coords.x + TILE_WIDTH, tex_coords.y + TILE_HEIGHT);
+		vertices[id * 4 + 3].texCoords = sf::Vector2f(tex_coords.x, tex_coords.y + TILE_HEIGHT);
+	}
+
+	bool World::dig(int x, int y, int power) {
+		//world coords to tilemap coords
+		const int tile_x = x / TILE_WIDTH;
+		const int tile_y = y / TILE_HEIGHT;
+
+		if (tile_x < 0 || tile_x > width)
+			return false;
+		if (tile_y < 0 || tile_y > height)
+			return false;
+
+		tile tile_def = tile_definitions[tiles[tile_x + tile_y * width]];
+
+		if (tile_def.hardness <= power) {
+			change_tile(tile_x, tile_y, TILE_AIR);
+			return true;
+		}
+
+		return false;
 	}
 }

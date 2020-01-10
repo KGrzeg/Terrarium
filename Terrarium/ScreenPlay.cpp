@@ -2,7 +2,8 @@
 
 namespace terr {
 	ScreenPlay::ScreenPlay(GlobalReference global, WorldSettings settings) :
-		global(global), world(global, settings)
+		global(global), world(global, settings),
+		pickaxe(global, &world)
 	{
 		player = new Character(global, &world);
 		player->setPosition(100, 20);
@@ -19,6 +20,8 @@ namespace terr {
 			player->update(time);
 			update_elapsed_time -= sf::seconds(update_fps);
 		}
+
+		//pickaxe.update(time);
 	}
 
 	void ScreenPlay::draw(sf::Time time)
@@ -31,4 +34,10 @@ namespace terr {
 		global->window.display();
 	}
 
+	void ScreenPlay::handle_input() {
+		sf::Event event;
+		while (global->window.pollEvent(event)) {
+			pickaxe.feedEvent(event);
+		}
+	}
 }

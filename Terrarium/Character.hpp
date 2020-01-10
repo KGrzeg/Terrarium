@@ -29,8 +29,15 @@ namespace terr {
 		sf::Sprite* getSprite() { return sprite->getSprite(); };
 
 	private:
+		const float jump_power = 220;
+		const float speed = 285;
+		const float collision_ray_distance = 1.f;
+		const float collision_ray_thickness = 0.5f;
+		const float collision_ray_shrink = 0.8f;
+
 		void handle_moving(sf::Time& time);
 		void handle_gravity(sf::Time& time);
+		void handle_velocity(sf::Time& time);
 		bool test_collision(int side);
 		sf::FloatRect side_rectangle(int side);
 
@@ -38,14 +45,17 @@ namespace terr {
 		World* world;
 		GlobalReference global;
 
+		sf::Vector2f velocity;
+
 		bool camera_follow = true;
-		const float speed = 185;
-		const float collision_ray_distance = 2.f;
-		const float collision_ray_thickness = 1.f;
+		bool jumping = false;
+		bool move_horizontally = false;
 
 		sf::Keyboard::Key key_move_up = sf::Keyboard::W;
 		sf::Keyboard::Key key_move_down = sf::Keyboard::S;
 		sf::Keyboard::Key key_move_left = sf::Keyboard::A;
 		sf::Keyboard::Key key_move_right = sf::Keyboard::D;
+
+		sf::Text debug_text;
 	};
 }
