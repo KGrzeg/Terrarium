@@ -3,13 +3,11 @@
 
 namespace terr {
 
-	class AnimatedSprite : sf::Drawable
+	class AnimatedSprite : public sf::Drawable
 	{
 	public:
 		AnimatedSprite(int frame_width,
 			int frame_height,
-			int frames,
-			int animations,
 			const sf::Texture& texture);
 
 		void update(sf::Time time);

@@ -4,19 +4,17 @@
 namespace terr {
 	AnimatedSprite::AnimatedSprite(int frame_width,
 		int frame_height,
-		int frames,
-		int animations,
 		const sf::Texture& texture) :
 
 		frame_width(frame_width),
 		frame_height(frame_height),
-		frames(frames),
-		animations(animations),
 		sprite(texture) {
 
+		frames = texture.getSize().x / frame_width;
+		animations = texture.getSize().y / frame_height;
 		current_animation = 0;
 		current_frame = 0;
-		fps = 1 / 16;
+		fps = 1.f / 4.f;
 
 		sprite.setTextureRect(sf::IntRect(
 			current_frame * frame_width,
