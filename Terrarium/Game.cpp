@@ -12,6 +12,8 @@ namespace terr {
 
 		global->assets.addFont("default", "arial.ttf");
 		global->assets.addTexture("menu/background", "images/menu_background.jpg");
+		global->assets.addTexture("game/character", "images/character_spritesheet.png");
+		global->assets.addTexture("game/character2", "images/character_spritesheet2.png");
 
 		global->navigator.pushScreen(ScreenReference(new ScreenMainMenu(global)));
 	}
