@@ -28,7 +28,6 @@ namespace terr {
 		sf::Vector2f getPosition() const { return sprite->getPosition(); }
 		sf::Sprite* getSprite() { return sprite->getSprite(); };
 		
-
 	private:
 		sf::FloatRect side_rectangle(int side);
 
