@@ -18,9 +18,11 @@ namespace terr {
 		void handle_input() override {};
 
 	private:
-
+		const float update_fps = 1.f / 60.f;
+		sf::Time update_elapsed_time;
 		GlobalReference global;
 		World world;
 		Character* player;
+		sf::Text fps_meter;
 	};
 }

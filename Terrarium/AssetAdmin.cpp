@@ -6,30 +6,32 @@ namespace terr {
 	{
 	}
 
-	sf::Texture &AssetAdmin::getTexture(std::string key)
+	sf::Texture& AssetAdmin::getTexture(std::string key)
 	{
 		return textures.at(key);
 	}
-	sf::Font &AssetAdmin::getFont(std::string key)
+	sf::Font& AssetAdmin::getFont(std::string key)
 	{
 		return fonts.at(key);
 	}
 
-	void AssetAdmin::addTexture(std::string key, std::string path)
+	sf::Texture& AssetAdmin::addTexture(std::string key, std::string path)
 	{
 		if (textures.find(key) == textures.end()) {
 			sf::Texture tex;
 			if (tex.loadFromFile(path))
 				textures[key] = tex;
 		}
+		return textures[key];
 	}
-	void AssetAdmin::addFont(std::string key, std::string path)
+	sf::Font& AssetAdmin::addFont(std::string key, std::string path)
 	{
 		if (fonts.find(key) == fonts.end()) {
 			sf::Font font;
 			if (font.loadFromFile(path))
 				fonts[key] = font;
 		}
+		return fonts[key];
 	}
 
 }

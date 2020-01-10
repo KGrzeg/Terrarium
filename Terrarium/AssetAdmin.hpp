@@ -10,8 +10,8 @@ public:
 	AssetAdmin();
 	~AssetAdmin() {};
 
-	void addTexture(std::string key, std::string path);
-	void addFont(std::string key, std::string path);
+	sf::Texture& addTexture(std::string key, std::string path);
+	sf::Font& addFont(std::string key, std::string path);
 	
 	sf::Texture &getTexture(std::string key);
 	sf::Font &getFont(std::string key);

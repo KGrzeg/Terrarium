@@ -74,9 +74,6 @@ namespace terr
 		if (clck_btn == "start")
 		{
 			WorldSettings settings;
-			settings.width = 50;
-			settings.height = 40;
-
 			global->navigator.pushScreen(ScreenReference(new ScreenPlay(global, settings)));
 		}
 		if (clck_btn == "back")

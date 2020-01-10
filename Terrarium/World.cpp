@@ -3,119 +3,140 @@
 #include <ctime>
 
 namespace terr {
-	World::World(WorldSettings settings)
+	World::World(GlobalReference global, WorldSettings& settings)
 	{
+		this->global = global;
 		this->width = settings.width;
 		this->height = settings.height;
 		srand(time(nullptr));
 
-		tiles = new tile * [width];
-		for (int x = 0; x < width; ++x)
-		{
-			tiles[x] = new tile[height];
-		}
+		tex = &global->assets.addTexture("map_spritesheet", settings.texture_name);
 
-		//TODO: error handling
-		spritesheet.loadFromFile("images/map_tileset.png");
+		setup_tiles_definitions();
 
-		for (int x = 0; x < width; ++x)
-		{
-			for (int y = 0; y < height; ++y)
-			{
-				switch (rand() % 20) {
-				case 0: {
-					tiles[x][y] = gen_dirt(x, y);
-					break;
-				}
-				case 1: {
-					tiles[x][y] = gen_stone(x, y);
-					break;
-				}
-				default: {
-					tiles[x][y] = gen_air(x, y);
-					break;
-				}
-				}
-			}
-		}
+		tiles = new int[width * height];
+		generate_simple_world(settings);
+		setup_vertices();
 	}
 
 
 	World::~World()
 	{
-		for (int x = 0; x < width; ++x)
-		{
-			delete[] tiles[x];
-		}
 		delete[] tiles;
 	}
 
 	void World::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		for (int x = 0; x < width; ++x)
+		// apply the transform
+		states.transform *= getTransform();
+
+		// apply the tileset texture
+		states.texture = tex;
+
+		// draw the vertex array
+		target.draw(vertices, states);
+	}
+
+	void World::generate_simple_world(WorldSettings& settings) {
+
+		int x, y;
+		for (int i = 0; i < width * height; i++)
 		{
-			for (int y = 0; y < height; ++y)
-			{
-				target.draw(tiles[x][y].rectangle_shape);
+			x = i % width;
+			y = i / width;
+
+			if (y < settings.surface_level) {
+				tiles[i] = TILE_AIR;
+				continue;
 			}
+
+			if (y < settings.dirt_level) {
+				tiles[i] = TILE_DIRT;
+				continue;
+			}
+
+			tiles[i] = TILE_STONE;
 		}
+	}
+	void World::setup_vertices() {
+		vertices.setPrimitiveType(sf::Quads);
+		vertices.resize(width * height * 4);
+
+		int x, y;
+		for (int i = 0; i < width * height; i++)
+		{
+			x = i % width;
+			y = i / width;
+
+			sf::Vertex* quad = &vertices[i * 4];
+
+			//quad position
+			quad[0].position = sf::Vector2f(x * TILE_WIDTH, y * TILE_HEIGHT);
+			quad[1].position = sf::Vector2f((x + 1) * TILE_WIDTH, y * TILE_HEIGHT);
+			quad[2].position = sf::Vector2f((x + 1) * TILE_WIDTH, (y + 1) * TILE_HEIGHT);
+			quad[3].position = sf::Vector2f(x * TILE_WIDTH, (y + 1) * TILE_HEIGHT);
+
+			//texture position
+			auto tex_coords = tile_definitions[tiles[i]].texture_coords;
+			quad[0].texCoords = sf::Vector2f(tex_coords.x, tex_coords.y);
+			quad[1].texCoords = sf::Vector2f(tex_coords.x + TILE_WIDTH, tex_coords.y);
+			quad[2].texCoords = sf::Vector2f(tex_coords.x + TILE_WIDTH, tex_coords.y + TILE_HEIGHT);
+			quad[3].texCoords = sf::Vector2f(tex_coords.x, tex_coords.y + TILE_HEIGHT);
+		}
+	}
+
+	bool World::check_collision_with_tile(sf::FloatRect& rectangle, int x, int y) {
+		const int tile_min_x = x * TILE_WIDTH;
+		const int tile_max_x = (x + 1) * TILE_WIDTH;
+		const int tile_min_y = y * TILE_HEIGHT;
+		const int tile_max_y = (y + 1) * TILE_HEIGHT;
+
+		if (rectangle.left + rectangle.width < tile_min_x) {
+			return false;
+		}
+		if (rectangle.left > tile_max_x) {
+			return false;
+		}
+		if (rectangle.top + rectangle.height < tile_min_y) {
+			return false;
+		}
+		if (rectangle.top > tile_max_y) {
+			return false;
+		}
+
+		return true;
 	}
 
 	bool World::checkCollision(sf::FloatRect rectangle) {
-		for (int x = 0; x < width; ++x)
+		int x, y;
+		for (int i = 0; i < width * height; i++)
 		{
-			for (int y = 0; y < height; ++y)
-			{
-				if (!tiles[x][y].collide)
-					continue;
+			x = i % width;
+			y = i / width;
 
-				bool intersecting = tiles[x][y]
-					.rectangle_shape
-					.getGlobalBounds()
-					.intersects(rectangle);
+			auto tile_def = tile_definitions[tiles[i]];
 
-				if (intersecting) {
-					return true;
-				}
-			}
+			if (!tile_def.collide)
+				continue;
+
+			if (check_collision_with_tile(rectangle, x, y))
+				return true;
 		}
 		return false;
 	}
-	tile World::gen_tile(int x, int y) {
-		tile tileInstance;
 
-		tileInstance.rectangle_shape.setSize(sf::Vector2f(TILE_WIDTH, TILE_HEIGHT));
-		tileInstance.rectangle_shape.setPosition(x * TILE_WIDTH, y * TILE_HEIGHT);
-		tileInstance.rectangle_shape.setTexture(&spritesheet);
+	void World::setup_tiles_definitions() {
+		tile_definitions[TILE_AIR].collide = false;
+		tile_definitions[TILE_AIR].hardness = 0;
+		tile_definitions[TILE_AIR].texture_coords = sf::Vector2f(1, 23);
 
-		return tileInstance;
-	}
 
-	tile World::gen_dirt(int x, int y) {
-		tile tileInstance = gen_tile(x, y);
+		tile_definitions[TILE_DIRT].collide = true;
+		tile_definitions[TILE_DIRT].hardness = 1;
+		tile_definitions[TILE_DIRT].texture_coords = sf::Vector2f(12, 23);
 
-		tileInstance.rectangle_shape.setTextureRect(sf::IntRect(12, 23, TILE_WIDTH, TILE_HEIGHT));
-		tileInstance.type = dirt;
-
-		return tileInstance;
-	}
-
-	tile World::gen_stone(int x, int y) {
-		tile tileInstance = gen_tile(x, y);
-
-		tileInstance.rectangle_shape.setTextureRect(sf::IntRect(12, 34, TILE_WIDTH, TILE_HEIGHT));
-		tileInstance.type = stone;
-
-		return tileInstance;
-	}
-
-	tile World::gen_air(int x, int y) {
-		tile tileInstance = gen_tile(x, y);
-
-		tileInstance.rectangle_shape.setTextureRect(sf::IntRect(1, 23, TILE_WIDTH, TILE_HEIGHT));
-		tileInstance.type = air;
-		tileInstance.collide = false;
-
-		return tileInstance;
+		tile_definitions[TILE_STONE].collide = true;
+		tile_definitions[TILE_STONE].hardness = 2;
+		tile_definitions[TILE_STONE].texture_coords = sf::Vector2f(12, 34);
 	}
 }
