@@ -1,6 +1,4 @@
 #include "World.hpp"
-#include <random>
-#include <ctime>
 
 namespace terr {
 	World::World(GlobalReference global, WorldSettings& settings)
@@ -8,10 +6,9 @@ namespace terr {
 		this->global = global;
 		this->width = settings.width;
 		this->height = settings.height;
-		srand(time(nullptr));
+		this->gravity = settings.gravity;
 
 		tex = &global->assets.addTexture("map_spritesheet", settings.texture_name);
-
 		setup_tiles_definitions();
 
 		tiles = new int[width * height];
@@ -91,18 +88,17 @@ namespace terr {
 		const int tile_min_y = y * TILE_HEIGHT;
 		const int tile_max_y = (y + 1) * TILE_HEIGHT;
 
-		if (rectangle.left + rectangle.width < tile_min_x) {
+		if (rectangle.left + rectangle.width < tile_min_x)
 			return false;
-		}
-		if (rectangle.left > tile_max_x) {
+
+		if (rectangle.left > tile_max_x)
 			return false;
-		}
-		if (rectangle.top + rectangle.height < tile_min_y) {
+
+		if (rectangle.top + rectangle.height < tile_min_y)
 			return false;
-		}
-		if (rectangle.top > tile_max_y) {
+
+		if (rectangle.top > tile_max_y)
 			return false;
-		}
 
 		return true;
 	}

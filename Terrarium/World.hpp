@@ -19,6 +19,7 @@ namespace terr {
 		int height = 300;
 		int surface_level = 40;
 		int dirt_level = 55;
+		float gravity = 35;
 		std::string texture_name = "images/map_tileset.png";
 	} WorldSettings;
 
@@ -35,6 +36,7 @@ namespace terr {
 		~World();
 
 		bool checkCollision(sf::FloatRect rectangle);
+		float getGravity() const { return gravity; }
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -49,6 +51,7 @@ namespace terr {
 		int width, height;
 		int* tiles;
 		tile tile_definitions[TILE_TYPES];
+		float gravity;
 
 		sf::Texture spritesheet;
 		sf::VertexArray vertices;

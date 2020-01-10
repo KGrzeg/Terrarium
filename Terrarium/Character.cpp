@@ -10,29 +10,43 @@ namespace terr {
 		sprite->setFPS(1.f / 12.f);
 	}
 
-	void Character::update(sf::Time time) {
+	void Character::update(sf::Time& time) {
 		sprite->update(time);
+		handle_moving(time);
+		handle_gravity(time);
+	}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) &&
-			!world->checkCollision(side_rectangle(SIDE_LEFT))) {
+	void Character::handle_moving(sf::Time& time) {
+		if (sf::Keyboard::isKeyPressed(key_move_left) &&
+			!test_collision(SIDE_LEFT)) {
 			move(-speed * time.asSeconds(), 0);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) &&
-			!world->checkCollision(side_rectangle(SIDE_RIGHT))) {
+		if (sf::Keyboard::isKeyPressed(key_move_right) &&
+			!test_collision(SIDE_RIGHT)) {
 			move(speed * time.asSeconds(), 0);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) &&
-			!world->checkCollision(side_rectangle(SIDE_TOP))) {
+		if (sf::Keyboard::isKeyPressed(key_move_up) &&
+			!test_collision(SIDE_TOP)) {
 			move(0, -speed * time.asSeconds());
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) &&
-			!world->checkCollision(side_rectangle(SIDE_DOWN))) {
+		if (sf::Keyboard::isKeyPressed(key_move_down) &&
+			!test_collision(SIDE_DOWN)) {
 			move(0, speed * time.asSeconds());
+		}
+	}
+
+	void Character::handle_gravity(sf::Time& time) {
+		if (!test_collision(SIDE_DOWN)) {
+			move(0, world->getGravity() * time.asSeconds());
 		}
 	}
 
 	void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 		target.draw(*sprite);
+	}
+
+	bool Character::test_collision(int side) {
+		return world->checkCollision(side_rectangle(side));
 	}
 
 	sf::FloatRect Character::side_rectangle(int side) {
