@@ -13,6 +13,7 @@ namespace terr {
 		this->gravity = settings.gravity;
 
 		srand(time(0));
+		perlin_noise.setSeed(rand());
 
 		tex = &global->assets.addTexture("map_spritesheet", settings.texture_name);
 		setup_tiles_definitions();
@@ -48,7 +49,7 @@ namespace terr {
 			x = i % width;
 			y = i / width;
 
-			if (y < settings.surface_level) {
+			if (y < settings.layers[1].level) {
 				tiles[i] = TILE_AIR;
 				continue;
 			}
@@ -62,24 +63,37 @@ namespace terr {
 		}
 	}
 
-	void World::generate_complex_world(WorldSettings& s) {
-		perlin_noise.setSeed(rand());
+	void World::generate_filled_layer(WorldLayer& layer) {
+		if (!layer.enabled) return;
 
-		//TODO: to delete
+		for (int x = 0; x < width; ++x) {
+			float noise_h = perlin_noise(x, 1, layer.zoom);
+			int h = layer.level + noise_h * layer.variation;
+
+			h = std::max(0, h);
+			h = std::min(h, height);
+
+			for (int y = h; y < height; ++y) {
+				int i = x + y * width;
+
+				float noise = perlin_noise(x, y, layer.zoom);
+				if (noise > layer.treshold)
+					tiles[i] = layer.tile_id;
+			}
+		}
+	}
+
+
+	void World::generate_complex_world(WorldSettings& s) {
+
 		for (int i = 0; i < width * height; i++)
 		{
 			tiles[i] = TILE_AIR;
 		}
 
-		//surface
-		for (int x = 0; x < width; ++x) {
-			float noise = perlin_noise(x, 1, s.surface_zoom);
-			int sur_height = s.surface_level + noise * s.surface_variation;
-
-			for (int y = sur_height; y < height; ++y) {
-				int i = x + y * width;
-				tiles[i] = TILE_DIRT;
-			}
+		for (int i = 0; i < MAX_LAYERS; i++)
+		{
+			generate_filled_layer(s.layers[i]);
 		}
 	}
 
@@ -163,6 +177,11 @@ namespace terr {
 		tile_definitions[TILE_STONE].hardness = 2;
 		tile_definitions[TILE_STONE].score = 1;
 		tile_definitions[TILE_STONE].texture_coords = sf::Vector2f(12, 34);
+
+		tile_definitions[TILE_COAL].collide = true;
+		tile_definitions[TILE_COAL].hardness = 2;
+		tile_definitions[TILE_COAL].score = 4;
+		tile_definitions[TILE_COAL].texture_coords = sf::Vector2f(12, 45);
 	}
 
 	void World::change_tile(int x, int y, int tile_def_id) {
