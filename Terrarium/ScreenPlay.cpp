@@ -4,8 +4,8 @@ namespace terr {
 	ScreenPlay::ScreenPlay(GlobalReference global, WorldSettings settings) :
 		global(global), world(settings)
 	{
-		player = new Character(global);
-		player->setPosition(100, 100);
+		player = new Character(global, &world);
+		player->setPosition(100, 500);
 	}
 
 	void ScreenPlay::update(sf::Time time) {
@@ -19,4 +19,5 @@ namespace terr {
 		global->window.draw(*player);
 		global->window.display();
 	}
+
 }

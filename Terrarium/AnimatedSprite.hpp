@@ -19,7 +19,7 @@ namespace terr {
 		void setAnimation(int animation) { current_animation = animation; }
 		void setAnimating(bool animating) { animating = animating; }
 
-		sf::Sprite getSprite() const { return sprite; }
+		sf::Sprite* getSprite() { return &sprite; }
 		sf::Vector2f getPosition() const { return sprite.getPosition(); }
 		sf::FloatRect getLocalBounds() const { return sprite.getLocalBounds(); }
 		sf::FloatRect getGlobalBounds() const { return sprite.getGlobalBounds(); }

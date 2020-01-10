@@ -6,8 +6,8 @@ namespace terr {
 	{
 		global->window.create(sf::VideoMode(window_width, window_height),
 			name + " v" + version,
-			sf::Style::None);
-		//screen_play(180, 90)
+			sf::Style::Default);
+
 		global->window.setVerticalSyncEnabled(true);
 
 		global->assets.addFont("default", "arial.ttf");
@@ -24,7 +24,7 @@ namespace terr {
 		{
 			elapsed_time = global_clock.restart();
 			global->navigator.update();
-			
+
 			global->navigator.getScreen()->handle_input();
 			global->navigator.getScreen()->update(elapsed_time);
 			global->navigator.getScreen()->draw(elapsed_time);

@@ -18,6 +18,7 @@ namespace terr {
 		void handle_input() override {};
 
 	private:
+
 		GlobalReference global;
 		World world;
 		Character* player;
