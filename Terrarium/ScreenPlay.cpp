@@ -2,18 +2,19 @@
 
 namespace terr {
 	ScreenPlay::ScreenPlay(GlobalReference global, WorldSettings settings) :
-		global(global), world(global, settings),
-		pickaxe(global, &world)
+		global(global), world(global, settings)
 	{
 		player = new Character(global, &world);
 		player->setPosition(settings.player_x, settings.player_y);
+
+		pickaxe = new Pickaxe(global, &world, player);
 
 		top_bar.setSize(sf::Vector2f(1280, 75));
 		top_bar.setTexture(&global->assets.getTexture("ui/topbar"));
 
 		power_label.setPosition(310, 20);
 		power_label.setFont(global->assets.getFont("default"));
-		power_label.setString(std::to_string(pickaxe.getPower()));
+		power_label.setString(std::to_string(pickaxe->getPower()));
 
 		score_label.setPosition(140, 20);
 		score_label.setFont(global->assets.getFont("default"));
@@ -32,9 +33,9 @@ namespace terr {
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-			pickaxe.setPower(std::max((pickaxe.getPower() + 1) % 4, 1));
-			power_sprite->setAnimation(pickaxe.getPower() - 1);
-			power_label.setString(std::to_string(pickaxe.getPower()));
+			pickaxe->setPower(std::max((pickaxe->getPower() + 1) % 4, 1));
+			power_sprite->setAnimation(pickaxe->getPower() - 1);
+			power_label.setString(std::to_string(pickaxe->getPower()));
 		}
 	}
 
@@ -69,7 +70,7 @@ namespace terr {
 		while (global->window.pollEvent(event)) {
 
 			player->handle_event(event);
-			addScore(pickaxe.feedEvent(event));
+			addScore(pickaxe->feedEvent(event));
 
 			if (event.type == sf::Event::Closed)
 				global->window.close();

@@ -20,6 +20,8 @@ namespace terr {
 		void handle_input() override;
 		void addScore(int score);
 
+		Character* getPlayer() { return player; }
+
 	private:
 		void draw_ui();
 
@@ -28,7 +30,7 @@ namespace terr {
 		GlobalReference global;
 		World world;
 		Character* player;
-		Pickaxe pickaxe;
+		Pickaxe* pickaxe;
 		sf::RectangleShape top_bar;
 
 		unsigned score = 0;
