@@ -4,20 +4,19 @@ namespace terr {
 	ScreenPlay::ScreenPlay(GlobalReference global, WorldSettings settings) :
 		global(global), world(settings)
 	{
-		animeddd = new AnimatedSprite(80, 80, global->assets.getTexture("game/character2"));
-		animeddd->setPosition(100, 100);
-		animeddd->setAnimation(3);
+		player = new Character(global);
+		player->setPosition(100, 100);
 	}
 
 	void ScreenPlay::update(sf::Time time) {
-		animeddd->update(time);
+		player->update(time);
 	}
 
 	void ScreenPlay::draw(sf::Time time)
 	{
 		global->window.clear();
 		global->window.draw(world);
-		global->window.draw(*animeddd);
+		global->window.draw(*player);
 		global->window.display();
 	}
 }

@@ -69,6 +69,9 @@
     <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -117,6 +120,9 @@
       <Filter>Pliki nagłówkowe\UI</Filter>
     </ClInclude>
     <ClInclude Include="AnimatedSprite.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

@@ -15,6 +15,7 @@ namespace terr {
 		current_animation = 0;
 		current_frame = 0;
 		fps = 1.f / 4.f;
+		animating = true;
 
 		sprite.setTextureRect(sf::IntRect(
 			current_frame * frame_width,
@@ -25,6 +26,9 @@ namespace terr {
 	}
 
 	void AnimatedSprite::update(sf::Time time) {
+		if (!animating)
+			return;
+
 		elapsed_time += time;
 
 		if (elapsed_time.asSeconds() >= fps) {

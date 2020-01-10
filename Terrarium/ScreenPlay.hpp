@@ -2,7 +2,7 @@
 #include "Screen.hpp"
 #include "World.hpp"
 #include "Game.hpp"
-#include "AnimatedSprite.hpp"
+#include "Character.hpp"
 
 namespace terr {
 	class ScreenPlay :
@@ -11,7 +11,7 @@ namespace terr {
 	public:
 		ScreenPlay(GlobalReference global, WorldSettings settings);
 		~ScreenPlay() {
-			delete animeddd;
+			delete player;
 		}
 		void draw(sf::Time time) override;
 		void update(sf::Time time) override;
@@ -20,6 +20,6 @@ namespace terr {
 	private:
 		GlobalReference global;
 		World world;
-		AnimatedSprite* animeddd = nullptr;
+		Character* player;
 	};
 }

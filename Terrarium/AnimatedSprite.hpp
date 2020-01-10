@@ -17,12 +17,15 @@ namespace terr {
 		void setPosition(float x, float y) { sprite.setPosition(x, y); }
 		void setFPS(float fps) { fps = fps; }
 		void setAnimation(int animation) { current_animation = animation; }
+		void setAnimating(bool animating) { animating = animating; }
 
+		sf::Sprite getSprite() const { return sprite; }
 		sf::Vector2f getPosition() const { return sprite.getPosition(); }
 		sf::FloatRect getLocalBounds() const { return sprite.getLocalBounds(); }
 		sf::FloatRect getGlobalBounds() const { return sprite.getGlobalBounds(); }
 		float getFPS() const { return fps; }
 		int getAnimation() const { return current_animation; }
+		bool getAnimating() const { return animating; }
 
 	private:
 		void increment_frame();
@@ -34,6 +37,7 @@ namespace terr {
 		int current_animation;
 		int current_frame;
 		float fps;
+		bool animating;
 		sf::Sprite sprite;
 		sf::Time elapsed_time;
 	};
