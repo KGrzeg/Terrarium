@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Game.hpp"
+#include "PerlinNoise.hpp"
 
 #define TILE_WIDTH 10
 #define TILE_HEIGHT 10
@@ -17,7 +18,11 @@ namespace terr {
 	{
 		int width = 120;
 		int height = 100;
+		
 		int surface_level = 40;
+		int surface_variation = 9;
+		float surface_zoom = 14.2f;
+
 		int dirt_level = 55;
 		float gravity = 185;
 		float player_x = 100;
@@ -46,6 +51,8 @@ namespace terr {
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 		void generate_simple_world(WorldSettings& settings);
+		void generate_complex_world(WorldSettings& settings);
+
 		bool check_collision_with_tile(sf::FloatRect& rectangle, int x, int y);
 		void change_tile(int x, int y, int tile_def_id);
 
@@ -61,6 +68,8 @@ namespace terr {
 		sf::Texture spritesheet;
 		sf::VertexArray vertices;
 		sf::Texture* tex;
+
+		PerlinNoise perlin_noise;
 	};
 
 }

@@ -14,7 +14,9 @@ namespace terr {
 	void Character::update(sf::Time& time) {
 		sprite->update(time);
 		handle_moving(time);
-		handle_gravity(time);
+
+		if (!god_mode)
+			handle_gravity(time);
 		handle_velocity(time);
 
 		if (camera_follow) {
@@ -27,27 +29,52 @@ namespace terr {
 	void Character::handle_moving(sf::Time& time) {
 		move_horizontally = false;
 
-		if (sf::Keyboard::isKeyPressed(key_move_left) &&
-			!test_collision(SIDE_LEFT)) {
-			velocity.x = -speed;
-			move_horizontally = true;
+		if (god_mode) {
+			if (sf::Keyboard::isKeyPressed(key_move_left)) {
+				velocity.x = -speed;
+				move_horizontally = true;
+			}
+			if (sf::Keyboard::isKeyPressed(key_move_right)) {
+				velocity.x = speed;
+				move_horizontally = true;
+			}
+			if (sf::Keyboard::isKeyPressed(key_move_up)) {
+				velocity.y = -speed;
+				move_horizontally = true;
+			}
+			if (sf::Keyboard::isKeyPressed(key_move_down)) {
+				velocity.y = speed;
+				move_horizontally = true;
+			}
+			if (!move_horizontally) {
+				velocity.x = 0;
+				velocity.y = 0;
+			}
+
 		}
-		if (sf::Keyboard::isKeyPressed(key_move_right) &&
-			!test_collision(SIDE_RIGHT)) {
-			velocity.x = speed;
-			move_horizontally = true;
+		else {
+			if (sf::Keyboard::isKeyPressed(key_move_left) &&
+				!test_collision(SIDE_LEFT)) {
+				velocity.x = -speed;
+				move_horizontally = true;
+			}
+			if (sf::Keyboard::isKeyPressed(key_move_right) &&
+				!test_collision(SIDE_RIGHT)) {
+				velocity.x = speed;
+				move_horizontally = true;
+			}
+
+			if (sf::Keyboard::isKeyPressed(key_move_up) &&
+				!jumping &&
+				!test_collision(SIDE_TOP)) {
+				jumping = true;
+				velocity.y -= jump_power;
+			}
+			if (!move_horizontally) {
+				velocity.x = 0;
+			}
 		}
 
-		if (!move_horizontally) {
-			velocity.x = 0;
-		}
-
-		if (sf::Keyboard::isKeyPressed(key_move_up) &&
-			!jumping &&
-			!test_collision(SIDE_TOP)) {
-			jumping = true;
-			velocity.y -= jump_power;
-		}
 	}
 
 	void Character::handle_gravity(sf::Time& time) {

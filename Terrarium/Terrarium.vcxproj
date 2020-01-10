@@ -93,7 +93,7 @@
     <Link>
       <AdditionalLibraryDirectories>E:\Grzes\dev\Terrarium\SFMLx32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-main-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -158,9 +158,11 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Interpolation.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Navigator.cpp" />
+    <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Pickaxe.cpp" />
     <ClCompile Include="ScreenLoadGame.cpp" />
     <ClCompile Include="ScreenMainMenu.cpp" />
@@ -176,8 +178,10 @@
     <ClInclude Include="Button.hpp" />
     <ClInclude Include="Character.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="Interpolation.hpp" />
     <ClInclude Include="Label.hpp" />
     <ClInclude Include="Navigator.hpp" />
+    <ClInclude Include="PerlinNoise.hpp" />
     <ClInclude Include="Pickaxe.hpp" />
     <ClInclude Include="Screen.hpp" />
     <ClInclude Include="ScreenLoadGame.hpp" />

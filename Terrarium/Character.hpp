@@ -50,6 +50,7 @@ namespace terr {
 		bool camera_follow = true;
 		bool jumping = false;
 		bool move_horizontally = false;
+		bool god_mode = true;
 
 		sf::Keyboard::Key key_move_up = sf::Keyboard::W;
 		sf::Keyboard::Key key_move_down = sf::Keyboard::S;

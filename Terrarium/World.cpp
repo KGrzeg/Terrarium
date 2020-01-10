@@ -1,3 +1,7 @@
+#include <random>
+#include <ctime>
+#include <iostream>
+
 #include "World.hpp"
 
 namespace terr {
@@ -8,11 +12,14 @@ namespace terr {
 		this->height = settings.height;
 		this->gravity = settings.gravity;
 
+		srand(time(0));
+
 		tex = &global->assets.addTexture("map_spritesheet", settings.texture_name);
 		setup_tiles_definitions();
 
 		tiles = new int[width * height];
-		generate_simple_world(settings);
+		//generate_simple_world(settings);
+		generate_complex_world(settings);
 		setup_vertices();
 	}
 
@@ -54,6 +61,28 @@ namespace terr {
 			tiles[i] = TILE_STONE;
 		}
 	}
+
+	void World::generate_complex_world(WorldSettings& s) {
+		perlin_noise.setSeed(rand());
+
+		//TODO: to delete
+		for (int i = 0; i < width * height; i++)
+		{
+			tiles[i] = TILE_AIR;
+		}
+
+		//surface
+		for (int x = 0; x < width; ++x) {
+			float noise = perlin_noise(x, 1, s.surface_zoom);
+			int sur_height = s.surface_level + noise * s.surface_variation;
+
+			for (int y = sur_height; y < height; ++y) {
+				int i = x + y * width;
+				tiles[i] = TILE_DIRT;
+			}
+		}
+	}
+
 	void World::setup_vertices() {
 		vertices.setPrimitiveType(sf::Quads);
 		vertices.resize(width * height * 4);
