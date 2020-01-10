@@ -132,6 +132,7 @@ namespace terr {
 
 		tile_definitions[TILE_STONE].collide = true;
 		tile_definitions[TILE_STONE].hardness = 2;
+		tile_definitions[TILE_STONE].score = 1;
 		tile_definitions[TILE_STONE].texture_coords = sf::Vector2f(12, 34);
 	}
 
@@ -148,7 +149,7 @@ namespace terr {
 		vertices[id * 4 + 3].texCoords = sf::Vector2f(tex_coords.x, tex_coords.y + TILE_HEIGHT);
 	}
 
-	bool World::dig(int x, int y, int power) {
+	int World::dig(int x, int y, int power) {
 		//world coords to tilemap coords
 		const int tile_x = x / TILE_WIDTH;
 		const int tile_y = y / TILE_HEIGHT;
@@ -162,9 +163,9 @@ namespace terr {
 
 		if (tile_def.hardness <= power) {
 			change_tile(tile_x, tile_y, TILE_AIR);
-			return true;
+			return tile_def.score;
 		}
 
-		return false;
+		return 0;
 	}
 }

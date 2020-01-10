@@ -11,7 +11,10 @@ namespace terr {
 	public:
 		Pickaxe(GlobalReference global, World* world);
 		//void update(sf::Time& time);
-		void feedEvent(sf::Event& event);
+		int feedEvent(sf::Event& event);
+
+		int getPower() const { return power; }
+		void setPower(int pow) { power = pow; }
 
 	private:
 		GlobalReference global;

@@ -55,7 +55,5 @@ namespace terr {
 		sf::Keyboard::Key key_move_down = sf::Keyboard::S;
 		sf::Keyboard::Key key_move_left = sf::Keyboard::A;
 		sf::Keyboard::Key key_move_right = sf::Keyboard::D;
-
-		sf::Text debug_text;
 	};
 }

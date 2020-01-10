@@ -14,6 +14,8 @@ namespace terr {
 		global->assets.addTexture("menu/background", "images/menu_background.jpg");
 		global->assets.addTexture("game/character", "images/character_spritesheet.png");
 		global->assets.addTexture("game/character2", "images/character_spritesheet2.png");
+		global->assets.addTexture("ui/topbar", "images/info_bar.png");
+		global->assets.addTexture("ui/tools", "images/tools.png");
 
 		global->navigator.pushScreen(ScreenReference(new ScreenMainMenu(global)));
 	}

@@ -16,7 +16,15 @@ namespace terr {
 		void move(float x, float y) { sprite.move(x, y); }
 		void setPosition(float x, float y) { sprite.setPosition(x, y); }
 		void setFPS(float fps) { fps = fps; }
-		void setAnimation(int animation) { current_animation = animation; }
+		void setAnimation(int animation) {
+			current_animation = animation;
+			sprite.setTextureRect(sf::IntRect(
+				current_frame * frame_width,
+				current_animation * frame_height,
+				frame_width,
+				frame_height
+			));
+		}
 		void setAnimating(bool animating) { animating = animating; }
 
 		sf::Sprite* getSprite() { return &sprite; }

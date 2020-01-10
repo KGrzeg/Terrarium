@@ -9,7 +9,6 @@ namespace terr {
 		sprite->setAnimation(3);
 		sprite->setFPS(1.f / 12.f);
 
-		debug_text.setFont(global->assets.getFont("default"));
 	}
 
 	void Character::update(sf::Time& time) {
@@ -23,18 +22,6 @@ namespace terr {
 			v.setCenter(getPosition());
 			global->window.setView(v);
 		}
-
-		auto p = sf::Mouse::getPosition(global->window);
-		sf::Vector2f worldPos = global->window.mapPixelToCoords(p);
-		auto p2 = sf::Vector2i(worldPos.x / TILE_WIDTH, worldPos.y / TILE_WIDTH);
-
-		std::string debug_message = "Mouse pos: "
-			+ std::to_string(p.x) + " " + std::to_string(p.y) + "\n"
-			+ std::to_string(worldPos.x) + " " + std::to_string(worldPos.y) + "\n"
-			+ std::to_string(p2.x) + " " + std::to_string(p2.y);
-
-		debug_text.setString(debug_message);
-		debug_text.setPosition(getPosition());
 	}
 
 	void Character::handle_moving(sf::Time& time) {
@@ -82,7 +69,6 @@ namespace terr {
 
 	void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 		target.draw(*sprite);
-		target.draw(debug_text);
 	}
 
 	bool Character::test_collision(int side) {

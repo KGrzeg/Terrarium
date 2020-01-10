@@ -20,12 +20,15 @@ namespace terr {
 		int surface_level = 40;
 		int dirt_level = 55;
 		float gravity = 185;
+		float player_x = 100;
+		float player_y = 20;
 		std::string texture_name = "images/map_tileset.png";
 	} WorldSettings;
 
 	typedef struct {
 		bool collide = false;
 		int hardness = 1;
+		int score = 0;
 		sf::Vector2f texture_coords;
 	} tile;
 
@@ -37,7 +40,7 @@ namespace terr {
 
 		bool checkCollision(sf::FloatRect rectangle);
 		float getGravity() const { return gravity; }
-		bool dig(int x, int y, int power);
+		int dig(int x, int y, int power);
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
