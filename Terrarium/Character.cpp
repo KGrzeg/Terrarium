@@ -14,6 +14,12 @@ namespace terr {
 		sprite->update(time);
 		handle_moving(time);
 		handle_gravity(time);
+
+		if (camera_follow) {
+			auto v = global->window.getView();
+			v.setCenter(getPosition());
+			global->window.setView(v);
+		}
 	}
 
 	void Character::handle_moving(sf::Time& time) {
@@ -32,6 +38,10 @@ namespace terr {
 		if (sf::Keyboard::isKeyPressed(key_move_down) &&
 			!test_collision(SIDE_DOWN)) {
 			move(0, speed * time.asSeconds());
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			world->move(0, 15);
 		}
 	}
 

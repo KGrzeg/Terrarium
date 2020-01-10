@@ -83,10 +83,10 @@ namespace terr {
 	}
 
 	bool World::check_collision_with_tile(sf::FloatRect& rectangle, int x, int y) {
-		const int tile_min_x = x * TILE_WIDTH;
-		const int tile_max_x = (x + 1) * TILE_WIDTH;
-		const int tile_min_y = y * TILE_HEIGHT;
-		const int tile_max_y = (y + 1) * TILE_HEIGHT;
+		const int tile_min_x = x * TILE_WIDTH + getPosition().x;
+		const int tile_max_x = tile_min_x + TILE_WIDTH;
+		const int tile_min_y = y * TILE_HEIGHT + getPosition().y;
+		const int tile_max_y = tile_min_y + TILE_HEIGHT;
 
 		if (rectangle.left + rectangle.width < tile_min_x)
 			return false;

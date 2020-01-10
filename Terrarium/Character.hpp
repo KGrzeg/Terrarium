@@ -38,6 +38,7 @@ namespace terr {
 		World* world;
 		GlobalReference global;
 
+		bool camera_follow = true;
 		const float speed = 185;
 		const float collision_ray_distance = 2.f;
 		const float collision_ray_thickness = 1.f;
