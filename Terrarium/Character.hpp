@@ -22,6 +22,7 @@ namespace terr {
 		void move(float x, float y) { sprite->move(x, y); }
 		void setPosition(float x, float y) { sprite->setPosition(x, y); }
 
+		sf::View getView() { return view; }
 		sf::Vector2f getPosition() const { return sprite->getPosition(); }
 		sf::Sprite* getSprite() { return sprite; };
 

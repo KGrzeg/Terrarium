@@ -32,6 +32,7 @@ namespace terr {
 		Pickaxe* pickaxe;
 		sf::RectangleShape top_bar;
 		sf::RectangleShape help_image;
+		sf::RectangleShape background_image;
 
 		bool display_help = false;
 

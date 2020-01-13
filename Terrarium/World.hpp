@@ -20,7 +20,8 @@ namespace terr {
 		int width = 420;
 		int height = 300;
 		float gravity = 485;
-		std::string texture_name = "game/map1";
+		std::string spritesheet_texture_name = "game/map1";
+		std::string background_texture_name = "game/skyBlue";
 		float player_x = 100;
 		float player_y = -500;
 
@@ -28,7 +29,6 @@ namespace terr {
 			{45, 9, TILE_GRASS, 14.2f, -2.f, true},
 			{65, 8, TILE_DIRT, 14.1f, -2.f, true},
 			{90, 16, TILE_STONE, 11.2f, -2.f, true},
-			//{150, 50, TILE_DIRT, 15.0f, -1.2f, true},
 			{80, 8, TILE_STONE, 4.f, 0.45f, true},
 			{80, 8, TILE_COAL, 4.f, 0.75f, true},
 			{125, 20, TILE_STONE, 12.f, 0.65f, true},
@@ -58,11 +58,11 @@ namespace terr {
 		bool checkCollision(sf::FloatRect rectangle);
 		float getGravity() const { return gravity; }
 		int dig(int x, int y, int power);
+		sf::Vector2f getSizeInPixels() { return { width * TILE_WIDTH * 1.f, height * TILE_WIDTH * 1.f }; }
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-		void generate_simple_world(WorldSettings& settings);
 		void generate_complex_world(WorldSettings& settings);
 		void generate_filled_layer(WorldLayer& layer);
 

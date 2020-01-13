@@ -120,6 +120,9 @@ namespace terr {
 		float cam_x = std::max(getPosition().x, view.getSize().x / 2.f);
 		float cam_y = std::max(getPosition().y, view.getSize().y / 2.f);
 
+		cam_x = std::min(cam_x, world->getSizeInPixels().x - view.getSize().x / 2.f);
+		cam_y = std::min(cam_y, world->getSizeInPixels().y - view.getSize().y / 2.f);
+
 		view.setCenter(cam_x, cam_y);
 		global->window.setView(view);
 	}

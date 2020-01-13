@@ -13,10 +13,13 @@ namespace terr {
 		global->assets.addFont("default", "arial.ttf");
 		global->assets.addTexture("menu/background", "images/menu_background.jpg");
 		global->assets.addTexture("help", "images/help_screen.jpg");
+
 		global->assets.addTexture("game/character", "images/character_spritesheet.png");
 		global->assets.addTexture("game/character2", "images/character_spritesheet2.png");
 		global->assets.addTexture("game/character3", "images/dwarf.png");
 		global->assets.addTexture("game/map1", "images/map_tileset.png");
+		global->assets.addTexture("game/skyBlue", "images/background_blue_sky.jpg").setRepeated(true);
+
 		global->assets.addTexture("ui/topbar", "images/info_bar.png");
 		global->assets.addTexture("ui/tools", "images/tools.png");
 

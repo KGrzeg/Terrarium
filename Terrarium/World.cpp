@@ -15,7 +15,7 @@ namespace terr {
 		srand(time(0));
 		perlin_noise.setSeed(rand());
 
-		tex = &global->assets.getTexture(settings.texture_name);
+		tex = &global->assets.getTexture(settings.spritesheet_texture_name);
 		setup_tiles_definitions();
 
 		tiles = new int[width * height];
@@ -39,7 +39,7 @@ namespace terr {
 		// draw the vertex array
 		target.draw(vertices, states);
 	}
-	
+
 	void World::generate_filled_layer(WorldLayer& layer) {
 		if (!layer.enabled) return;
 

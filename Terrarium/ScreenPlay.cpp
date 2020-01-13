@@ -25,6 +25,9 @@ namespace terr {
 
 		help_image.setSize(sf::Vector2f(1280, 720));
 		help_image.setTexture(&global->assets.getTexture("help"));
+
+		background_image.setSize({ settings.width * TILE_WIDTH * 1.f, WINDOW_HEIGHT });
+		background_image.setTexture(&global->assets.getTexture(settings.background_texture_name));
 	}
 
 	ScreenPlay::~ScreenPlay() {
@@ -58,6 +61,7 @@ namespace terr {
 			global->window.draw(help_image);
 		}
 		else {
+			global->window.draw(background_image);
 			global->window.draw(world);
 			global->window.draw(*player);
 
@@ -80,7 +84,7 @@ namespace terr {
 
 		global->window.setView(vue);
 	}
-
+	
 	void ScreenPlay::handle_input() {
 		sf::Event event;
 		while (global->window.pollEvent(event)) {
