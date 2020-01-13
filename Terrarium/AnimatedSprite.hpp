@@ -1,55 +1,55 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-namespace terr {
+typedef struct {
+	int x = 0;
+	int y = 0;
+	int width = 0;
+	int height = 0;
+	int origin_x = -1;
+	int oritin_y = -1;
+} AnimationFrameDef;
 
-	class AnimatedSprite : public sf::Drawable
-	{
-	public:
-		AnimatedSprite(int frame_width,
-			int frame_height,
-			const sf::Texture& texture);
+typedef struct {
+	int frame_start = 0;
+	int frame_end = 0;
+	bool play_once = false;
+	int next_animation = 0;
+	float override_fps = 0;
+} AnimationDef;
 
-		void update(sf::Time time);
-		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+class AnimatedSprite :
+	public sf::Sprite
+{
+public:
+	AnimatedSprite(AnimationDef* animations, AnimationFrameDef* frames, bool auto_start = true);
+	~AnimatedSprite();
 
-		void move(float x, float y) { sprite.move(x, y); }
-		void setPosition(float x, float y) { sprite.setPosition(x, y); }
-		void setFPS(float fps) { fps = fps; }
-		void setAnimation(int animation) {
-			current_animation = animation;
-			sprite.setTextureRect(sf::IntRect(
-				current_frame * frame_width,
-				current_animation * frame_height,
-				frame_width,
-				frame_height
-			));
-		}
-		void setAnimating(bool animating) { animating = animating; }
-		void playOnce(int animation);
+	void update(sf::Time time);
+	void playAnimation(int n, bool restart = false);
 
-		sf::Sprite* getSprite() { return &sprite; }
-		sf::Vector2f getPosition() const { return sprite.getPosition(); }
-		sf::FloatRect getLocalBounds() const { return sprite.getLocalBounds(); }
-		sf::FloatRect getGlobalBounds() const { return sprite.getGlobalBounds(); }
-		float getFPS() const { return fps; }
-		int getAnimation() const { return current_animation; }
-		bool getAnimating() const { return animating; }
+	void setTexture(const sf::Texture& texture, bool resetRect = false);
+	void setFPS(float fps) { frame_period = 1.f / fps; }
+	void setFramePeriod(float fps) { frame_period = fps; }
+	void freeze() { active = false; }
+	void unfreeze() { active = true; }
 
-	private:
-		void increment_frame();
+	float getFPS() { return 1.f / frame_period; }
+	float getFramePeriod() { return frame_period; }
+	int getCurrentAnimation() { return current_animation_id; }
+	AnimationFrameDef getCurrentFrameDef() { return frames[current_frame_id]; }
+	AnimationDef getCurrentAnimationDef() { return animations[current_animation_id]; }
+private:
+	void next_frame();
+	void update_frame_intrect();
 
-		int frame_width;
-		int frame_height;
-		int frames;
-		int animations;
-		int current_animation;
-		int current_frame;
-		int back_to_animation = -1;
-		float fps;
-		bool animating;
-		sf::Sprite sprite;
-		sf::Time elapsed_time;
-	};
+	AnimationDef* animations;
+	AnimationFrameDef* frames;
+	int current_animation_id = 0;
+	int current_frame_id = 0;
+	bool active = false;
+	float frame_period = 0.2f;
 
-}
+	sf::Time elapsed_time;
+};
+

@@ -1,67 +1,74 @@
 #include "AnimatedSprite.hpp"
 
+AnimatedSprite::AnimatedSprite(AnimationDef* animations, AnimationFrameDef* frames, bool auto_start)
+{
+	this->animations = animations;
+	this->frames = frames;
 
-namespace terr {
-	AnimatedSprite::AnimatedSprite(int frame_width,
-		int frame_height,
-		const sf::Texture& texture) :
+	if (auto_start) playAnimation(0);
+	update_frame_intrect();
+}
 
-		frame_width(frame_width),
-		frame_height(frame_height),
-		sprite(texture) {
+AnimatedSprite::~AnimatedSprite()
+{
+	delete animations, frames;
+}
 
-		frames = texture.getSize().x / frame_width;
-		animations = texture.getSize().y / frame_height;
-		current_animation = 0;
-		current_frame = 0;
-		fps = 1.f / 4.f;
-		animating = true;
+void AnimatedSprite::update(sf::Time time)
+{
+	elapsed_time += time;
 
-		sprite.setTextureRect(sf::IntRect(
-			current_frame * frame_width,
-			current_animation * frame_height,
-			frame_width,
-			frame_height
-		));
+	float time_period = frame_period;
+	if (getCurrentAnimationDef().override_fps)
+		time_period = 1 / getCurrentAnimationDef().override_fps;
+
+	if (elapsed_time.asSeconds() >= time_period) {
+		next_frame();
+		elapsed_time -= sf::seconds(time_period);
 	}
+}
 
-	void AnimatedSprite::update(sf::Time time) {
-		if (!animating)
-			return;
+void AnimatedSprite::playAnimation(int n, bool restart)
+{
+	current_animation_id = n;
+	if (restart) {
+		current_frame_id = animations[current_animation_id].frame_start;
+		elapsed_time = elapsed_time.Zero;
+		update_frame_intrect();
+	}
+	active = true;
+}
 
-		elapsed_time += time;
+void AnimatedSprite::setTexture(const sf::Texture& texture, bool resetRect)
+{
+	sf::Sprite::setTexture(texture, resetRect);
+	update_frame_intrect();
+}
 
-		if (elapsed_time.asSeconds() >= fps) {
-			increment_frame();
+void AnimatedSprite::next_frame()
+{
+	auto curAnim = getCurrentAnimationDef();
+	current_frame_id++;
+	if (current_frame_id > curAnim.frame_end) {
+		//end of animation
+		if (curAnim.play_once) {
+			current_animation_id = curAnim.next_animation;
+			current_frame_id = animations[current_animation_id].frame_start;
+		}
+		else {
+			current_frame_id = curAnim.frame_start;
 		}
 	}
 
-	void AnimatedSprite::playOnce(int animation)
-	{
-		back_to_animation = current_animation;
-		current_animation = animation;
-		elapsed_time = sf::seconds(0);
-	}
+	update_frame_intrect();
+}
 
-	void AnimatedSprite::increment_frame() {
-		current_frame = (++current_frame) % frames;
-		elapsed_time -= sf::seconds(fps);
+void AnimatedSprite::update_frame_intrect()
+{
+	auto frame = getCurrentFrameDef();
+	setTextureRect({ frame.x, frame.y, frame.width, frame.height });
 
-		//reset played_once animation
-		if (current_frame == 0 && back_to_animation != -1) {
-			current_animation = back_to_animation;
-			back_to_animation = -1;
-		}
-
-		sprite.setTextureRect(sf::IntRect(
-			current_frame * frame_width,
-			current_animation * frame_height,
-			frame_width,
-			frame_height
-		));
-	}
-
-	void AnimatedSprite::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-		target.draw(sprite);
-	}
+	setOrigin(frame.width / 2, frame.height);
+	/*if (frame.origin_x != -1 && frame.oritin_y != -1)
+		setOrigin(frame.origin_x - frame.x, frame.oritin_y - frame.y);*/
 }

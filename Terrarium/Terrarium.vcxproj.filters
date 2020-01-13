@@ -66,9 +66,6 @@
     <ClCompile Include="UIGrid.cpp">
       <Filter>Pliki źródłowe\UI</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedSprite.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="Character.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
@@ -79,6 +76,12 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="PerlinNoise.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleAnimatedSprite.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,9 +131,6 @@
     <ClInclude Include="UIGrid.hpp">
       <Filter>Pliki nagłówkowe\UI</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatedSprite.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="Character.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
@@ -141,6 +141,12 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="PerlinNoise.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleAnimatedSprite.hpp">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedSprite.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>

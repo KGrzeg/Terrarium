@@ -2,6 +2,7 @@
 
 #include <map>
 #include <SFML/Graphics.hpp>
+#include "AnimatedSprite.hpp"
 
 namespace terr{
 class AssetAdmin

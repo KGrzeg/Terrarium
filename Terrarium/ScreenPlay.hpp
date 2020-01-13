@@ -4,7 +4,7 @@
 #include "Game.hpp"
 #include "Character.hpp"
 #include "Pickaxe.hpp"
-#include "AnimatedSprite.hpp"
+#include "SimpleAnimatedSprite.hpp"
 
 namespace terr {
 	class ScreenPlay :
@@ -35,7 +35,7 @@ namespace terr {
 
 		unsigned score = 0;
 
-		AnimatedSprite* power_sprite;
+		SimpleAnimatedSprite* power_sprite;
 		sf::Text power_label;
 		sf::Text score_label;
 	};

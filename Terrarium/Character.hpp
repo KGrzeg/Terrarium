@@ -10,6 +10,14 @@
 #define SIDE_LEFT 3
 #define SIDE_RIGHT 4
 
+#define ANIMATION_IDLE 0
+#define ANIMATION_WALK 1
+#define ANIMATION_MINE 2
+#define ANIMATION_JUMP 3
+#define ANIMATION_DEAD 4
+
+#define ANIMATION_SIDE_OFFSET 5
+
 namespace terr {
 	class Character : public sf::Drawable
 	{
@@ -27,14 +35,15 @@ namespace terr {
 		void setPosition(float x, float y) { sprite->setPosition(x, y); }
 
 		sf::Vector2f getPosition() const { return sprite->getPosition(); }
-		sf::Sprite* getSprite() { return sprite->getSprite(); };
+		sf::Sprite* getSprite() { return sprite; };
 
+		void playMineAnimation();
 	private:
-		const float jump_power = 420;
+		const float jump_power = 190;
 		const float speed = 160;
 		const float speed_in_air = speed;
-		const float collision_ray_distance = 1.f;
-		const float collision_ray_thickness = 0.5f;
+		const float collision_ray_distance = 2.f;
+		const float collision_ray_thickness = 1.f;
 		const float collision_ray_shrink = 0.8f;
 		const float zoom_step = 0.1f;
 		const float zoom_min = 0.2f;
@@ -43,8 +52,10 @@ namespace terr {
 		void handle_moving(sf::Time& time);
 		void handle_gravity(sf::Time& time);
 		void handle_velocity(sf::Time& time);
+		void update_animation(sf::Time& time);
 		bool test_collision(int side);
 		sf::FloatRect side_rectangle(int side);
+		void sprite_setup(terr::GlobalReference& global);
 
 		AnimatedSprite* sprite;
 		World* world;
@@ -53,13 +64,14 @@ namespace terr {
 		sf::Vector2f velocity;
 
 		bool camera_follow = true;
-		bool jumping = false;
 		bool move_horizontally = false;
 		bool god_mode = false;
 		bool allow_zoom = true;
 		bool on_ground = false;
+		int face_direction = SIDE_RIGHT;
+		int last_animation_id = 0;
 
-		float zoom;
+		float zoom = 0.5f;
 		sf::View view;
 
 		sf::Keyboard::Key key_move_up = sf::Keyboard::W;

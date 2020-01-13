@@ -20,7 +20,7 @@ namespace terr {
 		score_label.setFont(global->assets.getFont("default"));
 		score_label.setString("0");
 
-		power_sprite = new AnimatedSprite(64, 64, global->assets.getTexture("ui/tools"));
+		power_sprite = new SimpleAnimatedSprite(64, 64, global->assets.getTexture("ui/tools"));
 		power_sprite->setPosition(220, 6);
 	}
 
@@ -70,7 +70,12 @@ namespace terr {
 		while (global->window.pollEvent(event)) {
 
 			player->handle_event(event);
-			addScore(pickaxe->feedEvent(event));
+			int score = pickaxe->feedEvent(event);
+
+			if (score) {
+				player->playMineAnimation();
+				addScore(score);
+			}
 
 			if (event.type == sf::Event::Closed)
 				global->window.close();

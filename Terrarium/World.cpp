@@ -151,10 +151,12 @@ namespace terr {
 		tile_definitions[TILE_GRASS_DECAL].texture_coords = sf::Vector2f(12, 1);
 
 		tile_definitions[TILE_GRASS].texture_coords = sf::Vector2f(12, 12);
+		tile_definitions[TILE_GRASS].score = 1;
 		tile_definitions[TILE_DIRT].texture_coords = sf::Vector2f(12, 23);
+		tile_definitions[TILE_DIRT].score = 1;
 
 		tile_definitions[TILE_STONE].hardness = 2;
-		tile_definitions[TILE_STONE].score = 1;
+		tile_definitions[TILE_STONE].score = 2;
 		tile_definitions[TILE_STONE].texture_coords = sf::Vector2f(12, 34);
 
 		tile_definitions[TILE_COAL].hardness = 2;
