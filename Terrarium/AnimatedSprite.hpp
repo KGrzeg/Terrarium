@@ -26,6 +26,7 @@ namespace terr {
 			));
 		}
 		void setAnimating(bool animating) { animating = animating; }
+		void playOnce(int animation);
 
 		sf::Sprite* getSprite() { return &sprite; }
 		sf::Vector2f getPosition() const { return sprite.getPosition(); }
@@ -44,6 +45,7 @@ namespace terr {
 		int animations;
 		int current_animation;
 		int current_frame;
+		int back_to_animation = -1;
 		float fps;
 		bool animating;
 		sf::Sprite sprite;

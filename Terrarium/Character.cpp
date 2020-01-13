@@ -75,12 +75,12 @@ namespace terr {
 		else {
 			if (sf::Keyboard::isKeyPressed(key_move_left) &&
 				!test_collision(SIDE_LEFT)) {
-				velocity.x = -speed;
+				velocity.x = on_ground ? -speed : -speed_in_air;
 				move_horizontally = true;
 			}
 			if (sf::Keyboard::isKeyPressed(key_move_right) &&
 				!test_collision(SIDE_RIGHT)) {
-				velocity.x = speed;
+				velocity.x = on_ground ? speed : speed_in_air;
 				move_horizontally = true;
 			}
 
@@ -104,9 +104,12 @@ namespace terr {
 				velocity.y = 0;
 				if (jumping) jumping = false;
 			}
+			on_ground = true;
 		}
-		else {
+		else
+		{
 			velocity.y += world->getGravity() * time.asSeconds();
+			on_ground = false;
 		}
 	}
 

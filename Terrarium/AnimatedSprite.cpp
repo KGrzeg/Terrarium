@@ -33,13 +33,25 @@ namespace terr {
 
 		if (elapsed_time.asSeconds() >= fps) {
 			increment_frame();
-
 		}
+	}
+
+	void AnimatedSprite::playOnce(int animation)
+	{
+		back_to_animation = current_animation;
+		current_animation = animation;
+		elapsed_time = sf::seconds(0);
 	}
 
 	void AnimatedSprite::increment_frame() {
 		current_frame = (++current_frame) % frames;
 		elapsed_time -= sf::seconds(fps);
+
+		//reset played_once animation
+		if (current_frame == 0 && back_to_animation != -1) {
+			current_animation = back_to_animation;
+			back_to_animation = -1;
+		}
 
 		sprite.setTextureRect(sf::IntRect(
 			current_frame * frame_width,

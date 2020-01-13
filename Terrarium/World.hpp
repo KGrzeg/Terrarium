@@ -35,10 +35,10 @@ namespace terr {
 	{
 		int width = 420;
 		int height = 300;
-		float gravity = 185;
+		float gravity = 485;
 		std::string texture_name = "game/map1";
 		float player_x = 100;
-		float player_y = 20;
+		float player_y = -500;
 
 		WorldLayer layers[MAX_LAYERS] = {
 			{45, 9, TILE_GRASS, 14.2f, -2.f, true},

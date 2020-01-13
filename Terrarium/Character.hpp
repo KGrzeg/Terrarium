@@ -26,13 +26,13 @@ namespace terr {
 		void move(float x, float y) { sprite->move(x, y); }
 		void setPosition(float x, float y) { sprite->setPosition(x, y); }
 
-
 		sf::Vector2f getPosition() const { return sprite->getPosition(); }
 		sf::Sprite* getSprite() { return sprite->getSprite(); };
 
 	private:
-		const float jump_power = 220;
-		const float speed = 585;
+		const float jump_power = 420;
+		const float speed = 160;
+		const float speed_in_air = speed;
 		const float collision_ray_distance = 1.f;
 		const float collision_ray_thickness = 0.5f;
 		const float collision_ray_shrink = 0.8f;
@@ -55,8 +55,9 @@ namespace terr {
 		bool camera_follow = true;
 		bool jumping = false;
 		bool move_horizontally = false;
-		bool god_mode = true;
+		bool god_mode = false;
 		bool allow_zoom = true;
+		bool on_ground = false;
 
 		float zoom;
 		sf::View view;
