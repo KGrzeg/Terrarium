@@ -4,19 +4,7 @@
 #include "Game.hpp"
 #include "AnimatedSprite.hpp"
 #include "World.hpp"
-
-#define SIDE_TOP 1
-#define SIDE_DOWN 2
-#define SIDE_LEFT 3
-#define SIDE_RIGHT 4
-
-#define ANIMATION_IDLE 0
-#define ANIMATION_WALK 1
-#define ANIMATION_MINE 2
-#define ANIMATION_JUMP 3
-#define ANIMATION_DEAD 4
-
-#define ANIMATION_SIDE_OFFSET 5
+#include "Definitions.hpp"
 
 namespace terr {
 	class Character : public sf::Drawable
@@ -53,6 +41,7 @@ namespace terr {
 		void handle_gravity(sf::Time& time);
 		void handle_velocity(sf::Time& time);
 		void update_animation(sf::Time& time);
+		void update_view();
 		bool test_collision(int side);
 		sf::FloatRect side_rectangle(int side);
 		void sprite_setup(terr::GlobalReference& global);

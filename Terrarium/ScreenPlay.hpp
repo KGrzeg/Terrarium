@@ -31,6 +31,9 @@ namespace terr {
 		Character* player;
 		Pickaxe* pickaxe;
 		sf::RectangleShape top_bar;
+		sf::RectangleShape help_image;
+
+		bool display_help = false;
 
 		unsigned score = 0;
 

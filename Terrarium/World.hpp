@@ -3,23 +3,7 @@
 
 #include "Game.hpp"
 #include "PerlinNoise.hpp"
-
-#define TILE_WIDTH 10
-#define TILE_HEIGHT 10
-
-#define TILE_AIR 0
-#define TILE_GRASS 1
-#define TILE_GRASS_DECAL 2
-#define TILE_DIRT 3
-#define TILE_STONE 4
-#define TILE_COAL 5
-#define TILE_IRON 6
-#define TILE_GOLD 7
-#define TILE_EMERALD 8
-#define TILE_WOOD 9
-
-#define TILE_TYPES 10
-#define MAX_LAYERS 30
+#include "Definitions.hpp"
 
 namespace terr {
 	typedef struct {

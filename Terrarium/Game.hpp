@@ -5,9 +5,7 @@
 
 #include "Navigator.hpp"
 #include "AssetAdmin.hpp"
-
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 720
+#include "Definitions.hpp"
 
 namespace terr {
 	enum game_screen_type

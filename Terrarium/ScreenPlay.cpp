@@ -22,6 +22,9 @@ namespace terr {
 
 		power_sprite = new SimpleAnimatedSprite(64, 64, global->assets.getTexture("ui/tools"));
 		power_sprite->setPosition(220, 6);
+
+		help_image.setSize(sf::Vector2f(1280, 720));
+		help_image.setTexture(&global->assets.getTexture("help"));
 	}
 
 	ScreenPlay::~ScreenPlay() {
@@ -30,6 +33,8 @@ namespace terr {
 
 
 	void ScreenPlay::update(sf::Time time) {
+		if (display_help) return;
+
 		update_elapsed_time += time;
 
 		if (update_elapsed_time.asSeconds() >= update_fps) {
@@ -48,10 +53,16 @@ namespace terr {
 	{
 
 		global->window.clear();
-		global->window.draw(world);
-		global->window.draw(*player);
 
-		draw_ui();
+		if (display_help) {
+			global->window.draw(help_image);
+		}
+		else {
+			global->window.draw(world);
+			global->window.draw(*player);
+
+			draw_ui();
+		}
 
 		global->window.display();
 
@@ -77,18 +88,29 @@ namespace terr {
 			if (event.type == sf::Event::Closed)
 				global->window.close();
 
-			if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == sf::Keyboard::Escape) {
-					global->navigator.goBack();
+			if (display_help) {
+				if (event.type == sf::Event::KeyPressed) {
+					display_help = false;
 				}
 			}
+			else {
+				if (event.type == sf::Event::KeyPressed) {
+					if (event.key.code == sf::Keyboard::Escape) {
+						global->navigator.goBack();
+					}
+					if (event.key.code == sf::Keyboard::F1) {
+						global->window.setView(global->window.getDefaultView());
+						display_help = true;
+					}
+				}
 
-			player->handle_event(event);
-			int score = pickaxe->feedEvent(event);
+				player->handle_event(event);
+				int score = pickaxe->feedEvent(event);
 
-			if (score) {
-				player->playMineAnimation();
-				addScore(score);
+				if (score) {
+					player->playMineAnimation();
+					addScore(score);
+				}
 			}
 
 		}
