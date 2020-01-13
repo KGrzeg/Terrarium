@@ -33,8 +33,10 @@ namespace terr {
 		}
 		case GoBack:
 		{
-			if (!screens.empty())
+			if (!screens.empty()) {
+				getScreen()->pause();
 				screens.pop();
+			}
 			getScreen()->resume();
 			next_action = None;
 			break;
@@ -43,14 +45,17 @@ namespace terr {
 		{
 			if (!screens.empty())
 				getScreen()->pause();
+
 			screens.push(std::move(next_screen));
 			next_action = None;
 			break;
 		}
 		case Set:
 		{
-			if (!screens.empty())
+			if (!screens.empty()) {
+				getScreen()->pause();
 				screens.pop();
+			}
 			screens.push(std::move(next_screen));
 			break;
 		}

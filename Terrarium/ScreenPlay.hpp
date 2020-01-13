@@ -12,13 +12,12 @@ namespace terr {
 	{
 	public:
 		ScreenPlay(GlobalReference global, WorldSettings settings);
-		~ScreenPlay() {
-			delete player;
-		}
+		~ScreenPlay();
 		void draw(sf::Time time) override;
 		void update(sf::Time time) override;
 		void handle_input() override;
 		void addScore(int score);
+		void pause() override;
 
 		Character* getPlayer() { return player; }
 

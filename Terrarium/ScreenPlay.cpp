@@ -24,6 +24,11 @@ namespace terr {
 		power_sprite->setPosition(220, 6);
 	}
 
+	ScreenPlay::~ScreenPlay() {
+		delete player;
+	}
+
+
 	void ScreenPlay::update(sf::Time time) {
 		update_elapsed_time += time;
 
@@ -69,6 +74,15 @@ namespace terr {
 		sf::Event event;
 		while (global->window.pollEvent(event)) {
 
+			if (event.type == sf::Event::Closed)
+				global->window.close();
+
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Escape) {
+					global->navigator.goBack();
+				}
+			}
+
 			player->handle_event(event);
 			int score = pickaxe->feedEvent(event);
 
@@ -77,13 +91,15 @@ namespace terr {
 				addScore(score);
 			}
 
-			if (event.type == sf::Event::Closed)
-				global->window.close();
 		}
 	}
 
 	void ScreenPlay::addScore(int scr) {
 		score += scr;
 		score_label.setString(std::to_string(score));
+	}
+	void ScreenPlay::pause()
+	{
+		global->window.setView(global->window.getDefaultView());
 	}
 }
