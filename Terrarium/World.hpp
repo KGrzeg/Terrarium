@@ -19,11 +19,15 @@ namespace terr {
 	{
 		int width = 420;
 		int height = 300;
-		float gravity = 485;
+		float gravity = 385;
 		std::string spritesheet_texture_name = "game/map1";
 		std::string background_texture_name = "game/skyBlue";
+		
 		float player_x = 100;
-		float player_y = -500;
+		float player_y = 100;
+		float initial_time = 60;
+
+		bool immortal_frame = true;
 
 		WorldLayer layers[MAX_LAYERS] = {
 			{45, 9, TILE_GRASS, 14.2f, -2.f, true},
@@ -65,6 +69,8 @@ namespace terr {
 
 		void generate_complex_world(WorldSettings& settings);
 		void generate_filled_layer(WorldLayer& layer);
+		void generate_immortal_frame(WorldSettings& settings);
+		void swap_by_immortal(int x, int y);
 
 		bool check_collision_with_tile(sf::FloatRect& rectangle, int x, int y);
 		void change_tile(int x, int y, int tile_def_id);

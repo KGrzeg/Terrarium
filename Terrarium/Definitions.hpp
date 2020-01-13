@@ -29,6 +29,8 @@
 #define TILE_GOLD 7
 #define TILE_EMERALD 8
 #define TILE_WOOD 9
+#define TILE_IMMORTAL_AIR 10
+#define TILE_OBSIDIAN 11
 
-#define TILE_TYPES 10
+#define TILE_TYPES 12
 #define MAX_LAYERS 30

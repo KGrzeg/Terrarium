@@ -48,7 +48,7 @@ private:
 	int current_animation_id = 0;
 	int current_frame_id = 0;
 	bool active = false;
-	float frame_period = 0.2f;
+	float frame_period = 0.8f;
 
 	sf::Time elapsed_time;
 };

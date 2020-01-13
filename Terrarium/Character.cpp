@@ -102,11 +102,10 @@ namespace terr {
 	}
 
 	void Character::update(sf::Time& time) {
-		if (!god_mode)
-			handle_gravity(time);
-		handle_velocity(time);
+		handle_gravity(time);
 
 		handle_moving(time);
+		handle_velocity(time);
 
 		update_view();
 		update_animation(time);
@@ -128,14 +127,18 @@ namespace terr {
 	}
 
 	void Character::handle_event(sf::Event& event) {
+		if (event.type == sf::Event::KeyPressed) {
+			if (event.key.code == sf::Keyboard::F12 && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+				god_mode = !god_mode;
+				sprite->setColor(god_mode ? sf::Color::Yellow : sf::Color::White);
+			}
+		}
+
 		if (allow_zoom)
 			if (event.type == sf::Event::MouseWheelScrolled) {
-				if (event.mouseWheelScroll.delta > 0) {
-					zoom -= zoom_step;
-				}
-				else {
-					zoom += zoom_step;
-				}
+				if (event.mouseWheelScroll.delta > 0) zoom -= zoom_step;
+				else zoom += zoom_step;
+
 				zoom = std::max(zoom_min, zoom);
 				zoom = std::min(zoom_max, zoom);
 
@@ -208,21 +211,24 @@ namespace terr {
 	}
 
 	void Character::handle_gravity(sf::Time& time) {
+		if (velocity.y > 0 && !god_mode && test_collision(SIDE_DOWN, velocity.y * time.asSeconds() - collision_ray_distance)) {
+			velocity.y = 0;
+		}
+
 		if (test_collision(SIDE_DOWN)) {
 			//if falling
-			if (velocity.y > 0) velocity.y = 0;
 			on_ground = true;
 		}
 		else
 		{
 			//add gravity pull to down
-			velocity.y += world->getGravity() * time.asSeconds();
+			if (!god_mode) velocity.y += world->getGravity() * time.asSeconds();
 			on_ground = false;
 		}
 	}
 
 	void Character::handle_velocity(sf::Time& time) {
-		if (velocity.y < 0 && test_collision(SIDE_TOP)) {
+		if (!god_mode && velocity.y < 0 && test_collision(SIDE_TOP)) {
 			velocity.y = 0;
 		}
 
@@ -250,15 +256,15 @@ namespace terr {
 		target.draw(*sprite);
 	}
 
-	bool Character::test_collision(int side) {
-		return world->checkCollision(side_rectangle(side));
+	bool Character::test_collision(int side, float additional_push) {
+		return world->checkCollision(side_rectangle(side, additional_push));
 	}
 
-	sf::FloatRect Character::side_rectangle(int side) {
+	sf::FloatRect Character::side_rectangle(int side, float additional_push) {
 		auto rectangle = sprite->getGlobalBounds();
 		switch (side) {
 		case SIDE_TOP: {
-			rectangle.top -= collision_ray_distance;
+			rectangle.top -= collision_ray_distance + additional_push;
 			rectangle.height = collision_ray_thickness;
 
 			float w = rectangle.width;
@@ -267,7 +273,7 @@ namespace terr {
 			break;
 		}
 		case SIDE_DOWN: {
-			rectangle.top += collision_ray_distance + rectangle.height;
+			rectangle.top += collision_ray_distance + rectangle.height + additional_push;
 			rectangle.height = collision_ray_thickness;
 
 			float w = rectangle.width;
@@ -276,7 +282,7 @@ namespace terr {
 			break;
 		}
 		case SIDE_LEFT: {
-			rectangle.left -= collision_ray_distance;
+			rectangle.left -= collision_ray_distance + additional_push;
 			rectangle.width = collision_ray_thickness;
 
 			float h = rectangle.height;
@@ -285,7 +291,7 @@ namespace terr {
 			break;
 		}
 		case SIDE_RIGHT: {
-			rectangle.left += collision_ray_distance + rectangle.width;
+			rectangle.left += collision_ray_distance + rectangle.width + additional_push;
 			rectangle.width = collision_ray_thickness;
 
 			float h = rectangle.height;

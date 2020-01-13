@@ -20,6 +20,11 @@ namespace terr {
 		score_label.setFont(global->assets.getFont("default"));
 		score_label.setString("0");
 
+		time_left = settings.initial_time;
+		time_label.setPosition(190, 20);
+		time_label.setFont(global->assets.getFont("default"));
+		time_label.setString(std::to_string(static_cast<int>(time_left)));
+
 		power_sprite = new SimpleAnimatedSprite(64, 64, global->assets.getTexture("ui/tools"));
 		power_sprite->setPosition(220, 6);
 
@@ -36,19 +41,19 @@ namespace terr {
 
 
 	void ScreenPlay::update(sf::Time time) {
+		//skip heavy frames (ex. when world are generated)
+		if (time.asSeconds() > 0.5f) return;
 		if (display_help) return;
 
 		update_elapsed_time += time;
 
 		if (update_elapsed_time.asSeconds() >= update_fps) {
-			player->update(time);
-			update_elapsed_time -= sf::seconds(update_fps);
-		}
+			player->update(update_elapsed_time);
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-			pickaxe->setPower(std::max((pickaxe->getPower() + 1) % 4, 1));
-			power_sprite->setAnimation(pickaxe->getPower() - 1);
-			power_label.setString(std::to_string(pickaxe->getPower()));
+			time_left -= update_elapsed_time.asSeconds();
+			time_label.setString(std::to_string(static_cast<int>(time_left)));
+
+			update_elapsed_time = update_elapsed_time.Zero;
 		}
 	}
 
@@ -79,12 +84,13 @@ namespace terr {
 		global->window.draw(top_bar);
 
 		global->window.draw(score_label);
+		global->window.draw(time_label);
 		global->window.draw(*power_sprite);
 		global->window.draw(power_label);
 
 		global->window.setView(vue);
 	}
-	
+
 	void ScreenPlay::handle_input() {
 		sf::Event event;
 		while (global->window.pollEvent(event)) {
@@ -105,6 +111,11 @@ namespace terr {
 					if (event.key.code == sf::Keyboard::F1) {
 						global->window.setView(global->window.getDefaultView());
 						display_help = true;
+					}
+					if (event.key.code == sf::Keyboard::F11 && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+						pickaxe->setPower(std::max((pickaxe->getPower() + 1) % 4, 1));
+						power_sprite->setAnimation(pickaxe->getPower() - 1);
+						power_label.setString(std::to_string(pickaxe->getPower()));
 					}
 				}
 

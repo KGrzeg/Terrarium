@@ -30,9 +30,9 @@ namespace terr {
 	{
 		while (global->window.isOpen())
 		{
-			elapsed_time = global_clock.restart();
 			global->navigator.update();
-
+			elapsed_time = global_clock.restart();
+			
 			global->navigator.getScreen()->handle_input();
 			global->navigator.getScreen()->update(elapsed_time);
 			global->navigator.getScreen()->draw(elapsed_time);

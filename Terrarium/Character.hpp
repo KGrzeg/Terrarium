@@ -28,10 +28,10 @@ namespace terr {
 
 		void playMineAnimation();
 	private:
-		const float jump_power = 190;
-		const float speed = 160;
+		const float jump_power = 180;
+		const float speed = 120;
 		const float speed_in_air = speed;
-		const float collision_ray_distance = 2.f;
+		const float collision_ray_distance = 3.f;
 		const float collision_ray_thickness = 1.f;
 		const float collision_ray_shrink = 0.8f;
 		const float zoom_step = 0.1f;
@@ -43,8 +43,8 @@ namespace terr {
 		void handle_velocity(sf::Time& time);
 		void update_animation(sf::Time& time);
 		void update_view();
-		bool test_collision(int side);
-		sf::FloatRect side_rectangle(int side);
+		bool test_collision(int side, float additional_push = 0.f);
+		sf::FloatRect side_rectangle(int side, float additional_push = 0.f);
 		void sprite_setup(terr::GlobalReference& global);
 
 		AnimatedSprite* sprite;

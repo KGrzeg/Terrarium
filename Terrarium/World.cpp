@@ -19,7 +19,10 @@ namespace terr {
 		setup_tiles_definitions();
 
 		tiles = new int[width * height];
+
 		generate_complex_world(settings);
+		generate_immortal_frame(settings);
+
 		setup_vertices();
 	}
 
@@ -60,6 +63,23 @@ namespace terr {
 		}
 	}
 
+	void World::generate_immortal_frame(WorldSettings& settings)
+	{
+		if (!settings.immortal_frame) return;
+
+		for (int x = 0; x < width; ++x) swap_by_immortal(x, height - 1);
+		for (int y = 1; y < height - 1; ++y) swap_by_immortal(0, y);
+		for (int y = 1; y < height - 1; ++y) swap_by_immortal(width - 1, y);
+	}
+
+	void World::swap_by_immortal(int x, int y)
+	{
+		int i = x + y * width;
+		if (tiles[i] == TILE_AIR)
+			tiles[i] = TILE_IMMORTAL_AIR;
+		else
+			tiles[i] = TILE_OBSIDIAN;
+	}
 
 	void World::generate_complex_world(WorldSettings& s) {
 
@@ -174,6 +194,14 @@ namespace terr {
 		tile_definitions[TILE_EMERALD].hardness = 5;
 		tile_definitions[TILE_EMERALD].score = 48;
 		tile_definitions[TILE_EMERALD].texture_coords = sf::Vector2f(45, 1);
+
+		tile_definitions[TILE_IMMORTAL_AIR].collide = true;
+		tile_definitions[TILE_IMMORTAL_AIR].destroyable = false;
+		tile_definitions[TILE_IMMORTAL_AIR].texture_coords = sf::Vector2f(1, 23);
+
+		tile_definitions[TILE_OBSIDIAN].collide = true;
+		tile_definitions[TILE_OBSIDIAN].destroyable = false;
+		tile_definitions[TILE_OBSIDIAN].texture_coords = sf::Vector2f(57, 1);
 	}
 
 	void World::change_tile(int x, int y, int tile_def_id) {
@@ -201,7 +229,7 @@ namespace terr {
 
 		tile tile_def = tile_definitions[tiles[tile_x + tile_y * width]];
 
-		if (tile_def.hardness <= power) {
+		if (tile_def.destroyable && tile_def.hardness <= power) {
 			change_tile(tile_x, tile_y, TILE_AIR);
 			return tile_def.score;
 		}

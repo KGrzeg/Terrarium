@@ -37,9 +37,11 @@ namespace terr {
 		bool display_help = false;
 
 		unsigned score = 0;
+		float time_left = 1;
 
 		SimpleAnimatedSprite* power_sprite;
 		sf::Text power_label;
 		sf::Text score_label;
+		sf::Text time_label;
 	};
 }
