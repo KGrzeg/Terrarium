@@ -5,6 +5,7 @@
 #include "AnimatedSprite.hpp"
 #include "World.hpp"
 #include "Definitions.hpp"
+#include <fstream>
 
 namespace terr {
 	class Character : public sf::Drawable
@@ -29,6 +30,10 @@ namespace terr {
 		sf::Sprite* getSprite() { return sprite; };
 
 		void playMineAnimation();
+
+		friend std::fstream& operator<<(std::fstream& os, const Character& ws);
+		friend std::fstream& operator>>(std::fstream& os, Character& ws);
+		
 	private:
 		const float jump_power = 180;
 		const float speed = 120;

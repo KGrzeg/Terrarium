@@ -328,4 +328,45 @@ namespace terr {
 		return rectangle;
 	}
 
+	std::fstream& operator<<(std::fstream& os, const Character& chr)
+	{
+		os << chr.is_lose << ' '
+			<< chr.is_win << ' '
+			<< chr.camera_follow << ' '
+			<< chr.move_horizontally << ' '
+			<< chr.god_mode << ' '
+			<< chr.allow_zoom << ' '
+			<< chr.on_ground << ' '
+			<< chr.face_direction << ' '
+			<< chr.last_animation_id << ' '
+			<< chr.zoom << ' '
+			<< chr.getPosition().x << ' '
+			<< chr.getPosition().y << ' '
+			<< chr.velocity.x << ' '
+			<< chr.velocity.y << std::endl;
+		return os;
+	}
+
+	std::fstream& operator>>(std::fstream& os, Character& chr)
+	{
+
+		os >> chr.is_lose
+			>> chr.is_win
+			>> chr.camera_follow
+			>> chr.move_horizontally
+			>> chr.god_mode
+			>> chr.allow_zoom
+			>> chr.on_ground
+			>> chr.face_direction
+			>> chr.last_animation_id
+			>> chr.zoom;
+		float x, y;
+		os >> x
+			>> y
+			>> chr.velocity.x
+			>> chr.velocity.y;
+		chr.setPosition(x, y);
+		return os;
+	}
+
 }

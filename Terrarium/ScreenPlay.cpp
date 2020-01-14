@@ -2,6 +2,7 @@
 #include "Utils.hpp"
 #include <random>
 #include <iostream>
+#include <fstream>
 
 namespace terr {
 	ScreenPlay::ScreenPlay(GlobalReference global, WorldSettings& settings) :
@@ -38,6 +39,8 @@ namespace terr {
 
 		setup_drill(settings);
 		setup_sheep(settings);
+
+		this->settings = settings;
 	}
 
 	ScreenPlay::~ScreenPlay() {
@@ -150,6 +153,57 @@ namespace terr {
 		}
 	}
 
+	void ScreenPlay::save()
+	{
+		std::fstream writeFile;
+		writeFile.open(settings.name + ".sav", std::fstream::out);
+
+		if (!writeFile.good()) {
+			writeFile.close();
+			return;
+		}
+
+		writeFile << world;
+		writeFile << settings;
+		writeFile << *player;
+
+		writeFile << sheep->getPosition().x << ' ';
+		writeFile << sheep->getPosition().y << ' ';
+
+		writeFile << score << ' ';
+		writeFile << time_left << std::endl;
+
+		writeFile.close();
+	}
+
+	void ScreenPlay::load()
+	{
+		std::fstream readFile;
+		readFile.open(settings.name + ".sav", std::fstream::in);
+
+		if (!readFile.good()) {
+			readFile.close();
+			return;
+		}
+
+		readFile >> world;
+		readFile >> settings;
+		readFile >> *player;
+
+		float x, y;
+		readFile >> x >> y;
+		sheep->setPosition(x, y);
+
+		readFile >> score;
+		readFile >> time_left;
+
+		upgrade_tool();
+		time_label.setString(std::to_string(static_cast<int>(time_left)));
+		score_label.setString(std::to_string(score));
+
+		readFile.close();
+	}
+
 	void ScreenPlay::handle_input() {
 		sf::Event event;
 		while (global->window.pollEvent(event)) {
@@ -170,6 +224,12 @@ namespace terr {
 					if (event.key.code == sf::Keyboard::F1) {
 						global->window.setView(global->window.getDefaultView());
 						display_help = true;
+					}
+					if (event.key.code == sf::Keyboard::F5) {
+						save();
+					}
+					if (event.key.code == sf::Keyboard::F6) {
+						load();
 					}
 					if (event.key.code == sf::Keyboard::F11 && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
 						drill->setPower(std::max((drill->getPower() + 1) % 4, 1));

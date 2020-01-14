@@ -29,10 +29,14 @@ namespace terr {
 		void check_end_conditions();
 		void upgrade_tool();
 
+		void save();
+		void load();
+
 		const float update_fps = 1.f / 60.f;
 		sf::Time update_elapsed_time;
 		GlobalReference global;
 		World world;
+		WorldSettings settings;
 		Character* player;
 		Drill* drill;
 		int drill_tresholds[TOOLS_MAX_UPGRADE] = { 0, 300, 850, 2000, 5000, 16500 };

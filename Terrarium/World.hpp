@@ -1,9 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <fstream>
 
 #include "Game.hpp"
 #include "PerlinNoise.hpp"
 #include "Definitions.hpp"
+
 
 namespace terr {
 	typedef struct {
@@ -48,7 +50,6 @@ namespace terr {
 			{230, 40, TILE_EMERALD, 1.f, 0.9f, true},
 			{200, 95, TILE_AIR, 15.f, 0.3f, true}
 		};
-
 	} WorldSettings;
 
 	typedef struct {
@@ -70,6 +71,9 @@ namespace terr {
 		int dig(int x, int y, int power);
 		sf::Vector2f getSizeInPixels() { return { width * TILE_WIDTH * 1.f, height * TILE_WIDTH * 1.f }; }
 		void makeSheepHole(int x);
+
+		friend std::fstream& operator<<(std::fstream& os, const World& ws);
+		friend std::fstream& operator>>(std::fstream& os, World& ws);
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -98,4 +102,8 @@ namespace terr {
 		PerlinNoise perlin_noise;
 	};
 
+	std::fstream& operator<<(std::fstream& os, const WorldSettings& ws);
+	std::fstream& operator>>(std::fstream& os, WorldSettings& ws);
+	std::fstream& operator<<(std::fstream& os, const WorldLayer& wl);
+	std::fstream& operator>>(std::fstream& os, WorldLayer& wl);
 }

@@ -179,7 +179,7 @@ namespace terr
 		map_definitions[q].player_y = 10;
 		map_definitions[q].initial_time = 300;
 
-		map_definitions[q].layers[w] = { 45, 10, TILE_MOON_TORF, 0.05f, 0.1f, true };
+		map_definitions[q].layers[w] = { 45, 10, TILE_MOON_TORF, 0.05f, -0.1f, true };
 		map_definitions[q].layers[++w] = { 46, 9, TILE_MOON_ROCK, 14.2f, -2.f, true };
 		map_definitions[q].layers[++w] = { 60, 10, TILE_MOON_COAL, 2.f, 0.55f, true };
 		map_definitions[q].layers[++w] = { 90, 20, TILE_MOON_IRON, 12.f, 0.75f, true };

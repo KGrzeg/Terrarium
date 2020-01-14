@@ -1,14 +1,15 @@
 #include "ScreenMainMenu.hpp"
 #include "ScreenNewGame.hpp"
-#include "ScreenLoadGame.hpp"
+#include "ScreenDeleteSaves.hpp"
 
 namespace terr {
 	ScreenMainMenu::ScreenMainMenu(GlobalReference global) :
 		ScreenMenu(global)
 	{
-		addPosition(L"");
+		addPosition("");
+		addPosition("");
 		addPosition(L"Nowa Gra");
-		addPosition(L"Wczytaj Gre");
+		addPosition(L"Usun Zapis");
 		addPosition(L"Wyjscie");
 
 		m_background_shape.setTexture(&global->assets.getTexture("menu/background_main"));
@@ -19,17 +20,17 @@ namespace terr {
 	{
 		switch (id)
 		{
-		case 1:
+		case 2:
 		{
 			global->navigator.pushScreen(ScreenReference(new ScreenNewGame(global)));
 			break;
 		}
-		case 2:
+		case 3:
 		{
-			global->navigator.pushScreen(ScreenReference(new ScreenLoadGame(global)));
+			global->navigator.pushScreen(ScreenReference(new ScreenDeleteSaves(global)));
 			break;
 		}
-		case 3:
+		case 4:
 		{
 			global->window.close();
 			break;

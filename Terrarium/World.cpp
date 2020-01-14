@@ -271,4 +271,88 @@ namespace terr {
 				change_tile(x, y, TILE_AIR);
 			}
 	}
+
+	std::fstream& operator<<(std::fstream& os, const World& w)
+	{
+		for (size_t i = 0; i < w.width * w.height; i++)
+			os << w.tiles[i] << ' ';
+
+		os << std::endl;
+
+		return os;
+	}
+
+	std::fstream& operator>>(std::fstream& os, World& w)
+	{
+		for (size_t i = 0; i < w.width * w.height; i++)
+			os >> w.tiles[i];
+
+		w.setup_vertices();
+		return os;
+	}
+
+	std::fstream& operator<<(std::fstream& os, const WorldSettings& ws)
+	{
+		os << ws.name << std::endl;
+		os << ws.difficulty << std::endl;
+		os << ws.spritesheet_texture_name << std::endl;
+		os << ws.background_texture_name << std::endl;
+
+		os << ws.gravity << ' ';
+		os << ws.width << ' ';
+		os << ws.height << ' ';
+		os << ws.player_x << ' ';
+		os << ws.player_y << ' ';
+		os << ws.initial_time << ' ';
+		os << ws.default_power << ' ';
+		os << ws.immortal_frame << std::endl;
+
+		for (size_t i = 0; i < MAX_LAYERS; i++)
+			os << ws.layers[i];
+
+		return os;
+	}
+
+	std::fstream& operator>>(std::fstream& os, WorldSettings& ws)
+	{
+		os >> ws.name;
+		os >> ws.difficulty;
+		os >> ws.spritesheet_texture_name;
+		os >> ws.background_texture_name;
+
+		os >> ws.gravity;
+		os >> ws.width;
+		os >> ws.height;
+		os >> ws.player_x;
+		os >> ws.player_y;
+		os >> ws.initial_time;
+		os >> ws.default_power;
+		os >> ws.immortal_frame;
+
+		for (size_t i = 0; i < MAX_LAYERS; i++)
+			os >> ws.layers[i];
+
+		return os;
+	}
+
+	std::fstream& operator<<(std::fstream& os, const WorldLayer& wl) {
+		os << wl.enabled << ' ';
+		os << wl.level << ' ';
+		os << wl.tile_id << ' ';
+		os << wl.treshold << ' ';
+		os << wl.variation << ' ';
+		os << wl.zoom << std::endl;
+		return os;
+	}
+
+	std::fstream& operator>>(std::fstream& os, WorldLayer& wl)
+	{
+		os >> wl.enabled;
+		os >> wl.level;
+		os >> wl.tile_id;
+		os >> wl.treshold;
+		os >> wl.variation;
+		os >> wl.zoom;
+		return os;
+	}
 }

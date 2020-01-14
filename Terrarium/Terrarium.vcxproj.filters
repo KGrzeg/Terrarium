@@ -51,9 +51,6 @@
     <ClCompile Include="ScreenPlay.cpp">
       <Filter>Pliki źródłowe\Navigation</Filter>
     </ClCompile>
-    <ClCompile Include="ScreenLoadGame.cpp">
-      <Filter>Pliki źródłowe\Navigation</Filter>
-    </ClCompile>
     <ClCompile Include="Navigator.cpp">
       <Filter>Pliki źródłowe\Navigation</Filter>
     </ClCompile>
@@ -84,6 +81,9 @@
     <ClCompile Include="Drill.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="ScreenDeleteSaves.cpp">
+      <Filter>Pliki źródłowe\Navigation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -108,9 +108,6 @@
       <Filter>Pliki nagłówkowe\Navigation</Filter>
     </ClInclude>
     <ClInclude Include="ScreenNewGame.hpp">
-      <Filter>Pliki nagłówkowe\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="ScreenLoadGame.hpp">
       <Filter>Pliki nagłówkowe\Navigation</Filter>
     </ClInclude>
     <ClInclude Include="Navigator.hpp">
@@ -151,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="Drill.hpp">
       <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenDeleteSaves.hpp">
+      <Filter>Pliki nagłówkowe\Navigation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -165,7 +165,7 @@
     <ClCompile Include="Navigator.cpp" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Drill.cpp" />
-    <ClCompile Include="ScreenLoadGame.cpp" />
+    <ClCompile Include="ScreenDeleteSaves.cpp" />
     <ClCompile Include="ScreenMainMenu.cpp" />
     <ClCompile Include="ScreenMenu.cpp" />
     <ClCompile Include="ScreenNewGame.cpp" />
@@ -187,7 +187,7 @@
     <ClInclude Include="PerlinNoise.hpp" />
     <ClInclude Include="Drill.hpp" />
     <ClInclude Include="Screen.hpp" />
-    <ClInclude Include="ScreenLoadGame.hpp" />
+    <ClInclude Include="ScreenDeleteSaves.hpp" />
     <ClInclude Include="ScreenMainMenu.hpp" />
     <ClInclude Include="ScreenMenu.hpp" />
     <ClInclude Include="ScreenNewGame.hpp" />
