@@ -236,4 +236,11 @@ namespace terr {
 
 		return 0;
 	}
+	void World::makeSheepHole(int sheep_x)
+	{
+		for (int x = sheep_x - SHEEP_HOLE_SIZE; x < sheep_x + SHEEP_HOLE_SIZE; ++x)
+			for (int y = height - SHEEP_HOLE_SIZE; y < height - 1; ++y) {
+				change_tile(x, y, TILE_AIR);
+			}
+	}
 }

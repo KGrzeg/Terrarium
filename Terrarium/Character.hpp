@@ -20,6 +20,8 @@ namespace terr {
 		void handle_event(sf::Event& event);
 
 		void move(float x, float y) { sprite->move(x, y); }
+		void lose();
+		void win();
 		void setPosition(float x, float y) { sprite->setPosition(x, y); }
 
 		sf::View getView() { return view; }
@@ -53,6 +55,8 @@ namespace terr {
 
 		sf::Vector2f velocity;
 
+		bool is_lose = false;
+		bool is_win = false;
 		bool camera_follow = true;
 		bool move_horizontally = false;
 		bool god_mode = false;

@@ -22,7 +22,7 @@ namespace terr {
 		float gravity = 385;
 		std::string spritesheet_texture_name = "game/map1";
 		std::string background_texture_name = "game/skyBlue";
-		
+
 		float player_x = 100;
 		float player_y = 100;
 		float initial_time = 60;
@@ -63,6 +63,7 @@ namespace terr {
 		float getGravity() const { return gravity; }
 		int dig(int x, int y, int power);
 		sf::Vector2f getSizeInPixels() { return { width * TILE_WIDTH * 1.f, height * TILE_WIDTH * 1.f }; }
+		void makeSheepHole(int x);
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

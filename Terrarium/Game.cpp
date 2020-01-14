@@ -22,6 +22,7 @@ namespace terr {
 
 		global->assets.addTexture("ui/topbar", "images/info_bar.png");
 		global->assets.addTexture("ui/tools", "images/tools.png");
+		global->assets.addTexture("ui/hourglass", "images/hourglass.png");
 
 		global->navigator.pushScreen(ScreenReference(new ScreenMainMenu(global)));
 	}

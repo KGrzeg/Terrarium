@@ -81,19 +81,21 @@ namespace terr {
 		{ 188, 498, 27, 13 },
 		{ 224, 499, 29, 13 },
 		};
-		AnimationDef* animations = new AnimationDef[10]{
+		AnimationDef* animations = new AnimationDef[12]{
 			//right
 			{ 0, 4 }, //idle
-		{ 5, 12 }, //walk
-		{ 13, 19, true, ANIMATION_IDLE, 12.f }, //mine
-		{ 20, 24 }, //jump
-		{ 25, 31 }, //dead
-					//left
-		{ 32, 36 },
-		{ 37, 44 },
-		{ 45, 51, true, ANIMATION_IDLE + ANIMATION_SIDE_OFFSET, 12.f },
-		{ 52, 56 },
-		{ 56, 63 }
+			{ 5, 12 }, //walk
+			{ 13, 19, true, ANIMATION_IDLE, 12.f }, //mine
+			{ 20, 24 }, //jump
+			{ 25, 31, true, ANIMATION_DEADED }, //dead
+			{ 31, 31 }, //deaded
+						//left
+			{ 32, 36 },
+			{ 37, 44 },
+			{ 45, 51, true, ANIMATION_IDLE + ANIMATION_SIDE_OFFSET, 12.f },
+			{ 52, 56 },
+			{ 56, 63, true, ANIMATION_DEADED + ANIMATION_SIDE_OFFSET },
+			{ 63, 63 }
 		};
 
 		sprite = new AnimatedSprite(animations, frames);
@@ -102,12 +104,13 @@ namespace terr {
 	}
 
 	void Character::update(sf::Time& time) {
+		if (!is_lose && !is_win) {
+			handle_moving(time);
+		}
 		handle_gravity(time);
-
-		handle_moving(time);
 		handle_velocity(time);
-
 		update_view();
+
 		update_animation(time);
 	}
 
@@ -149,6 +152,23 @@ namespace terr {
 			}
 	}
 
+	void Character::lose()
+	{
+		is_lose = true;
+
+		int anim_id = ANIMATION_DEAD;
+		if (face_direction == SIDE_LEFT) anim_id += ANIMATION_SIDE_OFFSET;
+		sprite->playAnimation(anim_id, true);
+
+		velocity.x = 0;
+	}
+
+	void Character::win()
+	{
+		is_win = true;
+		sprite->setColor(sf::Color::Green);
+	}
+
 	void Character::playMineAnimation()
 	{
 		int anim_id = ANIMATION_MINE;
@@ -162,28 +182,27 @@ namespace terr {
 
 		if (god_mode) {
 			if (sf::Keyboard::isKeyPressed(key_move_left)) {
-				velocity.x = -speed;
+				velocity.x = -speed * GOD_SPEED_MULTIPLIER;
 				face_direction = SIDE_LEFT;
 				move_horizontally = true;
 			}
 			if (sf::Keyboard::isKeyPressed(key_move_right)) {
-				velocity.x = speed;
+				velocity.x = speed * GOD_SPEED_MULTIPLIER;
 				face_direction = SIDE_RIGHT;
 				move_horizontally = true;
 			}
 			if (sf::Keyboard::isKeyPressed(key_move_up)) {
-				velocity.y = -speed;
+				velocity.y = -speed * GOD_SPEED_MULTIPLIER;
 				move_horizontally = true;
 			}
 			if (sf::Keyboard::isKeyPressed(key_move_down)) {
-				velocity.y = speed;
+				velocity.y = speed * GOD_SPEED_MULTIPLIER;
 				move_horizontally = true;
 			}
 			if (!move_horizontally) {
 				velocity.x = 0;
 				velocity.y = 0;
 			}
-
 		}
 		else {
 			if (sf::Keyboard::isKeyPressed(key_move_left) &&
@@ -207,7 +226,6 @@ namespace terr {
 				velocity.x = 0;
 			}
 		}
-
 	}
 
 	void Character::handle_gravity(sf::Time& time) {
@@ -237,6 +255,11 @@ namespace terr {
 
 	void Character::update_animation(sf::Time& time)
 	{
+		if (is_lose && !is_win) {
+			sprite->update(time);
+			return;
+		}
+
 		int current_animation = ANIMATION_IDLE;
 		if (velocity.x != 0) current_animation = ANIMATION_WALK;
 		if (!on_ground) current_animation = ANIMATION_JUMP;
