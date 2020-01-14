@@ -48,7 +48,7 @@ namespace terr
 
 	void ScreenMenu::addPosition(sf::String msg)
 	{
-		auto newpos = sf::Text(msg, global->assets.getFont("default"), m_menu_font_size);
+		auto newpos = sf::Text(msg, global->assets.getFont("fancy"), m_menu_font_size);
 		newpos.setFillColor(m_default_color);
 		const auto window_width = global->window.getSize();
 		const auto x = window_width.x / 2 - newpos.getLocalBounds().width / 2;

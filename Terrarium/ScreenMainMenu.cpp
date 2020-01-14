@@ -7,10 +7,8 @@ namespace terr {
 		ScreenMenu(global)
 	{
 		addPosition(L"Nowa Gra");
-		addPosition(L"Wczytaj Grê");
-		addPosition(L"Autor");
-		addPosition(L"Pomoc");
-		addPosition(L"Wyjœcie");
+		addPosition(L"Wczytaj Gre");
+		addPosition(L"Wyjscie");
 	}
 
 	void ScreenMainMenu::clicked_option(int id)
@@ -27,7 +25,7 @@ namespace terr {
 			global->navigator.pushScreen(ScreenReference(new ScreenLoadGame(global)));
 			break;
 		}
-		case 4:
+		case 2:
 		{
 			global->window.close();
 			break;

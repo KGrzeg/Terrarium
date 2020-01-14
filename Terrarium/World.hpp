@@ -40,7 +40,8 @@ namespace terr {
 			{190, 8, TILE_STONE, 4.f, 0.55f, true},
 			{190, 8, TILE_GOLD, 4.f, 0.80f, true},
 			{260, 40, TILE_EMERALD, 4.f, 0.9f, true},
-			{230, 40, TILE_EMERALD, 1.f, 0.9f, true}
+			{230, 40, TILE_EMERALD, 1.f, 0.9f, true},
+			{200, 95, TILE_AIR, 15.f, 0.3f, true}
 		};
 
 	} WorldSettings;

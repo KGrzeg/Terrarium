@@ -11,6 +11,8 @@ namespace terr {
 		global->window.setVerticalSyncEnabled(true);
 
 		global->assets.addFont("default", "arial.ttf");
+		global->assets.addFont("fancy", "AnotherRound.otf");
+
 		global->assets.addTexture("menu/background", "images/menu_background.jpg");
 		global->assets.addTexture("help", "images/help_screen.jpg");
 

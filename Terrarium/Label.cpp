@@ -6,7 +6,7 @@ namespace terr {
 	Label::Label(GlobalReference global, sf::String text)
 		: UIElement(global)
 	{
-		label.setFont(global->assets.getFont("default"));
+		label.setFont(global->assets.getFont("fancy"));
 		label.setString(text);
 		label.setFillColor(default_color);
 	}

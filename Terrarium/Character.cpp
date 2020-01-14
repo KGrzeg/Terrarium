@@ -167,6 +167,7 @@ namespace terr {
 	{
 		is_win = true;
 		sprite->setColor(sf::Color::Green);
+		velocity.x = 0;
 	}
 
 	void Character::playMineAnimation()
