@@ -10,14 +10,8 @@ namespace terr {
 		player = new Character(global, &world);
 		player->setPosition(settings.player_x * TILE_WIDTH, settings.player_y * TILE_WIDTH);
 
-		pickaxe = new Pickaxe(global, &world, player);
-
 		top_bar.setSize(sf::Vector2f(1280, 75));
 		top_bar.setTexture(&global->assets.getTexture("ui/topbar"));
-
-		power_label.setPosition(310, 20);
-		power_label.setFont(global->assets.getFont("default"));
-		power_label.setString(std::to_string(pickaxe->getPower()));
 
 		score_label.setPosition(140, 20);
 		score_label.setFont(global->assets.getFont("default"));
@@ -28,8 +22,10 @@ namespace terr {
 		time_label.setFont(global->assets.getFont("default"));
 		time_label.setString(std::to_string(static_cast<int>(time_left)));
 
-		power_sprite = new SimpleAnimatedSprite(64, 64, global->assets.getTexture("ui/tools"));
-		power_sprite->setPosition(220, 6);
+		power_sprite = new SimpleAnimatedSprite(56, 18, global->assets.getTexture("ui/tools"));
+		power_sprite->setPosition(248, 30);
+		power_sprite->getSprite()->setOrigin(28, 9);
+		power_sprite->getSprite()->setRotation(-45.0f);
 
 		time_sprite = new SimpleAnimatedSprite(25, 47, global->assets.getTexture("ui/hourglass"));
 		time_sprite->setPosition(428, 14);
@@ -40,11 +36,12 @@ namespace terr {
 		background_image.setSize({ settings.width * TILE_WIDTH * 1.f, WINDOW_HEIGHT });
 		background_image.setTexture(&global->assets.getTexture(settings.background_texture_name));
 
+		setup_drill(settings);
 		setup_sheep(settings);
 	}
 
 	ScreenPlay::~ScreenPlay() {
-		delete player, power_sprite, time_sprite;
+		delete player, power_sprite, time_sprite, drill_tresholds;
 	}
 
 	void ScreenPlay::update(sf::Time time) {
@@ -104,6 +101,16 @@ namespace terr {
 		global->window.setView(vue);
 	}
 
+	void ScreenPlay::setup_drill(WorldSettings& settings)
+	{
+		drill = new Drill(global, &world, player);
+		drill->setPower(settings.default_power);
+
+		power_label.setPosition(310, 20);
+		power_label.setFont(global->assets.getFont("default"));
+		power_label.setString(std::to_string(drill->getPower()));
+	}
+
 	void ScreenPlay::setup_sheep(WorldSettings& settings)
 	{
 		AnimationFrameDef* frames = new AnimationFrameDef[2]{ {54, 58, 13, 9}, {67, 58, 13, 9} };
@@ -130,6 +137,19 @@ namespace terr {
 		}
 	}
 
+	void ScreenPlay::upgrade_tool()
+	{
+		int cur_power = drill->getPower();
+		if (cur_power >= TOOLS_MAX_UPGRADE)
+			return;
+
+		if (score > drill_tresholds[cur_power]) {
+			power_sprite->setAnimation(cur_power);
+			drill->setPower(++cur_power);
+			power_label.setString(std::to_string(cur_power));
+		}
+	}
+
 	void ScreenPlay::handle_input() {
 		sf::Event event;
 		while (global->window.pollEvent(event)) {
@@ -152,15 +172,15 @@ namespace terr {
 						display_help = true;
 					}
 					if (event.key.code == sf::Keyboard::F11 && sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-						pickaxe->setPower(std::max((pickaxe->getPower() + 1) % 4, 1));
-						power_sprite->setAnimation(pickaxe->getPower() - 1);
-						power_label.setString(std::to_string(pickaxe->getPower()));
+						drill->setPower(std::max((drill->getPower() + 1) % 4, 1));
+						power_sprite->setAnimation(drill->getPower() - 1);
+						power_label.setString(std::to_string(drill->getPower()));
 					}
 				}
 
 				if (!is_lose && !is_win) {
 					player->handle_event(event);
-					int score = pickaxe->feedEvent(event);
+					int score = drill->feedEvent(event);
 
 					if (score) {
 						player->playMineAnimation();
@@ -176,6 +196,7 @@ namespace terr {
 		score += scr;
 		time_left += scr * SCORE_TO_TIME_RATIO;
 		score_label.setString(std::to_string(score));
+		upgrade_tool();
 	}
 	void ScreenPlay::pause()
 	{

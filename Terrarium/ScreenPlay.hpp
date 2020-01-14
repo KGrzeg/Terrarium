@@ -3,7 +3,7 @@
 #include "World.hpp"
 #include "Game.hpp"
 #include "Character.hpp"
-#include "Pickaxe.hpp"
+#include "Drill.hpp"
 #include "SimpleAnimatedSprite.hpp"
 #include "AnimatedSprite.hpp"
 
@@ -24,16 +24,18 @@ namespace terr {
 
 	private:
 		void draw_ui();
-
+		void setup_drill(WorldSettings& settings);
 		void setup_sheep(WorldSettings& settings);
 		void check_end_conditions();
+		void upgrade_tool();
 
 		const float update_fps = 1.f / 60.f;
 		sf::Time update_elapsed_time;
 		GlobalReference global;
 		World world;
 		Character* player;
-		Pickaxe* pickaxe;
+		Drill* drill;
+		int drill_tresholds[TOOLS_MAX_UPGRADE] = { 0, 300, 850, 2000, 5000, 16500 };
 		sf::RectangleShape top_bar;
 		sf::RectangleShape help_image;
 		sf::RectangleShape background_image;

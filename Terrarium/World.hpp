@@ -27,9 +27,10 @@ namespace terr {
 		std::string spritesheet_texture_name = "game/map1";
 		std::string background_texture_name = "game/skyBlue";
 
-		float player_x = 100;
-		float player_y = 100;
+		float player_x = 200;
+		float player_y = 10;
 		float initial_time = 6;
+		int default_power = 1;
 
 		bool immortal_frame = true;
 

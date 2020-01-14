@@ -39,9 +39,11 @@
 #define TILE_MOON_GOLD 16
 #define TILE_MOON_EMERALD 17
 #define TILE_MOON_TORF 18
+#define TILE_DIAMOND 19
 
-#define TILE_TYPES 19
+#define TILE_TYPES 20
 #define MAX_LAYERS 30
+#define DEFINED_MAPS 4
 
 #define GOD_SPEED_MULTIPLIER 3.f
 
@@ -50,4 +52,5 @@
 #define SHEEP_HOLE_MARGIN 50
 #define SHEEP_WIN_DISTANCE 5.0f
 
-#define DEFINED_MAPS 5
+
+#define TOOLS_MAX_UPGRADE 6

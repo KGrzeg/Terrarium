@@ -1,14 +1,14 @@
-#include "Pickaxe.hpp"
+#include "Drill.hpp"
 #include "Utils.hpp"
 
 namespace terr {
-	Pickaxe::Pickaxe(GlobalReference global, World* world, Character* player) {
+	Drill::Drill(GlobalReference global, World* world, Character* player) {
 		this->global = global;
 		this->world = world;
 		this->player = player;
 	}
 
-	int Pickaxe::feedEvent(sf::Event& event) {
+	int Drill::feedEvent(sf::Event& event) {
 		if (event.type == sf::Event::EventType::MouseButtonPressed) {
 			sf::Vector2i mouse_pos_window = sf::Mouse::getPosition(global->window);
 			sf::Vector2f worldPos = global->window.mapPixelToCoords(mouse_pos_window);

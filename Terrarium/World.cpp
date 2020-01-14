@@ -199,6 +199,10 @@ namespace terr {
 		tile_definitions[TILE_EMERALD].score = 48;
 		tile_definitions[TILE_EMERALD].texture_coords = sf::Vector2f(45, 1);
 
+		tile_definitions[TILE_DIAMOND].hardness = 6;
+		tile_definitions[TILE_DIAMOND].score = 102;
+		tile_definitions[TILE_DIAMOND].texture_coords = sf::Vector2f(69, 1);
+
 		tile_definitions[TILE_IMMORTAL_AIR].collide = true;
 		tile_definitions[TILE_IMMORTAL_AIR].destroyable = false;
 		tile_definitions[TILE_IMMORTAL_AIR].texture_coords = sf::Vector2f(1, 23);
@@ -214,15 +218,15 @@ namespace terr {
 		tile_definitions[TILE_MOON_COAL].hardness = 2;
 		tile_definitions[TILE_MOON_COAL].score = 4;
 		tile_definitions[TILE_MOON_COAL].texture_coords = sf::Vector2f(62, 12);
-							  
+
 		tile_definitions[TILE_MOON_IRON].hardness = 3;
 		tile_definitions[TILE_MOON_IRON].score = 8;
 		tile_definitions[TILE_MOON_IRON].texture_coords = sf::Vector2f(73, 12);
-							  
+
 		tile_definitions[TILE_MOON_GOLD].hardness = 4;
 		tile_definitions[TILE_MOON_GOLD].score = 16;
 		tile_definitions[TILE_MOON_GOLD].texture_coords = sf::Vector2f(54, 23);
-							  
+
 		tile_definitions[TILE_MOON_EMERALD].hardness = 5;
 		tile_definitions[TILE_MOON_EMERALD].score = 48;
 		tile_definitions[TILE_MOON_EMERALD].texture_coords = sf::Vector2f(65, 23);

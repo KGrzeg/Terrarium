@@ -7,10 +7,10 @@
 
 namespace terr {
 
-	class Pickaxe
+	class Drill
 	{
 	public:
-		Pickaxe(GlobalReference global, World* world, Character* player);
+		Drill(GlobalReference global, World* world, Character* player);
 		//void update(sf::Time& time);
 		int feedEvent(sf::Event& event);
 

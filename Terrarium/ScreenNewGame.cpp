@@ -113,9 +113,10 @@ namespace terr
 
 	void ScreenNewGame::setup_maps()
 	{
-		int q = 0;
+		int q = 0, w;
 		map_definitions[q].name = "Kopalnia";
 		map_definitions[q].difficulty = "Latwy";
+		map_definitions[q].default_power = 2;
 
 		map_definitions[q].gravity = 385;
 		map_definitions[q].width = 150;
@@ -127,14 +128,17 @@ namespace terr
 		map_definitions[q].player_y = 10;
 		map_definitions[q].initial_time = 300;
 
-		map_definitions[q].layers[0] = { 45, 9, TILE_STONE, 24.2f, -2.f, true };
-		map_definitions[q].layers[1] = { 60, 10, TILE_COAL, 4.f, 0.25f, true };
-		map_definitions[q].layers[2] = { 70, 20, TILE_IRON, 12.f, 0.55f, true };
-		map_definitions[q].layers[3] = { 90, 20, TILE_GOLD, 5.f, 0.55f, true };
-		map_definitions[q].layers[4] = { 130, 20, TILE_EMERALD, 4.f, 0.8f, true };
-		map_definitions[q].layers[5] = { 140, 5, TILE_EMERALD, 0.3f, 0.5f, true };
-		map_definitions[q].layers[6] = { 120, 25, TILE_AIR, 15.f, 0.5f, true };
-		++q;
+		w = 0;
+		map_definitions[q].layers[w] = { 45, 3, TILE_STONE, 24.2f, -2.f, true };
+		map_definitions[q].layers[++w] = { 50, 2, TILE_STONE, 24.2f, -2.f, true };
+		map_definitions[q].layers[++w] = { 60, 10, TILE_COAL, 4.f, 0.25f, true };
+		map_definitions[q].layers[++w] = { 70, 20, TILE_IRON, 12.f, 0.55f, true };
+		map_definitions[q].layers[++w] = { 90, 20, TILE_GOLD, 5.f, 0.55f, true };
+		map_definitions[q].layers[++w] = { 130, 20, TILE_EMERALD, 4.f, 0.8f, true };
+		map_definitions[q].layers[++w] = { 140, 5, TILE_EMERALD, 0.3f, 0.5f, true };
+		map_definitions[q].layers[++w] = { 120, 25, TILE_AIR, 15.f, 0.5f, true };
+		map_definitions[q].layers[++w] = { 147, 2, TILE_DIAMOND, -0.1f, 0.995f, true };
+		++q; w = 0;
 
 
 		map_definitions[q].name = "Pustynia";
@@ -150,15 +154,16 @@ namespace terr
 		map_definitions[q].player_y = 10;
 		map_definitions[q].initial_time = 300;
 
-		map_definitions[q].layers[0] = { 45, 9, TILE_SAND, 14.2f, -2.f, true };
-		map_definitions[q].layers[1] = { 55, 9, TILE_STONE, 24.2f, -2.f, true };
-		map_definitions[q].layers[2] = { 60, 10, TILE_COAL, 4.f, 0.25f, true };
-		map_definitions[q].layers[3] = { 70, 20, TILE_IRON, 12.f, 0.55f, true };
-		map_definitions[q].layers[4] = { 90, 20, TILE_GOLD, 5.f, 0.55f, true };
-		map_definitions[q].layers[5] = { 130, 20, TILE_EMERALD, 4.f, 0.8f, true };
-		map_definitions[q].layers[6] = { 140, 5, TILE_EMERALD, 0.3f, 0.5f, true };
-		map_definitions[q].layers[7] = { 120, 25, TILE_AIR, 15.f, 0.5f, true };
-		++q;
+		map_definitions[q].layers[w] = { 45, 9, TILE_SAND, 14.2f, -2.f, true };
+		map_definitions[q].layers[++w] = { 55, 9, TILE_STONE, 24.2f, -2.f, true };
+		map_definitions[q].layers[++w] = { 60, 10, TILE_COAL, 4.f, 0.25f, true };
+		map_definitions[q].layers[++w] = { 70, 20, TILE_IRON, 12.f, 0.55f, true };
+		map_definitions[q].layers[++w] = { 90, 20, TILE_GOLD, 5.f, 0.55f, true };
+		map_definitions[q].layers[++w] = { 130, 20, TILE_EMERALD, 4.f, 0.8f, true };
+		map_definitions[q].layers[++w] = { 140, 5, TILE_EMERALD, 0.3f, 0.5f, true };
+		map_definitions[q].layers[++w] = { 120, 25, TILE_AIR, 15.f, 0.5f, true };
+		map_definitions[q].layers[++w] = { 147, 2, TILE_DIAMOND, -0.1f, 0.995f, true };
+		++q; w = 0;
 
 
 		map_definitions[q].name = "Ksiezyc";
@@ -174,15 +179,16 @@ namespace terr
 		map_definitions[q].player_y = 10;
 		map_definitions[q].initial_time = 300;
 
-		map_definitions[q].layers[0] = { 45, 10, TILE_MOON_TORF, 0.05f, 0.1f, true };
-		map_definitions[q].layers[1] = { 46, 9, TILE_MOON_ROCK, 14.2f, -2.f, true };
-		map_definitions[q].layers[2] = { 60, 10, TILE_MOON_COAL, 2.f, 0.55f, true };
-		map_definitions[q].layers[3] = { 90, 20, TILE_MOON_IRON, 12.f, 0.75f, true };
-		map_definitions[q].layers[4] = { 120, 20, TILE_MOON_GOLD, 3.f, 0.85f, true };
-		map_definitions[q].layers[5] = { 170, 20, TILE_MOON_EMERALD, 5.f, 0.9f, true };
-		map_definitions[q].layers[6] = { 190, 5, TILE_MOON_EMERALD, 0.3f, 0.95f, true };
-		map_definitions[q].layers[7] = { 200, 50, TILE_OBSIDIAN, 0.1f, 0.95f, true };
-		++q;
+		map_definitions[q].layers[w] = { 45, 10, TILE_MOON_TORF, 0.05f, 0.1f, true };
+		map_definitions[q].layers[++w] = { 46, 9, TILE_MOON_ROCK, 14.2f, -2.f, true };
+		map_definitions[q].layers[++w] = { 60, 10, TILE_MOON_COAL, 2.f, 0.55f, true };
+		map_definitions[q].layers[++w] = { 90, 20, TILE_MOON_IRON, 12.f, 0.75f, true };
+		map_definitions[q].layers[++w] = { 120, 20, TILE_MOON_GOLD, 3.f, 0.85f, true };
+		map_definitions[q].layers[++w] = { 170, 20, TILE_MOON_EMERALD, 5.f, 0.9f, true };
+		map_definitions[q].layers[++w] = { 190, 5, TILE_MOON_EMERALD, 0.3f, 0.95f, true };
+		map_definitions[q].layers[++w] = { 200, 50, TILE_OBSIDIAN, 0.1f, 0.95f, true };
+		map_definitions[q].layers[++w] = { 197, 2, TILE_DIAMOND, -0.1f, 0.995f, true };
+		++q; w = 0;
 
 
 		map_definitions[q].name = "Polana";
@@ -198,18 +204,19 @@ namespace terr
 		map_definitions[q].player_y = 10;
 		map_definitions[q].initial_time = 60;
 
-		map_definitions[q].layers[0] = { 45, 9, TILE_GRASS, 14.2f, -2.f, true };
-		map_definitions[q].layers[1] = { 65, 8, TILE_DIRT, 14.1f, -2.f, true };
-		map_definitions[q].layers[2] = { 90, 16, TILE_STONE, 11.2f, -2.f, true };
-		map_definitions[q].layers[3] = { 80, 8, TILE_STONE, 4.f, 0.45f, true };
-		map_definitions[q].layers[4] = { 80, 8, TILE_COAL, 4.f, 0.75f, true };
-		map_definitions[q].layers[5] = { 125, 20, TILE_STONE, 12.f, 0.65f, true };
-		map_definitions[q].layers[6] = { 125, 20, TILE_IRON, 12.f, 0.75f, true };
-		map_definitions[q].layers[7] = { 190, 8, TILE_STONE, 4.f, 0.55f, true };
-		map_definitions[q].layers[8] = { 190, 8, TILE_GOLD, 4.f, 0.80f, true };
-		map_definitions[q].layers[9] = { 260, 40, TILE_EMERALD, 4.f, 0.9f, true };
-		map_definitions[q].layers[10] = { 230, 40, TILE_EMERALD, 1.f, 0.9f, true };
-		map_definitions[q].layers[11] = { 200, 95, TILE_AIR, 15.f, 0.3f, true };
+		map_definitions[q].layers[w] = { 45, 9, TILE_GRASS, 14.2f, -2.f, true };
+		map_definitions[q].layers[++w] = { 65, 8, TILE_DIRT, 14.1f, -2.f, true };
+		map_definitions[q].layers[++w] = { 90, 16, TILE_STONE, 11.2f, -2.f, true };
+		map_definitions[q].layers[++w] = { 80, 8, TILE_STONE, 4.f, 0.45f, true };
+		map_definitions[q].layers[++w] = { 80, 8, TILE_COAL, 4.f, 0.75f, true };
+		map_definitions[q].layers[++w] = { 125, 20, TILE_STONE, 12.f, 0.65f, true };
+		map_definitions[q].layers[++w] = { 125, 20, TILE_IRON, 12.f, 0.75f, true };
+		map_definitions[q].layers[++w] = { 190, 8, TILE_STONE, 4.f, 0.55f, true };
+		map_definitions[q].layers[++w] = { 190, 8, TILE_GOLD, 4.f, 0.80f, true };
+		map_definitions[q].layers[++w] = { 260, 40, TILE_EMERALD, 4.f, 0.9f, true };
+		map_definitions[q].layers[++w] = { 230, 40, TILE_EMERALD, 1.f, 0.9f, true };
+		map_definitions[q].layers[++w] = { 200, 95, TILE_AIR, 15.f, 0.3f, true };
+		map_definitions[q].layers[++w] = { 147, 2, TILE_DIAMOND, -0.1f, 0.995f, true };
 	}
 	void ScreenNewGame::select_map(int id)
 	{
