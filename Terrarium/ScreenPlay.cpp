@@ -57,6 +57,7 @@ namespace terr {
 		if (update_elapsed_time.asSeconds() >= update_fps) {
 			player->update(update_elapsed_time);
 			sheep->update(update_elapsed_time);
+			time_sprite->update(update_elapsed_time);
 
 			if (!is_lose && !is_win) {
 				time_left -= update_elapsed_time.asSeconds();
