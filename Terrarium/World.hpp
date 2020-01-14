@@ -17,15 +17,19 @@ namespace terr {
 
 	typedef struct
 	{
+		std::string name = "default";
+		std::string difficulty = "normal";
+
+		float gravity = 385;
 		int width = 420;
 		int height = 300;
-		float gravity = 385;
+
 		std::string spritesheet_texture_name = "game/map1";
 		std::string background_texture_name = "game/skyBlue";
 
 		float player_x = 100;
 		float player_y = 100;
-		float initial_time = 60;
+		float initial_time = 6;
 
 		bool immortal_frame = true;
 

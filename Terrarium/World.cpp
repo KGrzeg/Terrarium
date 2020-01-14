@@ -174,6 +174,8 @@ namespace terr {
 		tile_definitions[TILE_GRASS].score = 1;
 		tile_definitions[TILE_DIRT].texture_coords = sf::Vector2f(12, 23);
 		tile_definitions[TILE_DIRT].score = 1;
+		tile_definitions[TILE_SAND].texture_coords = sf::Vector2f(40, 12);
+		tile_definitions[TILE_SAND].score = 1;
 
 		tile_definitions[TILE_STONE].hardness = 2;
 		tile_definitions[TILE_STONE].score = 2;
@@ -202,6 +204,26 @@ namespace terr {
 		tile_definitions[TILE_OBSIDIAN].collide = true;
 		tile_definitions[TILE_OBSIDIAN].destroyable = false;
 		tile_definitions[TILE_OBSIDIAN].texture_coords = sf::Vector2f(57, 1);
+
+		tile_definitions[TILE_MOON_ROCK].hardness = 2;
+		tile_definitions[TILE_MOON_ROCK].score = 2;
+		tile_definitions[TILE_MOON_ROCK].texture_coords = sf::Vector2f(51, 12);
+
+		tile_definitions[TILE_MOON_COAL].hardness = 2;
+		tile_definitions[TILE_MOON_COAL].score = 4;
+		tile_definitions[TILE_MOON_COAL].texture_coords = sf::Vector2f(62, 12);
+							  
+		tile_definitions[TILE_MOON_IRON].hardness = 3;
+		tile_definitions[TILE_MOON_IRON].score = 8;
+		tile_definitions[TILE_MOON_IRON].texture_coords = sf::Vector2f(73, 12);
+							  
+		tile_definitions[TILE_MOON_GOLD].hardness = 4;
+		tile_definitions[TILE_MOON_GOLD].score = 16;
+		tile_definitions[TILE_MOON_GOLD].texture_coords = sf::Vector2f(54, 23);
+							  
+		tile_definitions[TILE_MOON_EMERALD].hardness = 5;
+		tile_definitions[TILE_MOON_EMERALD].score = 48;
+		tile_definitions[TILE_MOON_EMERALD].texture_coords = sf::Vector2f(65, 23);
 	}
 
 	void World::change_tile(int x, int y, int tile_def_id) {

@@ -5,6 +5,7 @@
 #include "UIElement.hpp"
 #include "Label.hpp"
 #include "UIGrid.hpp"
+#include "World.hpp"
 
 namespace terr {
 	typedef std::unique_ptr<UIElement> UIElementReference;
@@ -13,6 +14,7 @@ namespace terr {
 	{
 	public:
 		ScreenNewGame(GlobalReference global);
+		~ScreenNewGame();
 		void draw(sf::Time time);
 
 		void update(sf::Time time) override;
@@ -20,17 +22,14 @@ namespace terr {
 
 
 	private:
-		GlobalReference global;
-		
-		/*Label title;
-		Label world_name_lbl;
-		Label resources_lbl;
+		void setup_maps();
+		void select_map(int id);
 
-		Button btn_start;
-		Button btn_back;*/
-
+		int selected_map = 0;
+		WorldSettings map_definitions[DEFINED_MAPS];
+		GlobalReference global;		
 		UIGrid grid;
-
+		Label *lbl_name, *lbl_difficulty, *lbl_dimension;
 		sf::RectangleShape m_background_rectangle;
 	};
 }

@@ -21,6 +21,8 @@ namespace terr {
 		global->assets.addTexture("game/character3", "images/dwarf.png");
 		global->assets.addTexture("game/map1", "images/map_tileset.png");
 		global->assets.addTexture("game/skyBlue", "images/background_blue_sky.jpg").setRepeated(true);
+		global->assets.addTexture("game/skyYellow", "images/background_yellow_sky.jpg").setRepeated(true);
+		global->assets.addTexture("game/skySpace", "images/background_space_sky.jpg").setRepeated(true);
 
 		global->assets.addTexture("ui/topbar", "images/info_bar.png");
 		global->assets.addTexture("ui/tools", "images/tools.png");

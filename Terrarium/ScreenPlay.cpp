@@ -8,7 +8,7 @@ namespace terr {
 		global(global), world(global, settings)
 	{
 		player = new Character(global, &world);
-		player->setPosition(settings.player_x, settings.player_y);
+		player->setPosition(settings.player_x * TILE_WIDTH, settings.player_y * TILE_WIDTH);
 
 		pickaxe = new Pickaxe(global, &world, player);
 
