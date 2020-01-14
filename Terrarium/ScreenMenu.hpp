@@ -17,6 +17,7 @@ namespace terr {
 	protected:
 		GlobalReference global;
 		virtual void clicked_option(int id) {};
+		sf::RectangleShape m_background_shape;
 		
 	private:		
 		std::vector<sf::Text> m_positions;
@@ -26,7 +27,5 @@ namespace terr {
 		
 		const sf::Color m_default_color = sf::Color::White;
 		const sf::Color m_hover_color = sf::Color::Cyan;
-
-		sf::RectangleShape m_background_shape;
 	};
 }

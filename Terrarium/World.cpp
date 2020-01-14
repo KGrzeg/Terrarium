@@ -176,6 +176,8 @@ namespace terr {
 		tile_definitions[TILE_DIRT].score = 1;
 		tile_definitions[TILE_SAND].texture_coords = sf::Vector2f(40, 12);
 		tile_definitions[TILE_SAND].score = 1;
+		tile_definitions[TILE_MOON_TORF].texture_coords = sf::Vector2f(1, 12);
+		tile_definitions[TILE_MOON_TORF].score = 1;
 
 		tile_definitions[TILE_STONE].hardness = 2;
 		tile_definitions[TILE_STONE].score = 2;

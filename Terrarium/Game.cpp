@@ -14,6 +14,7 @@ namespace terr {
 		global->assets.addFont("fancy", "AnotherRound.otf");
 
 		global->assets.addTexture("menu/background", "images/menu_background.jpg");
+		global->assets.addTexture("menu/background_main", "images/menu_background_main.jpg");
 		global->assets.addTexture("help", "images/help_screen.jpg");
 
 		global->assets.addTexture("game/character", "images/character_spritesheet.png");

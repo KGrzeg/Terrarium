@@ -174,13 +174,14 @@ namespace terr
 		map_definitions[q].player_y = 10;
 		map_definitions[q].initial_time = 300;
 
-		map_definitions[q].layers[0] = { 45, 9, TILE_MOON_ROCK, 14.2f, -2.f, true };
-		map_definitions[q].layers[1] = { 60, 10, TILE_MOON_COAL, 2.f, 0.55f, true };
-		map_definitions[q].layers[2] = { 90, 20, TILE_MOON_IRON, 12.f, 0.75f, true };
-		map_definitions[q].layers[3] = { 120, 20, TILE_MOON_GOLD, 3.f, 0.85f, true };
-		map_definitions[q].layers[4] = { 170, 20, TILE_MOON_EMERALD, 5.f, 0.9f, true };
-		map_definitions[q].layers[5] = { 190, 5, TILE_MOON_EMERALD, 0.3f, 0.95f, true };
-		map_definitions[q].layers[6] = { 200, 50, TILE_OBSIDIAN, 0.1f, 0.95f, true };
+		map_definitions[q].layers[0] = { 45, 10, TILE_MOON_TORF, 0.05f, 0.1f, true };
+		map_definitions[q].layers[1] = { 46, 9, TILE_MOON_ROCK, 14.2f, -2.f, true };
+		map_definitions[q].layers[2] = { 60, 10, TILE_MOON_COAL, 2.f, 0.55f, true };
+		map_definitions[q].layers[3] = { 90, 20, TILE_MOON_IRON, 12.f, 0.75f, true };
+		map_definitions[q].layers[4] = { 120, 20, TILE_MOON_GOLD, 3.f, 0.85f, true };
+		map_definitions[q].layers[5] = { 170, 20, TILE_MOON_EMERALD, 5.f, 0.9f, true };
+		map_definitions[q].layers[6] = { 190, 5, TILE_MOON_EMERALD, 0.3f, 0.95f, true };
+		map_definitions[q].layers[7] = { 200, 50, TILE_OBSIDIAN, 0.1f, 0.95f, true };
 		++q;
 
 

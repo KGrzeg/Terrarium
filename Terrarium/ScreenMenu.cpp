@@ -8,15 +8,15 @@ namespace terr
 	ScreenMenu::ScreenMenu(GlobalReference global) :
 		global(global)
 	{
+		m_background_shape.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
 		m_background_shape.setTexture(&global->assets.getTexture("menu/background"));
-		m_background_shape.setSize(U::vec2f(global->window.getSize()));
 	}
 
 	void ScreenMenu::draw(sf::Time time)
 	{
 		global->window.clear();
 		global->window.draw(m_background_shape);
-		for (auto const &position : m_positions)
+		for (auto const& position : m_positions)
 		{
 			global->window.draw(position);
 		}
@@ -29,7 +29,7 @@ namespace terr
 
 		int i = 0;
 		m_hover_above = -1;
-		for (auto &position : m_positions)
+		for (auto& position : m_positions)
 		{
 			auto bounds = position.getGlobalBounds();
 

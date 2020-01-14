@@ -38,8 +38,9 @@
 #define TILE_MOON_IRON 15
 #define TILE_MOON_GOLD 16
 #define TILE_MOON_EMERALD 17
+#define TILE_MOON_TORF 18
 
-#define TILE_TYPES 18
+#define TILE_TYPES 19
 #define MAX_LAYERS 30
 
 #define GOD_SPEED_MULTIPLIER 3.f
