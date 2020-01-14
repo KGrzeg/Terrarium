@@ -177,7 +177,7 @@ namespace terr
 
 		map_definitions[q].player_x = 150;
 		map_definitions[q].player_y = 10;
-		map_definitions[q].initial_time = 300;
+		map_definitions[q].initial_time = 60;
 
 		map_definitions[q].layers[w] = { 45, 10, TILE_MOON_TORF, 0.05f, -0.1f, true };
 		map_definitions[q].layers[++w] = { 46, 9, TILE_MOON_ROCK, 14.2f, -2.f, true };
@@ -202,7 +202,7 @@ namespace terr
 
 		map_definitions[q].player_x = 350;
 		map_definitions[q].player_y = 10;
-		map_definitions[q].initial_time = 60;
+		map_definitions[q].initial_time = 20;
 
 		map_definitions[q].layers[w] = { 45, 9, TILE_GRASS, 14.2f, -2.f, true };
 		map_definitions[q].layers[++w] = { 65, 8, TILE_DIRT, 14.1f, -2.f, true };

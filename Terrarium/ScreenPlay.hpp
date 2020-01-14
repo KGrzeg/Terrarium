@@ -51,6 +51,8 @@ namespace terr {
 		unsigned score = 0;
 		float time_left = 1;
 
+		sf::Sprite* win_sprite = nullptr;
+		sf::Sprite* defeat_sprite = nullptr;
 		AnimatedSprite* sheep = nullptr;
 		SimpleAnimatedSprite* power_sprite = nullptr;
 		SimpleAnimatedSprite* time_sprite = nullptr;

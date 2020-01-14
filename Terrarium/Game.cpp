@@ -15,7 +15,10 @@ namespace terr {
 
 		global->assets.addTexture("menu/background", "images/menu_background.jpg");
 		global->assets.addTexture("menu/background_main", "images/menu_background_main.jpg");
+
 		global->assets.addTexture("help", "images/help_screen.jpg");
+		global->assets.addTexture("win", "images/win_info.jpg");
+		global->assets.addTexture("defeat", "images/defeat_info.jpg");
 
 		global->assets.addTexture("game/character", "images/character_spritesheet.png");
 		global->assets.addTexture("game/character2", "images/character_spritesheet2.png");
@@ -38,7 +41,7 @@ namespace terr {
 		{
 			global->navigator.update();
 			elapsed_time = global_clock.restart();
-			
+
 			global->navigator.getScreen()->handle_input();
 			global->navigator.getScreen()->update(elapsed_time);
 			global->navigator.getScreen()->draw(elapsed_time);

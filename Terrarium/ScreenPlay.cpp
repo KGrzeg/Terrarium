@@ -37,6 +37,13 @@ namespace terr {
 		background_image.setSize({ settings.width * TILE_WIDTH * 1.f, WINDOW_HEIGHT });
 		background_image.setTexture(&global->assets.getTexture(settings.background_texture_name));
 
+		win_sprite = new sf::Sprite(global->assets.getTexture("win"));
+		win_sprite->setOrigin(432, 145);
+		win_sprite->setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+		defeat_sprite = new sf::Sprite(global->assets.getTexture("defeat"));
+		defeat_sprite->setOrigin(432, 145);
+		defeat_sprite->setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+
 		setup_drill(settings);
 		setup_sheep(settings);
 
@@ -86,7 +93,6 @@ namespace terr {
 		}
 
 		global->window.display();
-		std::cout << sheep->getPosition().x - player->getPosition().x << ' ' << sheep->getPosition().y - player->getPosition().y << std::endl;
 	}
 
 	void ScreenPlay::draw_ui() {
@@ -100,6 +106,9 @@ namespace terr {
 		global->window.draw(power_label);
 		global->window.draw(*time_sprite);
 		global->window.draw(time_label);
+
+		if (is_win) global->window.draw(*win_sprite);
+		if (is_lose) global->window.draw(*defeat_sprite);
 
 		global->window.setView(vue);
 	}
@@ -245,6 +254,11 @@ namespace terr {
 					if (score) {
 						player->playMineAnimation();
 						addScore(score);
+					}
+				}
+				else {
+					if (event.type == sf::Event::KeyPressed) {
+						global->navigator.goBack();
 					}
 				}
 			}
