@@ -256,7 +256,7 @@ namespace terr {
 
 	void Character::update_animation(sf::Time& time)
 	{
-		if (is_lose && !is_win) {
+		if (is_lose || is_win) {
 			sprite->update(time);
 			return;
 		}

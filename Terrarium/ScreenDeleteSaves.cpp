@@ -19,7 +19,7 @@ namespace terr {
 			name += names[i];
 
 			if (exists_test(names[i] + ".sav"))
-				name += " / istnieje";
+				name += " / zajete";
 
 			addPosition(name);
 		}
