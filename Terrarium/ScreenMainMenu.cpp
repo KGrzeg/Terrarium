@@ -6,11 +6,11 @@ namespace terr {
 	ScreenMainMenu::ScreenMainMenu(GlobalReference global) :
 		ScreenMenu(global)
 	{
-		addPosition("");
-		addPosition("");
-		addPosition(L"Nowa Gra");
-		addPosition(L"Usun Zapis");
-		addPosition(L"Wyjscie");
+		this->addPosition("");
+		this->addPosition("");
+		this->addPosition(L"Nowa Gra");
+		this->addPosition(L"Usun Zapis");
+		this->addPosition(L"Wyjscie");
 
 		m_background_shape.setTexture(&global->assets.getTexture("menu/background_main"));
 		m_background_shape.setTextureRect({ 0,0,WINDOW_WIDTH, WINDOW_HEIGHT });
