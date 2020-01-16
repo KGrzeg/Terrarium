@@ -30,7 +30,7 @@ namespace terr {
 	{
 	public:
 		const std::string name = "Terrarium";
-		const std::string version = "0.2";
+		const std::string version = "0.3";
 
 		Game();
 
