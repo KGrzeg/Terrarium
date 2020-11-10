@@ -1,6 +1,9 @@
 # Terrarium
 Gra napisana w C++ wykorzystująca bibliotekę graficzną SFML na zaliczenie przedmiotu na studiach.
 
+# Download
+[Releases](https://github.com/KGrzeg/Terrarium/releases)
+
 ## Images
 ![image](https://user-images.githubusercontent.com/27036554/73094636-4edea800-3ee1-11ea-9038-25433292db0a.png)
 ![image](https://user-images.githubusercontent.com/27036554/73094706-73d31b00-3ee1-11ea-9ead-c5d9d9b751e7.png)
