@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/System.hpp>
+#include <math.h>
 
 namespace terr {
 	class Utils
@@ -14,7 +15,7 @@ namespace terr {
 			return { static_cast<float>(v.x), static_cast<float>(v.y) };
 		}
 		static double distance(float x1, float y1, float x2, float y2) {
-			return std::sqrt(std::pow(x2 - x1, 2) + std::pow(y2 - y1, 2));
+			return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 		}
 		static double distance(sf::Vector2f v1, sf::Vector2f v2) {
 			return distance(v1.x, v1.y, v2.x, v2.y);

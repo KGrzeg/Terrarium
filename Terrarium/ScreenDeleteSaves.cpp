@@ -23,7 +23,7 @@ namespace terr {
 
 			addPosition(name);
 		}
-		addPosition(L"Powrót");
+		addPosition("Powrot");
 	}
 
 	void ScreenDeleteSaves::clicked_option(int id)

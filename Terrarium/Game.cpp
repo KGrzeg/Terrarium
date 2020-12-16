@@ -6,7 +6,7 @@ namespace terr {
 	{
 		global->window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
 			name + " v" + version,
-			sf::Style::Default);
+			sf::Style::Fullscreen);
 
 		global->window.setVerticalSyncEnabled(true);
 
